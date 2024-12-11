@@ -7,12 +7,13 @@
         variant="flat"
         rounded="xl"
         elevation="0"
-        color="#FFEBF7"
         flat
         class="pa-10"
       >
         <div class="text-center">
-          <div class="text-h5">Bienvenido a:</div>
+          <div class="text-h5">
+            Bienvenido a:
+          </div>
         </div>
         <div class="d-flex justify-center align-center">
           <img
@@ -21,11 +22,13 @@
             src="@/assets/logo.png"
             alt="logo"
             class="mr-2"
-          />
-          <h1 class="text-h2 text-xl-h1 font-weight-bold">Merly</h1>
+          >
+          <h1 class="text-h2 text-xl-h1 font-weight-bold">
+            Merly
+          </h1>
         </div>
 
-        <div class="py-3"/>
+        <div class="py-3" />
 
 
         <v-row justify="center">
@@ -40,7 +43,7 @@
         </v-row>
 
         <v-row justify="center">
-          <v-col cols="12" >
+          <v-col cols="12">
             <v-text-field
               label="Contraseña"
               variant="outlined"
@@ -59,16 +62,12 @@
               elevation="0"
             />
           </v-col>
-
         </v-row>
-
       </v-card>
-
-
     </v-responsive>
   </v-container>
 </template>
 
-<script setup>
+<script>
 //
 </script>

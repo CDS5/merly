@@ -15,6 +15,7 @@ const lightTheme = {
   dark: false,
   colors: {
     primary: '#FE40B4', // Morado oscuro
+    "primary-lighten-1": '#FFEBF7', // Morado oscuro
   },
 };
 
@@ -22,6 +23,8 @@ const darkTheme = {
   dark: true,
   colors: {
     primary: '#FE40B4', // Morado claro
+    "primary-lighten-1": '#14000C', // Morado oscuro
+
   },
 };
 

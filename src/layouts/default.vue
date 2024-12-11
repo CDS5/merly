@@ -1,56 +1,72 @@
 <template>
   <v-app>
-
-
-      <v-card>
-        <v-layout>
-          <v-app-bar
-            color="primary"
-            prominent
-          >
-            <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-
-            <v-toolbar-title>My files</v-toolbar-title>
-
-            <v-spacer></v-spacer>
-
-            <template v-if="$vuetify.display.mdAndUp">
-              <v-btn icon="mdi-magnify" variant="text"></v-btn>
-
-              <v-btn icon="mdi-filter" variant="text"></v-btn>
-            </template>
-
-            <v-btn icon="mdi-dots-vertical" variant="text"></v-btn>
-          </v-app-bar>
-
-          <v-navigation-drawer
-            v-model="drawer"
-            :location="$vuetify.display.mobile ? 'bottom' : undefined"
-            temporary
-          >
-            <v-list
-              :items="items"
-            ></v-list>
-          </v-navigation-drawer>
-
-          <v-main style="height: 500px;">
-            <v-card-text>
-              The navigation drawer will appear from the bottom on smaller size screens.
-            </v-card-text>
-          </v-main>
-        </v-layout>
-      </v-card>
-
-
-
-    <v-main>
-      <router-view />
-    </v-main>
-    <AppFooter />
+    <v-layout>
+      <v-app-bar
+        elevation="0"
+        app
+      >
+        <v-app-bar-nav-icon
+          variant="tonal"
+          @click.stop="drawer = !drawer"
+        />
+        <v-toolbar-title>
+          <div class="d-flex align-center">
+            <img
+              height="40"
+              width="40"
+              src="@/assets/logo.png"
+              alt="logo"
+              class="mr-2"
+            >
+            <h1 class="font-weight-bold">
+              Merly
+            </h1>
+          </div>
+        </v-toolbar-title>
+        <v-spacer />
+      </v-app-bar>
+      <v-navigation-drawer
+        v-model="drawer"
+        persistent
+        :location="$vuetify.display.mobile ? 'bottom' : undefined"
+        elevation="0"
+        border="0"
+      >
+        <v-list :items="items" />
+      </v-navigation-drawer>
+      <v-main class="bg-primary-lighten-1">
+        <router-view />
+      </v-main>
+      <AppFooter />
+    </v-layout>
   </v-app>
 </template>
 
-<script setup>
-  //
+<script>
 import AppFooter from "@/components/AppFooter.vue";
+
+export default {
+  components: {AppFooter},
+  data: () => ({
+    drawer: false,
+    group: null,
+    items: [
+      {
+        title: 'Pedidos',
+        value: 'foo',
+        props:{
+          prependIcon: 'mdi-basket',
+          active:true,
+          to: '/orders'
+        }
+      },
+    ],
+  }),
+
+  watch: {
+    group() {
+      this.drawer = false
+    },
+  },
+}
 </script>
