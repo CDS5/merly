@@ -1,34 +1,50 @@
 <template>
   <v-app>
     <v-layout>
+
+
       <v-app-bar
         elevation="0"
         app
+        rounded="b-xl"
       >
         <v-app-bar-nav-icon
           variant="flat"
           @click.stop="drawer = !drawer"
         />
+
         <v-toolbar-title>
           <div class="d-flex align-center">
             <img
               height="40"
-              width="40"
-              src="@/assets/logo.png"
+              src="@/assets/logo.svg"
               alt="logo"
               class="mr-2"
             >
-            <h1 class="font-weight-bold">
+            <p class="font-weight-bold text-h5 text-lg-h4">
               Merly
-            </h1>
+            </p>
           </div>
         </v-toolbar-title>
-        <v-spacer />
+
+        <v-spacer/>
+
+        <v-btn
+          icon
+          variant="flat"
+          @click="toggleTheme"
+        >
+          <v-icon>
+            {{ $vuetify.theme.global.name === 'light' ? 'mdi-weather-night' : 'mdi-white-balance-sunny' }}
+          </v-icon>
+        </v-btn>
       </v-app-bar>
+
+
       <v-navigation-drawer
         v-model="drawer"
-        color="black"
-        class="rounded-e-shaped "
+        color="primary"
+        class="rounded-e-xl"
         :location="$vuetify.display.mobile ? 'start' : undefined"
         elevation="0"
         temporary
@@ -37,13 +53,21 @@
       >
         <v-list
           :items="items"
-          rounded="xl"
+          rounded="e-xl"
         />
+
+
       </v-navigation-drawer>
+
+
       <v-main class="bg-primary-lighten-1">
-        <router-view />
+        <router-view/>
       </v-main>
-      <AppFooter />
+
+
+      <AppFooter/>
+
+
     </v-layout>
   </v-app>
 </template>
@@ -69,5 +93,13 @@ export default {
       },
     ],
   }),
+
+
+  methods: {
+    toggleTheme() {
+      this.$vuetify.theme.global.name = this.$vuetify.theme.global.name === 'light' ? 'dark' : 'light'
+
+    }
+  }
 }
 </script>

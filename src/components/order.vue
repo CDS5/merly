@@ -4,20 +4,20 @@
     rounded="xl"
     prepend-icon="mdi-basket"
     class="pa-3 ma-3"
-    title="Pedido"
-    subtitle="Selecciona los productos que necesites"
+    title="PEDIDO"
+    subtitle="CREADO: "
   >
     <template #text>
       <v-row>
         <v-col
           cols="12"
-          lg="6"
+          lg="4"
         >
           <v-row no-gutters>
             <v-col cols="12">
               <v-text-field
                 v-model="id"
-                label="ID o Usuario"
+                label="ID o USUARIO"
                 prepend-inner-icon="mdi-key"
                 variant="outlined"
                 type="number"
@@ -30,7 +30,7 @@
             <v-col cols="12">
               <v-text-field
                 v-model="client"
-                label="Cliente"
+                label="NOMBRE DEL CLIENTE"
                 prepend-inner-icon="mdi-account-circle"
                 variant="outlined"
                 rounded="xl"
@@ -43,20 +43,21 @@
             <v-col cols="12">
               <v-text-field
                 v-model="pvn"
-                label="PVN Personales Actuales"
+                label="PVN ACTUALES"
                 prepend-inner-icon="mdi-dots-triangle"
                 variant="outlined"
                 rounded="xl"
                 clearable
                 type="number"
                 placeholder="Coloque los puntos si ya existen en sistema"
+                @click:clear="pvn = 0"
               />
             </v-col>
 
             <v-col cols="12">
               <v-text-field
                 v-model="originalComission"
-                label="Bonificaciones"
+                label="BONIFICACIONES"
                 prepend-inner-icon="mdi-cash"
                 variant="outlined"
                 rounded="xl"
@@ -78,28 +79,137 @@
                 </template>
               </v-text-field>
               <div
-                class="text-h6 mb-4"
-                v-text="isActiveComission ? `10% agregado: $${commission}`: ''"
+                class="text-h6 mb-4 text-success"
+                v-text="isActiveComission ? `10% agregado: $${getAddcommission}`: ''"
               />
             </v-col>
           </v-row>
         </v-col>
+
+        <v-col
+          cols="12"
+          lg="2"
+        >
+          <v-row no-gutters>
+            <v-col cols="12">
+              <v-text-field
+                v-model="finalOrderPrice"
+                label="DINERO TOTAL PEDIDO"
+                prepend-inner-icon="mdi-currency-usd"
+                variant="outlined"
+                readonly
+                rounded="xl"
+              />
+            </v-col>
+
+            <v-col cols="12">
+              <v-text-field
+                v-model="orderPVN"
+                label="PVN DEL PEDIDO"
+                prepend-inner-icon="mdi-dots-triangle"
+                variant="outlined"
+                readonly
+                rounded="xl"
+              />
+            </v-col>
+
+            <v-col cols="12">
+              <v-text-field
+                v-model="finalOrderPVN"
+                label="PVN TOTALES"
+                prepend-inner-icon="mdi-dots-triangle"
+                variant="outlined"
+                readonly
+                rounded="xl"
+              />
+            </v-col>
+          </v-row>
+        </v-col>
+
         <v-col
           cols="12"
           lg="6"
-        />
-      </v-row>
+        >
+          <v-card
+            elevation="0"
+            rounded="xl"
+            color="blue-grey-lighten-5"
+            prepend-icon="mdi-basket"
+            title="LISTA"
+          >
+            <v-card-item
+            >
+              <v-data-table
+                density="compact"
+                items-per-page="100"
+                class="bg-transparent"
+                disable-sort
+                hide-default-footer
+                :items="getProductsSelected"
+                :headers="headersSelected"
+                :hide-default-header="!!$vuetify.display.mobile"
+                :mobile="!!$vuetify.display.mobile"
+                no-data-text="NO HAY PRODUCTOS SELECCIONADOS"
+              >
 
-      <v-text-field
-        v-model="search"
-        label="Busca un producto"
-        bg-color="primary-lighten-1"
-        prepend-inner-icon="mdi-magnify"
-        variant="outlined"
-        rounded="xl"
-        clearable
-        placeholder="Escriba el nombre del producto"
-      />
+                <template #item.quantity="{ item }">
+                  <VueNumberComponent
+                    v-model="item.quantity"
+                    inputtable
+                    center
+                    size="small"
+                    :step="1"
+                    :attrs="{ style: 'color: black;' }"
+                    :max="99"
+                    :min="0"
+                    autofocus
+                    controls
+                  />
+                </template>
+
+
+                <template #item.sub_pvn="{item}">
+                  {{ item.pvn * item.quantity }}
+                </template>
+
+                <template #item.sub_price="{item}">
+                  ${{ item.price.member * item.quantity }}
+                </template>
+
+                <template #item.action="{item}">
+                  <v-btn
+                    density="compact"
+                    color="error"
+                    icon="mdi-delete"
+                    @click="item.quantity = 0"
+                  />
+                </template>
+
+              </v-data-table>
+
+            </v-card-item>
+
+
+          </v-card>
+
+
+        </v-col>
+
+        <v-col cols="12">
+
+          <v-text-field
+            v-model="search"
+            label="BUSCAR PRODUCTO(S)"
+            bg-color="primary-lighten-1"
+            prepend-inner-icon="mdi-magnify"
+            variant="outlined"
+            rounded="xl"
+            clearable
+            placeholder="Escriba el nombre del producto"
+          />
+        </v-col>
+
+      </v-row>
     </template>
 
 
@@ -108,8 +218,9 @@
         :items="[...products.values()]"
         :headers="headers"
         :search="search"
-        items-per-page="20"
+        items-per-page="10"
         :mobile="!!$vuetify.display.mobile"
+        no-data-text="NO HAY PRODUCTOS"
       >
         <template #item.img="{ item }">
           <v-img
@@ -120,8 +231,16 @@
           />
         </template>
 
+        <template #item.price.public="{item}">
+          ${{ item.price.public }}
+        </template>
+
         <template #item.price.member="{ item }">
-          {{ getDiscountMember(item) }}
+          ${{ getDiscountMember(item) }}
+        </template>
+
+        <template #item.pvn="{ item }">
+          {{ getPVNMember(item) }}
         </template>
 
         <template #item.quantity="{ item }">
@@ -139,13 +258,7 @@
           />
         </template>
 
-        <template #item.sub_pvn="{item}">
-          {{ item.pvn * item.quantity }}
-        </template>
 
-        <template #item.sub_price="{item}">
-          {{ item.price.member * item.quantity }}
-        </template>
       </v-data-table>
     </v-card-item>
   </v-card>
@@ -165,13 +278,36 @@ export default {
       id: '',
       client: '',
       search: '',
+      pvn: 0,
 
-      pvn: null,
-      originalComission: null,
-
+      originalComission: 0,
       isActiveComission: false,
 
+
       products: reactive(map),
+
+      headersSelected: [
+        {
+          title: 'PRODUCTO',
+          value: 'name',
+        },
+        {
+          title: 'CANTIDAD',
+          value: 'quantity',
+        },
+        {
+          title: 'SUB. PRECIO',
+          value: 'sub_price',
+        },
+        {
+          title: 'SUB. PVN',
+          value: 'sub_pvn',
+        },
+        {
+          title: 'ACCIÓN',
+          value: 'action',
+        },
+      ],
       headers: [
         {
           title: 'IMG',
@@ -202,14 +338,7 @@ export default {
           title: 'CANTIDAD',
           value: 'quantity',
         },
-        {
-          title: 'SUB. PRECIO',
-          value: 'sub_price',
-        },
-        {
-          title: 'SUB. PVN',
-          value: 'sub_pvn',
-        },
+
         {
           title: 'PALABRAS CLAVE',
           value: 'alternative_name',
@@ -219,18 +348,39 @@ export default {
     }
   },
   computed: {
+
+    finalOrderPrice() {
+      return this.getProductsSelected.reduce((price, item) => price + item.price.member * item.quantity, 0)
+    },
+    finalOrderPVN() {
+      return this.orderPVN + parseInt(this.pvn)
+    },
+    orderPVN() {
+      return this.getProductsSelected.reduce((pvn, item) => pvn + item.pvn * item.quantity, 0)
+    },
+    getProductsSelected() {
+      return [...this.products.values()].filter(item => item.quantity > 0)
+    },
     getDiscountMember() {
       return item => {
         item.price.member = item.price.public / 2
         return item.price.member
       }
     },
-    commission() {
-      if (this.isActiveComission) {
-        return this.originalComission * 1.10;
-      } else {
-        return this.originalComission;
+    getPVNMember() {
+      return item => {
+        item.pvn = Math.round(item.price.public / 2.582)
+        return item.pvn
       }
+    },
+    getAddcommission() {
+      let commision = new Float32Array(0)
+      if (this.isActiveComission) {
+        commision = this.originalComission * 1.10;
+      } else {
+        commision = this.originalComission;
+      }
+      return parseFloat(commision).toFixed(2);
     }
   },
   async created() {

@@ -22,7 +22,7 @@
       class="text-caption text-disabled"
       style="position: absolute; right: 16px;"
     >
-      &copy; {{ (new Date()).getFullYear() }} <span class="d-none d-sm-inline-block">Vuetify, LLC</span>
+      &copy; {{ (new Date()).getFullYear() }}
       —
       <a
         class="text-decoration-none on-surface"
@@ -30,7 +30,7 @@
         rel="noopener noreferrer"
         target="_blank"
       >
-        MIT License
+        HÉCTOR SALDAÑA ESPINOZA
       </a>
     </div>
   </v-footer>
