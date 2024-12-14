@@ -17,6 +17,57 @@ import PT790 from '@/assets/products/PT790.png'
 import PT764 from '@/assets/products/PT764.png'
 import PT726 from '@/assets/products/PT726.png'
 import PT722 from '@/assets/products/PT722.png'
+import PT720 from '@/assets/products/PT720.png'
+import PT774 from '@/assets/products/PT774.png'
+import PT724 from '@/assets/products/PT724.png'
+import PT725 from '@/assets/products/PT725.png'
+import PT788 from '@/assets/products/PT788.png'
+import PT789 from '@/assets/products/PT789.png'
+import PT721 from '@/assets/products/PT721.png'
+import PT728 from '@/assets/products/PT728.png'
+import PT730 from '@/assets/products/PT730.png'
+import PT729 from '@/assets/products/PT729.png'
+import PT732 from '@/assets/products/PT732.png'
+import PT727 from '@/assets/products/PT727.png'
+import PT731 from '@/assets/products/PT731.png'
+import PT777 from '@/assets/products/PT777.png'
+import PT748 from '@/assets/products/PT748.png'
+import PT775 from '@/assets/products/PT775.png'
+import PT757 from '@/assets/products/PT757.png'
+import PT761 from '@/assets/products/PT761.png'
+import PT776 from '@/assets/products/PT776.png'
+import PT793 from '@/assets/products/PT793.png'
+import PT750 from '@/assets/products/PT750.png'
+import PT772 from '@/assets/products/PT772.png'
+import PT752 from '@/assets/products/PT752.png'
+import PT786 from '@/assets/products/PT786.png'
+import PT760 from '@/assets/products/PT760.png'
+import PT766 from '@/assets/products/PT766.png'
+import PT751 from '@/assets/products/PT751.png'
+import PT736 from '@/assets/products/PT736.png'
+import PT737 from '@/assets/products/PT737.png'
+import CAFE from '@/assets/products/CAFE.png'
+import PT756 from '@/assets/products/PT756.png'
+import PT767 from '@/assets/products/PT767.png'
+import PT733 from '@/assets/products/PT733.png'
+import PT735 from '@/assets/products/PT735.png'
+import PT734 from '@/assets/products/PT734.png'
+import PT784 from '@/assets/products/PT784.png'
+import PT759 from '@/assets/products/PT759.png'
+import PT765 from '@/assets/products/PT765.png'
+import PT755 from '@/assets/products/PT755.png'
+import CBD500 from '@/assets/products/CBD500.png'
+import CBD1000 from '@/assets/products/CBD1000.png'
+import PT762 from '@/assets/products/PT762.png'
+import PT743 from '@/assets/products/PT743.png'
+import PT744 from '@/assets/products/PT744.png'
+import PT749 from '@/assets/products/PT749.png'
+import PT791 from '@/assets/products/PT791.png'
+import PT796 from '@/assets/products/PT796.png'
+import PT795 from '@/assets/products/PT795.png'
+import PT797 from '@/assets/products/PT797.png'
+import CATALOGO from '@/assets/products/CATALOGO.png'
+
 
 products.set('PT758', {
   id: 'PT758',
@@ -215,7 +266,7 @@ products.set('PT720', {
   price: {public: 589, member: 295},
   pvn: 228,
   quantity: 0,
-  img: '',
+  img: PT720,
 });
 
 products.set('PT774', {
@@ -225,7 +276,7 @@ products.set('PT774', {
   price: {public: 949, member: 475},
   pvn: 368,
   quantity: 0,
-  img: '',
+  img: PT774,
 });
 
 products.set('PT724', {
@@ -235,7 +286,7 @@ products.set('PT724', {
   price: {public: 299, member: 150},
   pvn: 116,
   quantity: 0,
-  img: '',
+  img: PT724,
 });
 
 products.set('PT725', {
@@ -245,7 +296,7 @@ products.set('PT725', {
   price: {public: 549, member: 275},
   pvn: 213,
   quantity: 0,
-  img: '',
+  img: PT725,
 });
 
 products.set('PT788', {
@@ -255,7 +306,7 @@ products.set('PT788', {
   price: {public: 530, member: 265},
   pvn: 205,
   quantity: 0,
-  img: '',
+  img: PT788,
 });
 
 products.set('PT789', {
@@ -265,7 +316,7 @@ products.set('PT789', {
   price: {public: 150, member: 75},
   pvn: 58,
   quantity: 0,
-  img: '',
+  img: PT789,
 });
 
 products.set('PT721', {
@@ -275,7 +326,7 @@ products.set('PT721', {
   price: {public: 529, member: 265},
   pvn: 205,
   quantity: 0,
-  img: '',
+  img: PT721,
 });
 
 products.set('PT728', {
@@ -285,7 +336,7 @@ products.set('PT728', {
   price: {public: 549, member: 275},
   pvn: 213,
   quantity: 0,
-  img: '',
+  img: PT728,
 });
 
 products.set('PT730', {
@@ -295,7 +346,7 @@ products.set('PT730', {
   price: {public: 549, member: 275},
   pvn: 213,
   quantity: 0,
-  img: '',
+  img: PT730,
 });
 
 products.set('PT729', {
@@ -305,7 +356,7 @@ products.set('PT729', {
   price: {public: 549, member: 275},
   pvn: 213,
   quantity: 0,
-  img: '',
+  img: PT729,
 });
 
 products.set('PT732', {
@@ -315,7 +366,7 @@ products.set('PT732', {
   price: {public: 549, member: 275},
   pvn: 213,
   quantity: 0,
-  img: '',
+  img: PT732,
 });
 
 products.set('PT727', {
@@ -325,7 +376,7 @@ products.set('PT727', {
   price: {public: 549, member: 275},
   pvn: 213,
   quantity: 0,
-  img: '',
+  img: PT727,
 });
 
 products.set('PT731', {
@@ -335,7 +386,7 @@ products.set('PT731', {
   price: {public: 549, member: 275},
   pvn: 213,
   quantity: 0,
-  img: '',
+  img: PT731,
 });
 
 products.set('PT777', {
@@ -345,7 +396,7 @@ products.set('PT777', {
   price: {public: 549, member: 275},
   pvn: 213,
   quantity: 0,
-  img: '',
+  img: PT777,
 });
 
 products.set('PT723', {
@@ -365,7 +416,7 @@ products.set('PT748', {
   price: {public: 429, member: 215},
   pvn: 166,
   quantity: 0,
-  img: '',
+  img: PT748,
 });
 
 products.set('PT775', {
@@ -375,7 +426,7 @@ products.set('PT775', {
   price: {public: 429, member: 215},
   pvn: 166,
   quantity: 0,
-  img: '',
+  img: PT775,
 });
 
 products.set('PT787', {
@@ -395,7 +446,7 @@ products.set('PT757', {
   price: {public: 389, member: 195},
   pvn: 151,
   quantity: 0,
-  img: '',
+  img: PT757,
 });
 
 products.set('PT761', {
@@ -405,17 +456,17 @@ products.set('PT761', {
   price: {public: 199, member: 100},
   pvn: 77,
   quantity: 0,
-  img: '',
+  img: PT761,
 });
 
 products.set('PT776', {
   id: 'PT776',
-  name: 'MY LIVE-T 250 G SABOR MENTA',
+  name: 'MY LIVE-T 250 G SABOR TÉ VERDE',
   alternative_name: 'live-t, menta, saludable, live',
   price: {public: 499, member: 250},
   pvn: 194,
   quantity: 0,
-  img: '',
+  img: PT776,
 });
 
 products.set('PT793', {
@@ -425,7 +476,7 @@ products.set('PT793', {
   price: {public: 499, member: 250},
   pvn: 194,
   quantity: 0,
-  img: '',
+  img: PT793,
 });
 
 products.set('PT750', {
@@ -435,7 +486,7 @@ products.set('PT750', {
   price: {public: 389, member: 195},
   pvn: 151,
   quantity: 0,
-  img: '',
+  img: PT750,
 });
 
 products.set('PT772', {
@@ -445,7 +496,7 @@ products.set('PT772', {
   price: {public: 319, member: 160},
   pvn: 124,
   quantity: 0,
-  img: '',
+  img: PT772,
 });
 
 products.set('PT752', {
@@ -455,7 +506,7 @@ products.set('PT752', {
   price: {public: 529, member: 265},
   pvn: 205,
   quantity: 0,
-  img: '',
+  img: PT752,
 });
 
 products.set('PT786', {
@@ -465,7 +516,7 @@ products.set('PT786', {
   price: {public: 999, member: 500},
   pvn: 388,
   quantity: 0,
-  img: '',
+  img: PT786,
 });
 
 products.set('PT760', {
@@ -475,7 +526,7 @@ products.set('PT760', {
   price: {public: 389, member: 195},
   pvn: 151,
   quantity: 0,
-  img: '',
+  img: PT760,
 });
 
 products.set('PT766', {
@@ -485,7 +536,7 @@ products.set('PT766', {
   price: {public: 319, member: 160},
   pvn: 124,
   quantity: 0,
-  img: '',
+  img: PT766,
 });
 
 products.set('PT751', {
@@ -495,7 +546,7 @@ products.set('PT751', {
   price: {public: 429, member: 215},
   pvn: 166,
   quantity: 0,
-  img: '',
+  img: PT751,
 });
 
 products.set('PT736', {
@@ -505,7 +556,7 @@ products.set('PT736', {
   price: {public: 599, member: 300},
   pvn: 232,
   quantity: 0,
-  img: '',
+  img: PT736,
 });
 
 
@@ -516,7 +567,7 @@ products.set('PT737', {
   price: {public: 1459, member: 730},
   pvn: 566,
   quantity: 0,
-  img: '',
+  img: PT737,
 });
 
 products.set('PT780', {
@@ -526,7 +577,7 @@ products.set('PT780', {
   price: {public: 599, member: 300},
   pvn: 232,
   quantity: 0,
-  img: '',
+  img: CAFE,
 });
 
 products.set('PT739', {
@@ -536,7 +587,7 @@ products.set('PT739', {
   price: {public: 529, member: 265},
   pvn: 205,
   quantity: 0,
-  img: '',
+  img: CAFE,
 });
 
 products.set('PT740', {
@@ -546,7 +597,7 @@ products.set('PT740', {
   price: {public: 529, member: 265},
   pvn: 205,
   quantity: 0,
-  img: '',
+  img: CAFE,
 });
 
 products.set('PT738', {
@@ -556,7 +607,7 @@ products.set('PT738', {
   price: {public: 529, member: 265},
   pvn: 205,
   quantity: 0,
-  img: '',
+  img: CAFE,
 });
 
 products.set('PT741', {
@@ -566,7 +617,7 @@ products.set('PT741', {
   price: {public: 529, member: 265},
   pvn: 205,
   quantity: 0,
-  img: '',
+  img: CAFE,
 });
 
 products.set('PT785', {
@@ -576,7 +627,7 @@ products.set('PT785', {
   price: {public: 599, member: 300},
   pvn: 232,
   quantity: 0,
-  img: '',
+  img: CAFE,
 });
 
 products.set('PT756', {
@@ -586,7 +637,7 @@ products.set('PT756', {
   price: {public: 389, member: 195},
   pvn: 151,
   quantity: 0,
-  img: '',
+  img: PT756,
 });
 
 products.set('PT767', {
@@ -596,7 +647,7 @@ products.set('PT767', {
   price: {public: 549, member: 275},
   pvn: 213,
   quantity: 0,
-  img: '',
+  img: PT767,
 });
 
 products.set('PT733', {
@@ -606,9 +657,8 @@ products.set('PT733', {
   price: {public: 899, member: 450},
   pvn: 349,
   quantity: 0,
-  img: '',
+  img: PT733,
 });
-
 
 products.set('PT735', {
   id: 'PT735',
@@ -617,7 +667,7 @@ products.set('PT735', {
   price: {public: 599, member: 300},
   pvn: 232,
   quantity: 0,
-  img: '',
+  img: PT735,
 });
 
 products.set('PT734', {
@@ -627,7 +677,7 @@ products.set('PT734', {
   price: {public: 789, member: 395},
   pvn: 306,
   quantity: 0,
-  img: '',
+  img: PT734,
 });
 
 products.set('PT784', {
@@ -637,7 +687,7 @@ products.set('PT784', {
   price: {public: 699, member: 350},
   pvn: 271,
   quantity: 0,
-  img: '',
+  img: PT784,
 });
 
 products.set('PT759', {
@@ -647,7 +697,7 @@ products.set('PT759', {
   price: {public: 389, member: 195},
   pvn: 151,
   quantity: 0,
-  img: '',
+  img: PT759,
 });
 
 products.set('PT765', {
@@ -657,7 +707,7 @@ products.set('PT765', {
   price: {public: 389, member: 195},
   pvn: 151,
   quantity: 0,
-  img: '',
+  img: PT765,
 });
 
 products.set('PT755', {
@@ -667,7 +717,7 @@ products.set('PT755', {
   price: {public: 399, member: 200},
   pvn: 155,
   quantity: 0,
-  img: '',
+  img: PT755,
 });
 
 products.set('CBD1000', {
@@ -677,7 +727,7 @@ products.set('CBD1000', {
   price: {public: 2999, member: 1500},
   pvn: 1163,
   quantity: 0,
-  img: '',
+  img: CBD1000,
 });
 
 products.set('CBD500', {
@@ -687,7 +737,7 @@ products.set('CBD500', {
   price: {public: 1999, member: 1000},
   pvn: 775,
   quantity: 0,
-  img: '',
+  img: CBD500,
 });
 
 products.set('PT762', {
@@ -697,7 +747,7 @@ products.set('PT762', {
   price: {public: 319, member: 160},
   pvn: 124,
   quantity: 0,
-  img: '',
+  img: PT762,
 });
 
 products.set('PT743', {
@@ -707,9 +757,8 @@ products.set('PT743', {
   price: {public: 399, member: 200},
   pvn: 155,
   quantity: 0,
-  img: '',
+  img: PT743,
 });
-
 
 products.set('PT744', {
   id: 'PT744',
@@ -718,7 +767,7 @@ products.set('PT744', {
   price: {public: 529, member: 265},
   pvn: 205,
   quantity: 0,
-  img: '',
+  img: PT744,
 });
 
 products.set('PT749', {
@@ -728,7 +777,7 @@ products.set('PT749', {
   price: {public: 389, member: 195},
   pvn: 151,
   quantity: 0,
-  img: '',
+  img: PT749,
 });
 
 products.set('PT791', {
@@ -738,7 +787,7 @@ products.set('PT791', {
   price: {public: 699, member: 350},
   pvn: 271,
   quantity: 0,
-  img: '',
+  img: PT791,
 });
 
 products.set('PT796', {
@@ -748,7 +797,7 @@ products.set('PT796', {
   price: {public: 600, member: 300},
   pvn: 232,
   quantity: 0,
-  img: '',
+  img: PT796,
 });
 
 products.set('PT795', {
@@ -758,7 +807,7 @@ products.set('PT795', {
   price: {public: 600, member: 300},
   pvn: 232,
   quantity: 0,
-  img: '',
+  img: PT795,
 });
 
 products.set('PT797', {
@@ -768,7 +817,7 @@ products.set('PT797', {
   price: {public: 429, member: 215},
   pvn: 166,
   quantity: 0,
-  img: '',
+  img: PT797,
 });
 
 products.set('HE801', {
@@ -778,7 +827,7 @@ products.set('HE801', {
   price: {public: 35, member: 35},
   pvn: 0,
   quantity: 0,
-  img: '',
+  img: CATALOGO,
 });
 
 products.set('HE802', {
@@ -788,7 +837,7 @@ products.set('HE802', {
   price: {public: 100, member: 100},
   pvn: 0,
   quantity: 0,
-  img: '',
+  img: CATALOGO,
 });
 
 products.set('HE796', {
@@ -798,7 +847,7 @@ products.set('HE796', {
   price: {public: 3420, member: 3420},
   pvn: 0,
   quantity: 0,
-  img: '',
+  img: CATALOGO,
 });
 
 

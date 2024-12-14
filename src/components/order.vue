@@ -87,22 +87,13 @@
         <v-col
           cols="12"
           lg="6"
-        >
-          <p>
-            PEDIDO: {{ id === 0 ? '' : id }} - {{ client }}
-          </p>
-          <p>
-            PVN en Sistema: {{ pvn }}
-          </p>
-          <p>
-            Bonificaciones: {{ commission }}
-          </p>
-        </v-col>
+        />
       </v-row>
 
       <v-text-field
         v-model="search"
         label="Busca un producto"
+        bg-color="primary-lighten-1"
         prepend-inner-icon="mdi-magnify"
         variant="outlined"
         rounded="xl"
@@ -117,7 +108,8 @@
         :items="[...products.values()]"
         :headers="headers"
         :search="search"
-        items-per-page="100"
+        items-per-page="20"
+        :mobile="!!$vuetify.display.mobile"
       >
         <template #item.img="{ item }">
           <v-img
@@ -139,8 +131,10 @@
             center
             size="small"
             :step="1"
+            :attrs="{ style: 'color: black;' }"
             :max="99"
             :min="0"
+            autofocus
             controls
           />
         </template>

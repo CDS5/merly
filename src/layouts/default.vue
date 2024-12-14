@@ -6,7 +6,7 @@
         app
       >
         <v-app-bar-nav-icon
-          variant="tonal"
+          variant="flat"
           @click.stop="drawer = !drawer"
         />
         <v-toolbar-title>
@@ -27,12 +27,18 @@
       </v-app-bar>
       <v-navigation-drawer
         v-model="drawer"
-        persistent
-        :location="$vuetify.display.mobile ? 'bottom' : undefined"
+        color="black"
+        class="rounded-e-shaped "
+        :location="$vuetify.display.mobile ? 'start' : undefined"
         elevation="0"
+        temporary
+
         border="0"
       >
-        <v-list :items="items" />
+        <v-list
+          :items="items"
+          rounded="xl"
+        />
       </v-navigation-drawer>
       <v-main class="bg-primary-lighten-1">
         <router-view />
@@ -54,19 +60,14 @@ export default {
       {
         title: 'Pedidos',
         value: 'foo',
-        props:{
+        props: {
+          class: '',
           prependIcon: 'mdi-basket',
-          active:true,
+          active: true,
           to: '/orders'
         }
       },
     ],
   }),
-
-  watch: {
-    group() {
-      this.drawer = false
-    },
-  },
 }
 </script>
