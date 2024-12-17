@@ -200,7 +200,7 @@
                     color="blue"
                     flat
                     :disabled="getProductsSelected.length <= 0"
-                    @click="snackFastQuick = true"
+                    @click="getFastQuick"
                   />
                 </template>
               </v-tooltip>
@@ -209,16 +209,18 @@
 
             <v-snackbar
               v-model="snackFastQuick"
-              vertical
               color="primary"
               location="top"
             >
-              <div class="text-subtitle-1 pb-2">This is a snackbar message</div>
 
-              <p>This is a longer paragraph explaining something</p>
+              <template #text>
+                <strong>¡CLAVES COPIADAS!</strong>
+                {{txtFastQuickCopy}}
+              </template>
+
+
 
             </v-snackbar>
-
 
             <v-card-item>
               <v-data-table
@@ -353,6 +355,8 @@ export default {
       pvn: 0,
 
       txtFastQuick: '',
+
+      txtFastQuickCopy: '',
       snackFastQuick: false,
 
       originalComission: 0,
@@ -467,6 +471,22 @@ export default {
       this.isActiveComission = !this.isActiveComission;
     },
 
+    async getFastQuick() {
+      this.snackFastQuick = true;
+      this.txtFastQuickCopy = ''; // Reinicia la variable
+
+      for (const item of this.getProductsSelected.values()) {
+        this.txtFastQuickCopy += `${item.id},${item.quantity}\n`;
+      }
+
+      try {
+        // Copiar el texto al portapapeles
+        await navigator.clipboard.writeText(this.txtFastQuickCopy);
+        console.log("Texto copiado al portapapeles");
+      } catch (err) {
+        console.error("Error al copiar al portapapeles: ", err);
+      }
+    }
   },
 
 };
