@@ -30,7 +30,7 @@
         rel="noopener noreferrer"
         target="_blank"
       >
-        HÉCTOR SALDAÑA ESPINOZA
+        HECTORSALDES
       </a>
     </div>
   </v-footer>

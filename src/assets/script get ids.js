@@ -1,6 +1,6 @@
-const dataMap = new Map(); // Crear el mapa para almacenar los resultados
+const dataJson = {}; // Crear un objeto para almacenar los resultados
 
-for (let i = 10001; i <= 10500; i++) {
+for (let i = 999; i <= 2000; i++) {
   try {
     // Seleccionar el input y el botón
     const input = document.querySelector("body > center > form > div:nth-child(11) > div > div:nth-child(3) > div.col-xs-12 > input[type=text]");
@@ -25,7 +25,7 @@ for (let i = 10001; i <= 10500; i++) {
     let spanContent = null;
     let maxRetries = 10; // Máximo 10 intentos (5 segundos)
     while (maxRetries-- > 0) {
-      await new Promise(resolve => setTimeout(resolve, 2000)); // Esperar 500 ms entre intentos
+      await new Promise(resolve => setTimeout(resolve, 800)); // Esperar 2 segundos entre intentos
       const span = document.querySelector(spanSelector);
 
       if (span) {
@@ -42,8 +42,8 @@ for (let i = 10001; i <= 10500; i++) {
       result = "No existe cliente";
     }
 
-    // Guardar en el mapa
-    dataMap.set(i, result);
+    // Guardar en el objeto con clave numérica
+    dataJson[i] = result;
 
     console.log(`Procesado número: ${i}, Resultado: ${result}`);
   } catch (error) {
@@ -53,8 +53,5 @@ for (let i = 10001; i <= 10500; i++) {
 }
 
 // Mostrar los datos procesados al final
-console.log("Datos procesados:", Array.from(dataMap.entries()));
-
-// Convertir el mapa a JSON para su exportación o uso posterior
-const jsonData = JSON.stringify(Object.fromEntries(dataMap), null, 2);
-console.log(jsonData);
+console.log("Datos procesados:");
+console.log(dataJson);

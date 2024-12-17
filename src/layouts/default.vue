@@ -1,8 +1,6 @@
 <template>
   <v-app>
     <v-layout>
-
-
       <v-app-bar
         elevation="0"
         app
@@ -27,7 +25,7 @@
           </div>
         </v-toolbar-title>
 
-        <v-spacer/>
+        <v-spacer />
 
         <v-btn
           icon
@@ -55,19 +53,15 @@
           :items="items"
           rounded="e-xl"
         />
-
-
       </v-navigation-drawer>
 
 
       <v-main class="bg-primary-lighten-1">
-        <router-view/>
+        <router-view />
       </v-main>
 
 
-      <AppFooter/>
-
-
+      <AppFooter />
     </v-layout>
   </v-app>
 </template>

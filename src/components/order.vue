@@ -1,4 +1,40 @@
 <template>
+  <v-dialog
+    v-model="dialogQuickCapture"
+  >
+    <v-card
+      elevation="0"
+      rounded="xl"
+      prepend-icon="mdi-pencil"
+      class="pa-2 ma-2"
+      title="CAPTURA RÁPIDA"
+    >
+      <v-card-item>
+
+        <v-textarea
+          v-model="txtFastQuick"
+          clearable
+          label="CLAVES Y CANTIDAD"
+          prepend-icon="mdi-pencil-box-outline"
+          variant="outlined"
+          rounded="xl"
+          class="pa-2"
+          placeholder="Ej. PT758,2"
+        />
+        {{ txtFastQuick }}
+
+      </v-card-item>
+
+      <v-card-actions>
+        <v-btn
+          color="primary"
+          text="GUARDAR"
+          @click="dialogQuickCapture = false"
+        />
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+
   <v-card
     elevation="0"
     rounded="xl"
@@ -7,6 +43,22 @@
     title="PEDIDO"
     subtitle="CREADO: "
   >
+    <template #append>
+      <v-tooltip
+        text="CAPTURA RÁPIDA"
+      >
+        <template v-slot:activator="{ props }">
+          <v-btn
+            v-bind="props"
+            icon="mdi-pencil"
+            color="primary"
+            flat
+            @click="dialogQuickCapture=true"
+          />
+        </template>
+      </v-tooltip>
+    </template>
+
     <template #text>
       <v-row>
         <v-col
@@ -137,8 +189,38 @@
             prepend-icon="mdi-basket"
             title="LISTA"
           >
-            <v-card-item
+            <template #append>
+              <v-tooltip
+                text="COPIAR CLAVES"
+              >
+                <template v-slot:activator="{ props }">
+                  <v-btn
+                    v-bind="props"
+                    icon="mdi-content-copy"
+                    color="blue"
+                    flat
+                    :disabled="getProductsSelected.length <= 0"
+                    @click="snackFastQuick = true"
+                  />
+                </template>
+              </v-tooltip>
+            </template>
+
+
+            <v-snackbar
+              v-model="snackFastQuick"
+              vertical
+              color="primary"
+              location="top"
             >
+              <div class="text-subtitle-1 pb-2">This is a snackbar message</div>
+
+              <p>This is a longer paragraph explaining something</p>
+
+            </v-snackbar>
+
+
+            <v-card-item>
               <v-data-table
                 density="compact"
                 items-per-page="100"
@@ -151,7 +233,6 @@
                 :mobile="!!$vuetify.display.mobile"
                 no-data-text="NO HAY PRODUCTOS SELECCIONADOS"
               >
-
                 <template #item.quantity="{ item }">
                   <VueNumberComponent
                     v-model="item.quantity"
@@ -178,25 +259,19 @@
 
                 <template #item.action="{item}">
                   <v-btn
-                    density="compact"
+                    density="comfortable"
                     color="error"
                     icon="mdi-delete"
+                    flat
                     @click="item.quantity = 0"
                   />
                 </template>
-
               </v-data-table>
-
             </v-card-item>
-
-
           </v-card>
-
-
         </v-col>
 
         <v-col cols="12">
-
           <v-text-field
             v-model="search"
             label="BUSCAR PRODUCTO(S)"
@@ -208,7 +283,6 @@
             placeholder="Escriba el nombre del producto"
           />
         </v-col>
-
       </v-row>
     </template>
 
@@ -257,8 +331,6 @@
             controls
           />
         </template>
-
-
       </v-data-table>
     </v-card-item>
   </v-card>
@@ -280,9 +352,13 @@ export default {
       search: '',
       pvn: 0,
 
+      txtFastQuick: '',
+      snackFastQuick: false,
+
       originalComission: 0,
       isActiveComission: false,
 
+      dialogQuickCapture: false,
 
       products: reactive(map),
 
