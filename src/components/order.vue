@@ -129,6 +129,7 @@
                 placeholder="Coloque aquí la bonificación con o sin el 10%"
                 prefix="$"
                 :loading="loading"
+                @click:clear="originalComission=0"
               >
                 <template #append>
                   <v-btn
@@ -199,6 +200,7 @@
 
             <v-col cols="12">
               <v-text-field
+
                 v-model="differenceComissionAndFinalOrderPrice"
                 label="PAGO TOTAL"
                 prepend-inner-icon="mdi-cash"
@@ -206,9 +208,10 @@
                 readonly
                 rounded="xl"
                 hide-details
-                :base-color="differenceComissionAndFinalOrderPrice > 0 ? 'error' : 'success'"
+                :base-color=" differenceComissionAndFinalOrderPrice > 0 ? 'error' : differenceComissionAndFinalOrderPrice < 0 ? 'success' : '' "
               />
               <div
+                v-if="differenceComissionAndFinalOrderPrice != 0.00"
                 :class="`text-h6  text-${differenceComissionAndFinalOrderPrice > 0 ? 'error' : 'success'}`"
                 v-text="`${differenceComissionAndFinalOrderPrice > 0 ? 'TOTAL A PAGAR' : 'SALDO A FAVOR'}`"
               />
