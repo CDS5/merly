@@ -9,8 +9,11 @@
       class="pa-2 ma-2"
       title="CAPTURA RÁPIDA"
     >
-      <v-card-item>
 
+      <v-card-text>
+        NOTA: CADA SALTO DE LÍNEA ES UN PRODUCTO
+      </v-card-text>
+      <v-card-item>
         <v-textarea
           v-model="txtFastQuick"
           clearable
@@ -19,17 +22,17 @@
           variant="outlined"
           rounded="xl"
           class="pa-2"
+          auto-grow
+          autofocus
           placeholder="Ej. PT758,2"
         />
-        {{ txtFastQuick }}
-
       </v-card-item>
 
       <v-card-actions>
         <v-btn
           color="primary"
           text="GUARDAR"
-          @click="dialogQuickCapture = false"
+          @click="updateProductsFastQuick"
         />
       </v-card-actions>
     </v-card>
@@ -40,7 +43,7 @@
     rounded="xl"
     prepend-icon="mdi-basket"
     class="pa-3 ma-3"
-    title="PEDIDO"
+    :title="`PEDIDO: ${id} ${client}`"
     subtitle="CREADO: "
   >
     <template #append>
@@ -63,7 +66,7 @@
       <v-row>
         <v-col
           cols="12"
-          lg="4"
+          lg="2"
         >
           <v-row no-gutters>
             <v-col cols="12">
@@ -76,6 +79,9 @@
                 rounded="xl"
                 clearable
                 placeholder="Coloque su ID o Usuario"
+                :loading="loading"
+                @blur="getNameById"
+                @click:clear="id=''"
               />
             </v-col>
 
@@ -89,6 +95,8 @@
                 clearable
                 type="text"
                 placeholder="Coloque el nombre"
+                :loading="loading"
+                @click:clear="client=''"
               />
             </v-col>
 
@@ -102,6 +110,7 @@
                 clearable
                 type="number"
                 placeholder="Coloque los puntos si ya existen en sistema"
+                :loading="loading"
                 @click:clear="pvn = 0"
               />
             </v-col>
@@ -119,6 +128,7 @@
                 hide-details
                 placeholder="Coloque aquí la bonificación con o sin el 10%"
                 prefix="$"
+                :loading="loading"
               >
                 <template #append>
                   <v-btn
@@ -131,7 +141,7 @@
                 </template>
               </v-text-field>
               <div
-                class="text-h6 mb-4 text-success"
+                class="text-h6 text-success"
                 v-text="isActiveComission ? `10% agregado: $${getAddcommission}`: ''"
               />
             </v-col>
@@ -175,17 +185,47 @@
                 rounded="xl"
               />
             </v-col>
+
+            <v-col cols="12">
+              <v-text-field
+                v-model="getProductsOrderQuantity"
+                label="CANTIDAD DE PRODUCTOS"
+                prepend-inner-icon="mdi-numeric"
+                variant="outlined"
+                readonly
+                rounded="xl"
+              />
+            </v-col>
+
+            <v-col cols="12">
+              <v-text-field
+                v-model="differenceComissionAndFinalOrderPrice"
+                label="PAGO TOTAL"
+                prepend-inner-icon="mdi-cash"
+                variant="outlined"
+                readonly
+                rounded="xl"
+                hide-details
+                :base-color="differenceComissionAndFinalOrderPrice > 0 ? 'error' : 'success'"
+              />
+              <div
+                :class="`text-h6  text-${differenceComissionAndFinalOrderPrice > 0 ? 'error' : 'success'}`"
+                v-text="`${differenceComissionAndFinalOrderPrice > 0 ? 'TOTAL A PAGAR' : 'SALDO A FAVOR'}`"
+              />
+            </v-col>
+
+
           </v-row>
         </v-col>
 
         <v-col
           cols="12"
-          lg="6"
+          lg="8"
         >
           <v-card
             elevation="0"
             rounded="xl"
-            color="blue-grey-lighten-5"
+            color="#5271ff"
             prepend-icon="mdi-basket"
             title="LISTA"
           >
@@ -212,14 +252,11 @@
               color="primary"
               location="top"
             >
-
               <template #text>
                 <strong>¡CLAVES COPIADAS!</strong>
-                {{txtFastQuickCopy}}
+                <br>
+                {{ txtFastQuickCopy }}
               </template>
-
-
-
             </v-snackbar>
 
             <v-card-item>
@@ -252,24 +289,44 @@
 
 
                 <template #item.sub_pvn="{item}">
-                  {{ item.pvn * item.quantity }}
+                  {{ getSubPVN(item) }}
                 </template>
 
                 <template #item.sub_price="{item}">
-                  ${{ item.price.member * item.quantity }}
+                  ${{ getSubPrice(item) }}
                 </template>
 
-                <template #item.action="{item}">
-                  <v-btn
-                    density="comfortable"
-                    color="error"
-                    icon="mdi-delete"
-                    flat
-                    @click="item.quantity = 0"
-                  />
+                <template #item.action_check="{item}">
+
+                  sfd
+                </template>
+
+                <template #item.action_delete="{item}">
+                  <v-tooltip
+                    text="BORRAR PRODUCTO"
+                  >
+                    <template v-slot:activator="{ props }">
+                      <v-btn
+                        v-bind="props"
+                        density="comfortable"
+                        color="error"
+                        icon="mdi-delete"
+                        flat
+                        @click="item.quantity = 0"
+                      />
+
+                    </template>
+                  </v-tooltip>
+
+
                 </template>
               </v-data-table>
             </v-card-item>
+
+            <v-card-actions>
+
+            </v-card-actions>
+
           </v-card>
         </v-col>
 
@@ -342,6 +399,7 @@
 import {default as map} from "@/assets/products.js";
 import {reactive,} from 'vue';
 import VueNumberComponent from '@chenfengyuan/vue-number-input'
+import funcGetNameById from "@/assets/ids.js";
 
 export default {
   components: {
@@ -354,9 +412,10 @@ export default {
       search: '',
       pvn: 0,
 
+      loading: false,
+
       txtFastQuick: '',
 
-      txtFastQuickCopy: '',
       snackFastQuick: false,
 
       originalComission: 0,
@@ -384,8 +443,12 @@ export default {
           value: 'sub_pvn',
         },
         {
-          title: 'ACCIÓN',
-          value: 'action',
+          title: '¿ENTREGADO?',
+          value: 'action_check',
+        },
+        {
+          title: 'ELIMINAR',
+          value: 'action_delete',
         },
       ],
       headers: [
@@ -429,6 +492,22 @@ export default {
   },
   computed: {
 
+    differenceComissionAndFinalOrderPrice() {
+      return parseFloat(this.finalOrderPrice - this.getAddcommission).toFixed(2) || this.finalOrderPrice
+    },
+
+    txtFastQuickCopy() {
+      let copy = ''; // Reinicia la variable
+      for (const item of this.getProductsSelected.values()) {
+        copy += `${item.id},${item.quantity}\n`;
+      }
+      return copy;
+    },
+
+    getProductsOrderQuantity() {
+      return this.getProductsSelected.reduce((quantity, item) => quantity + item.quantity, 0)
+    },
+
     finalOrderPrice() {
       return this.getProductsSelected.reduce((price, item) => price + item.price.member * item.quantity, 0)
     },
@@ -441,6 +520,20 @@ export default {
     getProductsSelected() {
       return [...this.products.values()].filter(item => item.quantity > 0)
     },
+
+    getSubPVN() {
+      return item => {
+        item.sub_pvn = item.pvn * item.quantity
+        return item.sub_pvn
+      }
+    },
+    getSubPrice() {
+      return item => {
+        item.sub_price = item.price.member * item.quantity
+        return item.sub_price
+      }
+    },
+
     getDiscountMember() {
       return item => {
         item.price.member = item.price.public / 2
@@ -463,30 +556,49 @@ export default {
       return parseFloat(commision).toFixed(2);
     }
   },
-  async created() {
-
-  },
   methods: {
+    updateProductsFastQuick() {
+      let productData = {};
+
+      this.txtFastQuick = this.txtFastQuick.replace(/"/g, "");
+      this.txtFastQuick = this.txtFastQuick.replace(" ", "");
+      const lines = this.txtFastQuick.split(/[\n\s]+/);
+
+      lines.forEach((line) => {
+        const [code, quantity] = line.split(","); // Dividir en código y cantidad
+        if (code && quantity && !isNaN(quantity)) {
+          productData[code.trim()] = parseInt(quantity.trim(), 10); // Agregar al objeto
+        }
+      });
+
+      for (let key in productData) {
+        if (this.products.has(key)) {
+          let obj = this.products.get(key)
+          obj.quantity = productData[key]
+          this.products.set(key, obj);
+        }
+      }
+      this.dialogQuickCapture = false;
+    },
+
+    getNameById() {
+      this.loading = true
+      this.client = funcGetNameById(this.id)
+      this.loading = false
+    },
+
     updateComission() {
       this.isActiveComission = !this.isActiveComission;
     },
 
     async getFastQuick() {
       this.snackFastQuick = true;
-      this.txtFastQuickCopy = ''; // Reinicia la variable
-
-      for (const item of this.getProductsSelected.values()) {
-        this.txtFastQuickCopy += `${item.id},${item.quantity}\n`;
-      }
-
       try {
-        // Copiar el texto al portapapeles
         await navigator.clipboard.writeText(this.txtFastQuickCopy);
-        console.log("Texto copiado al portapapeles");
       } catch (err) {
         console.error("Error al copiar al portapapeles: ", err);
       }
-    }
+    },
   },
 
 };

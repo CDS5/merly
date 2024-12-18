@@ -1,6 +1,6 @@
 const dataJson = {}; // Crear un objeto para almacenar los resultados
-
-for (let i = 999; i <= 2000; i++) {
+localStorage.removeItem('ids')
+for (let i = 4000; i <= 10000; i++) {
   try {
     // Seleccionar el input y el botón
     const input = document.querySelector("body > center > form > div:nth-child(11) > div > div:nth-child(3) > div.col-xs-12 > input[type=text]");
@@ -38,6 +38,7 @@ for (let i = 999; i <= 2000; i++) {
     let result;
     if (spanContent && document.querySelector("#Ajax_ExisteCliente .correct")) {
       result = spanContent.replace("Cliente:&nbsp;", "").replace("Cliente:", "").trim();
+      document.querySelector("#Ajax_ExisteCliente .correct").remove()
     } else {
       result = "No existe cliente";
     }
@@ -50,6 +51,7 @@ for (let i = 999; i <= 2000; i++) {
     console.error(`Error procesando el número ${i}:`, error);
     continue;
   }
+  localStorage.setItem('ids', JSON.stringify(dataJson));
 }
 
 // Mostrar los datos procesados al final
