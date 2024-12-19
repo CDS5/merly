@@ -563,7 +563,7 @@ products.set('PT736', {
 products.set('PT737', {
   id: 'PT737',
   name: 'ORIGEN CAFÉ 1 KG NORMAL',
-  alternative_name: 'origen, cafe, 1kg, normal',
+  alternative_name: 'origen, cafe, 1kg, normal, kilo',
   price: {public: 1459, member: 730},
   pvn: 566,
   quantity: 0,

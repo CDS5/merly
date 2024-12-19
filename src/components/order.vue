@@ -78,7 +78,7 @@
                 type="number"
                 rounded="xl"
                 clearable
-                placeholder="Coloque su ID o Usuario"
+                placeholder="COLOQUE SU ID O USUARIO"
                 :loading="loading"
                 @blur="getNameById"
                 @click:clear="id=''"
@@ -94,7 +94,7 @@
                 rounded="xl"
                 clearable
                 type="text"
-                placeholder="Coloque el nombre"
+                placeholder="COLOQUE EL NOMBRE"
                 :loading="loading"
                 @click:clear="client=''"
               />
@@ -109,7 +109,7 @@
                 rounded="xl"
                 clearable
                 type="number"
-                placeholder="Coloque los puntos si ya existen en sistema"
+                placeholder="COLOQUE LOS PUNTOS SI YA EXISTEN EN SISTEMA"
                 :loading="loading"
                 @click:clear="pvn = 0"
               />
@@ -124,9 +124,9 @@
                 rounded="xl"
                 clearable
                 type="number"
-                step="any"
                 hide-details
-                placeholder="Coloque aquí la bonificación con o sin el 10%"
+                step="any"
+                placeholder="COLOQUE AQUÍ LA BONIFICACIÓN CON O SIN EL 10%"
                 prefix="$"
                 :loading="loading"
                 @click:clear="originalComission=0"
@@ -144,6 +144,22 @@
               <div
                 class="text-h6 text-success"
                 v-text="isActiveComission ? `10% agregado: $${getAddcommission}`: ''"
+              />
+            </v-col>
+
+            <v-col cols="12">
+              <v-textarea
+                v-model="notes"
+                bg-color="yellow-accent-1"
+                single-line
+                density="compact"
+                class="mt-5"
+                label="NOTAS"
+                prepend-inner-icon="mdi-note"
+                variant="outlined"
+                rounded="xl"
+                placeholder="ESCRIBA RECORDATORIOS O NOTAS"
+                :loading="loading"
               />
             </v-col>
           </v-row>
@@ -168,7 +184,7 @@
             <v-col cols="12">
               <v-text-field
                 v-model="orderPVN"
-                label="PVN DEL PEDIDO"
+                label="PVN PEDIDO"
                 prepend-inner-icon="mdi-dots-triangle"
                 variant="outlined"
                 readonly
@@ -228,9 +244,9 @@
           <v-card
             elevation="0"
             rounded="xl"
-            color="#5271ff"
             prepend-icon="mdi-basket"
             title="LISTA"
+            color="red"
           >
             <template #append>
               <v-tooltip
@@ -300,8 +316,12 @@
                 </template>
 
                 <template #item.action_check="{item}">
-
-                  sfd
+                  <v-checkbox
+                    v-model="item.check"
+                    hide-details
+                    density="comfortable"
+                    :label="`${item.check?'SI ✅':'NO ❌'}`"
+                  />
                 </template>
 
                 <template #item.action_delete="{item}">
@@ -330,8 +350,11 @@
 
             </v-card-actions>
 
+
           </v-card>
+
         </v-col>
+
 
         <v-col cols="12">
           <v-text-field
@@ -342,7 +365,7 @@
             variant="outlined"
             rounded="xl"
             clearable
-            placeholder="Escriba el nombre del producto"
+            placeholder="ESCRIBA NOMBRE O PALABRA"
           />
         </v-col>
       </v-row>
@@ -356,6 +379,7 @@
         :search="search"
         items-per-page="10"
         :mobile="!!$vuetify.display.mobile"
+        :hide-default-header="!!$vuetify.display.mobile"
         no-data-text="NO HAY PRODUCTOS"
       >
         <template #item.img="{ item }">
@@ -414,6 +438,8 @@ export default {
       client: '',
       search: '',
       pvn: 0,
+
+      notes: '',
 
       loading: false,
 
