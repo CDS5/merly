@@ -460,7 +460,7 @@ export default {
       txtFastQuick: '',
 
       snackFastQuick: false,
-      stackTxt :{
+      stackTxt: {
         title: '',
         text: ''
       },
@@ -540,25 +540,23 @@ export default {
   computed: {
 
     shareOrder() {
-      return `
-      CLIENTE: ${this.id} - ${this.client} \\n
-
-      DINERO PEDIDO: $${this.finalOrderPrice} \\n
-      BONIFICACIONES: $${this.getAddcommission} \\n
-      TOTAL A PAGAR: $${this.finalOrderPriceAndComission} \\n\\n
-
-      PVN PEDIDO: ${this.orderPVN} \\n
-      PVN ACTUALES: ${this.pvn} \\n
-      PVN TOTALES: ${this.finalOrderPVN} \\n
-      CANTIDAD DE PRODUCTOS: ${this.getProductsOrderQuantity} \\n
-      ${this.packOrder.text} \\n
-      LISTA: \\n
-      ${this.getProductsSelected.map((item,i) => `${i+1}. ${item.name}  (${item.quantity} x ${item.price.member}) = ${item.sub_price}`).join('\\n')} \\n\\n
-
-      CLAVES: \\n
-      ${this.getProductsSelected.map((item) => `${item.id},${item.quantity}`).join('\\n')} \\n\\n
-
-      `
+      return "👤 CLIENTE: " + this.id + " - " + this.client + "\n\n" +
+        "💵 DINERO PEDIDO: $" + this.finalOrderPrice + "\n" +
+        "🪙 BONIFICACIONES: $" + this.getAddcommission + "\n" +
+        "💰 TOTAL A PAGAR: $" + this.finalOrderPriceAndComission + "\n\n" +
+        "⚫ PVN ACTUALES: " + this.pvn + "\n" +
+        "🔵 PVN PEDIDO: " + this.orderPVN + "\n" +
+        "🟣 PVN TOTALES: " + this.finalOrderPVN + "\n" +
+        "🔢 CANTIDAD DE PRODUCTOS: " + this.getProductsOrderQuantity + "\n" +
+        this.packOrder.text + "\n\n" +
+        "📋 LISTA:\n" +
+        this.getProductsSelected.map(function (item, i) {
+          return (i + 1) + ". " + item.name + "  (" + item.quantity + " x " + item.price.member + ") = " + item.sub_price;
+        }).join("\n") + "\n\n" +
+        "🔑CLAVES:\n" +
+        this.getProductsSelected.map(function (item) {
+          return item.id + "," + item.quantity;
+        }).join("\n") + "\n";
     },
 
     packOrder() {
