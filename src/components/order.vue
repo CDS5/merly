@@ -66,7 +66,7 @@
       <v-row>
         <v-col
           cols="12"
-          lg="2"
+          lg="3"
         >
           <v-row no-gutters>
             <v-col cols="12">
@@ -216,20 +216,19 @@
 
             <v-col cols="12">
               <v-text-field
-
-                v-model="differenceComissionAndFinalOrderPrice"
+                v-model="finalOrderPriceAndComission"
                 label="PAGO TOTAL"
                 prepend-inner-icon="mdi-cash"
                 variant="outlined"
                 readonly
                 rounded="xl"
                 hide-details
-                :base-color=" differenceComissionAndFinalOrderPrice > 0 ? 'error' : differenceComissionAndFinalOrderPrice < 0 ? 'success' : '' "
+                :base-color=" finalOrderPriceAndComission > 0 ? 'error' : finalOrderPriceAndComission < 0 ? 'success' : '' "
               />
               <div
-                v-if="differenceComissionAndFinalOrderPrice != 0.00"
-                :class="`text-h6  text-${differenceComissionAndFinalOrderPrice > 0 ? 'error' : 'success'}`"
-                v-text="`${differenceComissionAndFinalOrderPrice > 0 ? 'TOTAL A PAGAR' : 'SALDO A FAVOR'}`"
+                v-if="finalOrderPriceAndComission != 0.00"
+                :class="`text-h6  text-${finalOrderPriceAndComission > 0 ? 'error' : 'success'}`"
+                v-text="`${finalOrderPriceAndComission > 0 ? 'TOTAL A PAGAR' : 'SALDO A FAVOR'}`"
               />
             </v-col>
 
@@ -239,14 +238,14 @@
 
         <v-col
           cols="12"
-          lg="8"
+          lg="7"
         >
           <v-card
             elevation="0"
             rounded="xl"
             prepend-icon="mdi-basket"
             title="LISTA"
-            color="red"
+            :color="packOrder.color"
           >
             <template #append>
               <v-tooltip
@@ -319,7 +318,7 @@
                   <v-checkbox
                     v-model="item.check"
                     hide-details
-                    density="comfortable"
+
                     :label="`${item.check?'SI ✅':'NO ❌'}`"
                   />
                 </template>
@@ -344,14 +343,36 @@
 
                 </template>
               </v-data-table>
+
+              <h2
+                v-if="packOrder.text"
+                class="mt-3"
+                v-text="`${packOrder.text}`"
+              />
+
             </v-card-item>
+
 
             <v-card-actions>
 
+              <v-spacer/>
+
+              <v-btn
+                variant="outlined"
+                rounded="xl"
+                text="COMPARTIR PEDIDO"
+                prepend-icon="mdi-share-variant"
+                @click="getShareOrder"
+              />
+
             </v-card-actions>
 
-
           </v-card>
+
+          <div
+            v-html="shareOrder"
+          />
+
 
         </v-col>
 
@@ -521,7 +542,47 @@ export default {
   },
   computed: {
 
-    differenceComissionAndFinalOrderPrice() {
+    shareOrder() {
+      return `
+      CLIENTE: ${this.id} - ${this.client}  <br/>
+
+      DINERO PEDIDO: $${this.finalOrderPrice} <br/>
+      BONIFICACIONES: $${this.getAddcommission} <br/>
+      TOTAL A PAGAR: $${this.finalOrderPriceAndComission} <br/><br/>
+
+      PVN PEDIDO: ${this.orderPVN} <br/>
+      PVN ACTUALES: ${this.pvn} <br/>
+      PVN TOTALES: ${this.finalOrderPVN} <br/>
+      CANTIDAD DE PRODUCTOS: ${this.getProductsOrderQuantity} <br/>
+      ${this.packOrder.text} <br/>
+      LISTA: <br/>
+      ${this.getProductsSelected.map((item,i) => `${i+1}. ${item.name}  (${item.quantity} x ${item.price.member}) = ${item.sub_price}`).join('<br/>')} <br/><br/>
+
+      CLAVES: <br/>
+      ${this.getProductsSelected.map((item) => `${item.id},${item.quantity}`).join('<br/>')} <br/><br/>
+
+      `
+    },
+
+    packOrder() {
+      let obj = {
+        color: 'blue-grey-lighten-5',
+        text: ''
+      }
+      if (this.finalOrderPVN >= 8800) {
+        obj.color = '#5271ff'
+        obj.text = 'CERRADO/A CON: 8800'
+      } else if (this.finalOrderPVN >= 4400 && this.finalOrderPVN < 8800) {
+        obj.color = '#e50c80'
+        obj.text = 'CERRADO/A CON: 4400'
+      } else if (this.finalOrderPVN >= 2200 && this.finalOrderPVN < 4400) {
+        obj.color = '#b5d167'
+        obj.text = 'CERRADO/A CON: 2200'
+      }
+      return obj
+    },
+
+    finalOrderPriceAndComission() {
       return parseFloat(this.finalOrderPrice - this.getAddcommission).toFixed(2) || this.finalOrderPrice
     },
 
@@ -571,7 +632,15 @@ export default {
     },
     getPVNMember() {
       return item => {
-        item.pvn = Math.round(item.price.public / 2.582)
+        let value = 0.3858 * item.price.public + 0.7285;
+        let integerPart = Math.floor(value);
+        let decimalPart = value - integerPart;
+
+        if (decimalPart >= 0.6) {
+          item.pvn = Math.ceil(value);
+        } else {
+          item.pvn = Math.floor(value);
+        }
         return item.pvn
       }
     },
@@ -608,6 +677,7 @@ export default {
         }
       }
       this.dialogQuickCapture = false;
+      this.txtFastQuick = '';
     },
 
     getNameById() {
@@ -628,6 +698,16 @@ export default {
         console.error("Error al copiar al portapapeles: ", err);
       }
     },
+
+    async getShareOrder() {
+      try {
+        await navigator.clipboard.writeText(this.shareOrder);
+        console.log('Order copied to clipboard successfully');
+      } catch (error) {
+        console.error('Error copying order to clipboard:', error);
+      }
+
+    }
   },
 
 };
