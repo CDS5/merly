@@ -271,9 +271,9 @@
               location="top"
             >
               <template #text>
-                <strong>¡CLAVES COPIADAS!</strong>
+                <strong>{{ stackTxt.title }}</strong>
                 <br>
-                {{ txtFastQuickCopy }}
+                {{ stackTxt.text }}
               </template>
             </v-snackbar>
 
@@ -467,6 +467,10 @@ export default {
       txtFastQuick: '',
 
       snackFastQuick: false,
+      stackTxt :{
+        title: '',
+        text: ''
+      },
 
       originalComission: 0,
       isActiveComission: false,
@@ -691,6 +695,8 @@ export default {
     },
 
     async getFastQuick() {
+      this.stackTxt.title = '¡CLAVES COPIADAS!';
+      this.stackTxt.text = this.txtFastQuickCopy;
       this.snackFastQuick = true;
       try {
         await navigator.clipboard.writeText(this.txtFastQuickCopy);
@@ -700,8 +706,12 @@ export default {
     },
 
     async getShareOrder() {
+      let replace = this.shareOrder.replace(/<br\/>/g, '\n');
+      this.stackTxt.title = '¡ORDEN COPIADA!';
+      this.stackTxt.text = replace;
+      this.snackFastQuick = true;
       try {
-        await navigator.clipboard.writeText(this.shareOrder);
+        await navigator.clipboard.writeText(replace);
         console.log('Order copied to clipboard successfully');
       } catch (error) {
         console.error('Error copying order to clipboard:', error);
