@@ -56,17 +56,16 @@ import PT784 from '@/assets/products/PT784.png'
 import PT759 from '@/assets/products/PT759.png'
 import PT765 from '@/assets/products/PT765.png'
 import PT755 from '@/assets/products/PT755.png'
-import CBD500 from '@/assets/products/CBD500.png'
-import CBD1000 from '@/assets/products/CBD1000.png'
 import PT762 from '@/assets/products/PT762.png'
 import PT743 from '@/assets/products/PT743.png'
 import PT744 from '@/assets/products/PT744.png'
 import PT749 from '@/assets/products/PT749.png'
-import PT791 from '@/assets/products/PT791.png'
 import PT796 from '@/assets/products/PT796.png'
 import PT795 from '@/assets/products/PT795.png'
 import PT797 from '@/assets/products/PT797.png'
 import CATALOGO from '@/assets/products/CATALOGO.png'
+import PT723 from '@/assets/products/PT723.png'
+import HE775 from '@/assets/products/HE775.png'
 
 
 products.set('PT758', {
@@ -406,7 +405,7 @@ products.set('PT723', {
   price: {public: 529, member: 265},
   pvn: 205,
   quantity: 0,
-  img: '',
+  img: PT723,
 });
 
 products.set('PT748', {
@@ -429,6 +428,7 @@ products.set('PT775', {
   img: PT775,
 });
 
+/*
 products.set('PT787', {
   id: 'PT787',
   name: 'GUDDUS GUMMY BEARS KIDS',
@@ -438,6 +438,7 @@ products.set('PT787', {
   quantity: 0,
   img: '',
 });
+ */
 
 products.set('PT757', {
   id: 'PT757',
@@ -720,6 +721,7 @@ products.set('PT755', {
   img: PT755,
 });
 
+/*
 products.set('CBD1000', {
   id: 'CBD1000',
   name: 'SPECTRUM CBD 1000 MG. 30 ML',
@@ -739,6 +741,7 @@ products.set('CBD500', {
   quantity: 0,
   img: CBD500,
 });
+ */
 
 products.set('PT762', {
   id: 'PT762',
@@ -780,7 +783,7 @@ products.set('PT749', {
   img: PT749,
 });
 
-products.set('PT791', {
+/*products.set('PT791', {
   id: 'PT791',
   name: 'BIOTELLE COLAGENO GOMITAS',
   alternative_name: 'biotelle, colageno, gomitas, guddus',
@@ -788,7 +791,7 @@ products.set('PT791', {
   pvn: 271,
   quantity: 0,
   img: PT791,
-});
+});*/
 
 products.set('PT796', {
   id: 'PT796',
@@ -858,7 +861,7 @@ products.set('HE775', {
   price: {public: 100, member: 100},
   pvn: 0,
   quantity: 0,
-  img: '',
+  img: HE775,
 });
 
 

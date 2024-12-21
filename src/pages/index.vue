@@ -1,12 +1,12 @@
 <template>
-  <Login />
+  <Orders />
 </template>
 
 <script>
-import Login from '@/components/Login.vue'
+import Orders from "@/pages/orders.vue";
 export default {
   components: {
-    Login
+    Orders,
   }
 }
 </script>

@@ -1,6 +1,6 @@
 const dataJson = {}; // Crear un objeto para almacenar los resultados
 localStorage.removeItem('ids')
-for (let i = 155001; i <= 160000; i++) {
+for (let i = 220001; i <= 240000; i++) {
   try {
     // Seleccionar el input y el botón
     const input = document.querySelector("body > center > form > div:nth-child(11) > div > div:nth-child(3) > div.col-xs-12 > input[type=text]");

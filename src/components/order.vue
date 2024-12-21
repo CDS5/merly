@@ -151,8 +151,6 @@
               <v-textarea
                 v-model="notes"
                 bg-color="yellow-accent-1"
-                single-line
-                density="compact"
                 class="mt-5"
                 label="NOTAS"
                 prepend-inner-icon="mdi-note"
@@ -178,6 +176,7 @@
                 variant="outlined"
                 readonly
                 rounded="xl"
+                disabled
               />
             </v-col>
 
@@ -189,6 +188,7 @@
                 variant="outlined"
                 readonly
                 rounded="xl"
+                disabled
               />
             </v-col>
 
@@ -200,6 +200,7 @@
                 variant="outlined"
                 readonly
                 rounded="xl"
+                disabled
               />
             </v-col>
 
@@ -211,6 +212,7 @@
                 variant="outlined"
                 readonly
                 rounded="xl"
+                disabled
               />
             </v-col>
 
@@ -230,6 +232,10 @@
                 :class="`text-h6  text-${finalOrderPriceAndComission > 0 ? 'error' : 'success'}`"
                 v-text="`${finalOrderPriceAndComission > 0 ? 'TOTAL A PAGAR' : 'SALDO A FAVOR'}`"
               />
+            </v-col>
+
+            <v-col cols="12">
+              <v-checkbox v-model="isRoundedPrices" label="REDONDEAR PRECIO PRODUCTO"/>
             </v-col>
 
 
@@ -378,7 +384,6 @@
             prepend-inner-icon="mdi-magnify"
             variant="outlined"
             rounded="xl"
-            clearable
             placeholder="ESCRIBA NOMBRE O PALABRA"
           />
         </v-col>
@@ -454,6 +459,8 @@ export default {
       pvn: 0,
 
       notes: '',
+
+      isRoundedPrices: false,
 
       loading: false,
 
@@ -621,20 +628,23 @@ export default {
 
     getDiscountMember() {
       return item => {
-        item.price.member = item.price.public / 2
+        item.price.member = item.id.startsWith('HE') ? item.price.public : this.isRoundedPrices ?  Math.round(item.price.public / 2) : item.price.public / 2
         return item.price.member
       }
     },
     getPVNMember() {
       return item => {
-        let value = 0.3858 * item.price.public + 0.7285;
-        let integerPart = Math.floor(value);
-        let decimalPart = value - integerPart;
-
-        if (decimalPart >= 0.6) {
-          item.pvn = Math.ceil(value);
+        if (item.id.startsWith('HE')) {
+          item.pvn = 0
         } else {
-          item.pvn = Math.floor(value);
+          let value = 0.3858 * item.price.public + 0.7285;
+          let integerPart = Math.floor(value);
+          let decimalPart = value - integerPart;
+          if (decimalPart >= 0.6) {
+            item.pvn = Math.ceil(value);
+          } else {
+            item.pvn = Math.floor(value);
+          }
         }
         return item.pvn
       }
