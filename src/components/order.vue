@@ -38,28 +38,46 @@
     </v-card>
   </v-dialog>
 
+
   <v-card
+    prepend-icon="mdi-basket"
     elevation="0"
     rounded="xl"
-    prepend-icon="mdi-basket"
     class="pa-3 ma-3"
-    :title="`PEDIDO: ${id} ${client}`"
-    subtitle="CREADO: "
+    title="PEDIDO"
+    :subtitle="`${id} ${client}`"
   >
+
     <template #append>
-      <v-tooltip
+
+      <v-btn
+        rounded="xl"
+        flat
+        text="LIMPIAR PEDIDO"
+        prepend-icon="mdi-basket-off-outline"
+        color="red"
+        @click="clearOrder"
+      />
+
+      <v-btn
+        rounded="xl"
+        flat
+        text="COMPARTIR"
+        prepend-icon="mdi-share-variant"
+        color="success"
+        @click="getShareOrder"
+      />
+
+
+      <v-btn
+        rounded="xl"
+        prepend-icon="mdi-pencil"
+        color="primary"
         text="CAPTURA RÁPIDA"
-      >
-        <template v-slot:activator="{ props }">
-          <v-btn
-            v-bind="props"
-            icon="mdi-pencil"
-            color="primary"
-            flat
-            @click="dialogQuickCapture=true"
-          />
-        </template>
-      </v-tooltip>
+        flat
+        @click="dialogQuickCapture=true"
+      />
+
     </template>
 
     <template #text>
@@ -78,6 +96,7 @@
                 type="number"
                 rounded="xl"
                 clearable
+                max="999999"
                 placeholder="COLOQUE SU ID O USUARIO"
                 :loading="loading"
                 @blur="getNameById"
@@ -234,10 +253,6 @@
               />
             </v-col>
 
-            <v-col cols="12">
-              <v-checkbox v-model="isRoundedPrices" label="REDONDEAR PRECIO PRODUCTO"/>
-            </v-col>
-
 
           </v-row>
         </v-col>
@@ -249,11 +264,28 @@
           <v-card
             elevation="0"
             rounded="xl"
-            prepend-icon="mdi-basket"
+            prepend-icon="mdi-cart"
             title="LISTA"
             :color="packOrder.color"
           >
             <template #append>
+
+              <v-tooltip
+                text="VACÍAR LISTA"
+              >
+                <template v-slot:activator="{ props }">
+                  <v-btn
+                    v-bind="props"
+                    icon="mdi-cart-arrow-up"
+                    color="error"
+                    flat
+                    :disabled="getProductsSelected.length <= 0"
+                    @click="clearList"
+                  />
+                </template>
+              </v-tooltip>
+
+
               <v-tooltip
                 text="COPIAR CLAVES"
               >
@@ -324,7 +356,6 @@
                   <v-checkbox
                     v-model="item.check"
                     hide-details
-
                     :label="`${item.check?'SI ✅':'NO ❌'}`"
                   />
                 </template>
@@ -358,20 +389,6 @@
 
             </v-card-item>
 
-
-            <v-card-actions>
-
-              <v-spacer/>
-
-              <v-btn
-                variant="outlined"
-                rounded="xl"
-                text="COMPARTIR PEDIDO"
-                prepend-icon="mdi-share-variant"
-                @click="getShareOrder"
-              />
-
-            </v-card-actions>
           </v-card>
         </v-col>
 
@@ -396,7 +413,7 @@
         :items="[...products.values()]"
         :headers="headers"
         :search="search"
-        items-per-page="10"
+        items-per-page="100"
         :mobile="!!$vuetify.display.mobile"
         :hide-default-header="!!$vuetify.display.mobile"
         no-data-text="NO HAY PRODUCTOS"
@@ -453,32 +470,26 @@ export default {
   },
   data() {
     return {
-      id: '',
-      client: '',
-      search: '',
-      pvn: 0,
-
-      notes: '',
-
-      isRoundedPrices: false,
-
       loading: false,
-
       txtFastQuick: '',
-
       snackFastQuick: false,
       stackTxt: {
         title: '',
         text: ''
       },
 
+      id: '',
+      client: '',
+      search: '',
+      pvn: 0,
+      notes: '',
+
+
       originalComission: 0,
       isActiveComission: false,
-
       dialogQuickCapture: false,
 
       products: reactive(map),
-
       headersSelected: [
         {
           title: 'PRODUCTO',
@@ -547,23 +558,19 @@ export default {
   computed: {
 
     shareOrder() {
-      return "👤 CLIENTE: " + this.id + " - " + this.client + "\n\n" +
+      return "*👤 PEDIDO: " + this.id + " - " + this.client + "*\n\n" +
         "💵 DINERO PEDIDO: $" + this.finalOrderPrice + "\n" +
         "🪙 BONIFICACIONES: $" + this.getAddcommission + "\n" +
         "💰 TOTAL A PAGAR: $" + this.finalOrderPriceAndComission + "\n\n" +
-        "⚫ PVN ACTUALES: " + this.pvn + "\n" +
-        "🔵 PVN PEDIDO: " + this.orderPVN + "\n" +
-        "🟣 PVN TOTALES: " + this.finalOrderPVN + "\n" +
-        "🔢 CANTIDAD DE PRODUCTOS: " + this.getProductsOrderQuantity + "\n" +
+        "▪️ PVN ACTUALES: " + this.pvn + "\n" +
+        "▫️ PVN PEDIDO: " + this.orderPVN + "\n" +
+        "🔳 PVN TOTALES: " + this.finalOrderPVN + "\n" +
+        "🔢 CANTIDAD DE PRODUCTOS: " + this.getProductsOrderQuantity + "\n\n" +
         this.packOrder.text + "\n\n" +
         "📋 LISTA:\n" +
-        this.getProductsSelected.map(function (item, i) {
-          return (i + 1) + ". " + item.name + "  (" + item.quantity + " x " + item.price.member + ") = " + item.sub_price;
-        }).join("\n") + "\n\n" +
-        "🔑CLAVES:\n" +
-        this.getProductsSelected.map(function (item) {
-          return item.id + "," + item.quantity;
-        }).join("\n") + "\n";
+        this.getProductsSelected.map(item => "* " +item.quantity +" " + item.name + "  (" + item.quantity + " x " + item.price.member + ") = $" + item.sub_price).join("\n") + "\n\n" +
+        "🔑 CLAVES:\n" +
+        '```' + this.getProductsSelected.map(item => item.id + "," + item.quantity).join("\n") + "```";
     },
 
     packOrder() {
@@ -573,13 +580,13 @@ export default {
       }
       if (this.finalOrderPVN >= 8800) {
         obj.color = '#5271ff'
-        obj.text = 'CERRADO/A CON: 8800'
+        obj.text = '🔵 CERRADO/A CON: 8800'
       } else if (this.finalOrderPVN >= 4400 && this.finalOrderPVN < 8800) {
         obj.color = '#e50c80'
-        obj.text = 'CERRADO/A CON: 4400'
+        obj.text = '🟣 CERRADO/A CON: 4400'
       } else if (this.finalOrderPVN >= 2200 && this.finalOrderPVN < 4400) {
         obj.color = '#b5d167'
-        obj.text = 'CERRADO/A CON: 2200'
+        obj.text = '🟢 CERRADO/A CON: 2200'
       }
       return obj
     },
@@ -628,7 +635,7 @@ export default {
 
     getDiscountMember() {
       return item => {
-        item.price.member = item.id.startsWith('HE') ? item.price.public : this.isRoundedPrices ?  Math.round(item.price.public / 2) : item.price.public / 2
+        item.price.member = item.id.startsWith('HE') ? item.price.public : item.price.public / 2
         return item.price.member
       }
     },
@@ -695,6 +702,21 @@ export default {
       this.isActiveComission = !this.isActiveComission;
     },
 
+    async clearList() {
+      for (const item of this.getProductsSelected) {
+        item.quantity = 0;
+      }
+    },
+
+    async clearOrder(){
+      this.id = '';
+      this.client= '';
+      this.search = '';
+      this.pvn = 0;
+      this.notes = '';
+      this.clearList();
+    },
+
     async getFastQuick() {
       this.stackTxt.title = '¡CLAVES COPIADAS!';
       this.stackTxt.text = this.txtFastQuickCopy;
@@ -708,7 +730,7 @@ export default {
 
     async getShareOrder() {
       let replace = this.shareOrder.replace(/<br\/>/g, '\n');
-      this.stackTxt.title = '¡ORDEN COPIADA!';
+      this.stackTxt.title = '¡PEDIDO COPIADO!';
       this.stackTxt.text = replace;
       this.snackFastQuick = true;
       try {

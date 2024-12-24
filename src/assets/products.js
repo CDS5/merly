@@ -63,9 +63,12 @@ import PT749 from '@/assets/products/PT749.png'
 import PT796 from '@/assets/products/PT796.png'
 import PT795 from '@/assets/products/PT795.png'
 import PT797 from '@/assets/products/PT797.png'
+import PT791 from '@/assets/products/PT791.png'
 import CATALOGO from '@/assets/products/CATALOGO.png'
 import PT723 from '@/assets/products/PT723.png'
 import HE775 from '@/assets/products/HE775.png'
+import CBD500 from '@/assets/products/CBD500.png'
+import CBD1000 from '@/assets/products/CBD1000.png'
 
 
 products.set('PT758', {
@@ -261,7 +264,7 @@ products.set('PT722', {
 products.set('PT720', {
   id: 'PT720',
   name: 'FT-ELYM DTOX CAPS PRO 30 CAPS',
-  alternative_name: 'ftelym, dtox, pro, capsulas, negras',
+  alternative_name: 'ftelym dtox pro cap capsulas negras',
   price: {public: 589, member: 295},
   pvn: 228,
   quantity: 0,
@@ -428,7 +431,7 @@ products.set('PT775', {
   img: PT775,
 });
 
-/*
+
 products.set('PT787', {
   id: 'PT787',
   name: 'GUDDUS GUMMY BEARS KIDS',
@@ -438,7 +441,7 @@ products.set('PT787', {
   quantity: 0,
   img: '',
 });
- */
+
 
 products.set('PT757', {
   id: 'PT757',
@@ -543,7 +546,7 @@ products.set('PT766', {
 products.set('PT751', {
   id: 'PT751',
   name: 'MY MAHAL TÉ 250 GR',
-  alternative_name: 'mahal, te, saludable',
+  alternative_name: 'mahal te saludable',
   price: {public: 429, member: 215},
   pvn: 166,
   quantity: 0,
@@ -721,7 +724,7 @@ products.set('PT755', {
   img: PT755,
 });
 
-/*
+
 products.set('CBD1000', {
   id: 'CBD1000',
   name: 'SPECTRUM CBD 1000 MG. 30 ML',
@@ -741,7 +744,7 @@ products.set('CBD500', {
   quantity: 0,
   img: CBD500,
 });
- */
+
 
 products.set('PT762', {
   id: 'PT762',
@@ -783,7 +786,7 @@ products.set('PT749', {
   img: PT749,
 });
 
-/*products.set('PT791', {
+products.set('PT791', {
   id: 'PT791',
   name: 'BIOTELLE COLAGENO GOMITAS',
   alternative_name: 'biotelle, colageno, gomitas, guddus',
@@ -791,13 +794,13 @@ products.set('PT749', {
   pvn: 271,
   quantity: 0,
   img: PT791,
-});*/
+});
 
 products.set('PT796', {
   id: 'PT796',
   name: 'INTENS-MN',
   alternative_name: 'intens, mn, salud',
-  price: {public: 600, member: 300},
+  price: {public: 599, member: 300},
   pvn: 232,
   quantity: 0,
   img: PT796,
@@ -806,8 +809,8 @@ products.set('PT796', {
 products.set('PT795', {
   id: 'PT795',
   name: 'REVEN-VIT',
-  alternative_name: 'reven, vit, vitaminas',
-  price: {public: 600, member: 300},
+  alternative_name: 'reven vit vitaminas revenvit',
+  price: {public: 599, member: 300},
   pvn: 232,
   quantity: 0,
   img: PT795,

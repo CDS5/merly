@@ -46,7 +46,6 @@
         :location="$vuetify.display.mobile ? 'start' : undefined"
         elevation="0"
         temporary
-
         border="0"
       >
         <v-list
