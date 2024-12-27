@@ -16,7 +16,6 @@
       <v-card-item>
         <v-textarea
           v-model="txtFastQuick"
-          clearable
           label="CLAVES Y CANTIDAD"
           prepend-icon="mdi-pencil-box-outline"
           variant="outlined"
@@ -50,33 +49,79 @@
 
     <template #append>
 
-      <v-btn
-        rounded="xl"
-        flat
-        text="LIMPIAR PEDIDO"
-        prepend-icon="mdi-basket-off-outline"
-        color="red"
-        @click="clearOrder"
-      />
+      <v-menu v-if="$vuetify.display.mobile">
+        <template v-slot:activator="{ props }">
+          <v-btn icon="mdi-dots-vertical" variant="text" v-bind="props"></v-btn>
+        </template>
 
-      <v-btn
-        rounded="xl"
-        flat
-        text="COMPARTIR"
-        prepend-icon="mdi-share-variant"
-        color="success"
-        @click="getShareOrder"
-      />
+        <v-list>
+          <v-list-item>
+            <v-btn
+              rounded="xl"
+              flat
+              block
+              text="LIMPIAR PEDIDO"
+              prepend-icon="mdi-basket-off-outline"
+              color="red  "
+              @click="clearOrder"
+            />
+          </v-list-item>
+
+          <v-list-item>
+            <v-btn
+              rounded="xl"
+              flat
+              block
+              text="COMPARTIR"
+              prepend-icon="mdi-share-variant"
+              color="success"
+              @click="getShareOrder"
+            />
+          </v-list-item>
+
+          <v-list-item>
+            <v-btn
+              rounded="xl"
+              block
+              prepend-icon="mdi-pencil"
+              color="primary"
+              text="CAPTURA RÁPIDA"
+              flat
+              @click="dialogQuickCapture=true"
+            />
+          </v-list-item>
+        </v-list>
+      </v-menu>
+
+      <template v-else>
+        <v-btn
+          rounded="xl"
+          flat
+          text="LIMPIAR PEDIDO"
+          prepend-icon="mdi-basket-off-outline"
+          color="red"
+          @click="clearOrder"
+        />
+
+        <v-btn
+          rounded="xl"
+          flat
+          text="COMPARTIR"
+          prepend-icon="mdi-share-variant"
+          color="success"
+          @click="getShareOrder"
+        />
 
 
-      <v-btn
-        rounded="xl"
-        prepend-icon="mdi-pencil"
-        color="primary"
-        text="CAPTURA RÁPIDA"
-        flat
-        @click="dialogQuickCapture=true"
-      />
+        <v-btn
+          rounded="xl"
+          prepend-icon="mdi-pencil"
+          color="primary"
+          text="CAPTURA RÁPIDA"
+          flat
+          @click="dialogQuickCapture=true"
+        />
+      </template>
 
     </template>
 
@@ -250,6 +295,14 @@
                 v-if="finalOrderPriceAndComission != 0.00"
                 :class="`text-h6  text-${finalOrderPriceAndComission > 0 ? 'error' : 'success'}`"
                 v-text="`${finalOrderPriceAndComission > 0 ? 'TOTAL A PAGAR' : 'SALDO A FAVOR'}`"
+              />
+            </v-col>
+
+            <v-col cols="12">
+              <v-checkbox
+                v-model="isRounded"
+                label="REDONDEAR PRODUCTOS"
+                @click="updateIsRounded"
               />
             </v-col>
 
@@ -483,6 +536,7 @@ export default {
       search: '',
       pvn: 0,
       notes: '',
+      isRounded: false,
 
 
       originalComission: 0,
@@ -568,7 +622,7 @@ export default {
         "🔢 CANTIDAD DE PRODUCTOS: " + this.getProductsOrderQuantity + "\n\n" +
         this.packOrder.text + "\n\n" +
         "📋 LISTA:\n" +
-        this.getProductsSelected.map(item => "* " +item.quantity +" " + item.name + "  (" + item.quantity + " x " + item.price.member + ") = $" + item.sub_price).join("\n") + "\n\n" +
+        this.getProductsSelected.map(item => "* " + item.quantity + " " + item.name + "  (" + item.quantity + " x " + item.price.member + ") = $" + item.sub_price).join("\n") + "\n\n" +
         "🔑 CLAVES:\n" +
         '```' + this.getProductsSelected.map(item => item.id + "," + item.quantity).join("\n") + "```";
     },
@@ -667,6 +721,15 @@ export default {
     }
   },
   methods: {
+
+    updateIsRounded() {
+      this.isRounded = !this.isRounded;
+      console.log(this.isRounded);
+      for (const item of this.products.values()) {
+        console.log(item)
+        item.price.member = this.isRounded ? Math.round(item.price.public / 2) : item.price.public / 2;
+      }
+    },
     updateProductsFastQuick() {
       let productData = {};
 
@@ -708,9 +771,9 @@ export default {
       }
     },
 
-    async clearOrder(){
+    async clearOrder() {
       this.id = '';
-      this.client= '';
+      this.client = '';
       this.search = '';
       this.pvn = 0;
       this.notes = '';
