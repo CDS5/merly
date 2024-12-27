@@ -298,13 +298,13 @@
               />
             </v-col>
 
-            <v-col cols="12">
-              <v-checkbox
-                v-model="isRounded"
-                label="REDONDEAR PRODUCTOS"
-                @click="updateIsRounded"
-              />
-            </v-col>
+<!--            <v-col cols="12">-->
+<!--              <v-checkbox-->
+<!--                v-model="isRounded"-->
+<!--                label="REDONDEAR PRODUCTOS"-->
+<!--                @click="updateIsRounded"-->
+<!--              />-->
+<!--            </v-col>-->
 
 
           </v-row>
@@ -689,7 +689,7 @@ export default {
 
     getDiscountMember() {
       return item => {
-        item.price.member = item.id.startsWith('HE') ? item.price.public : item.price.public / 2
+        item.price.member = item.id.startsWith('HE') ? item.price.public : Math.round(item.price.public / 2)
         return item.price.member
       }
     },
