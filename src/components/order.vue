@@ -9,13 +9,19 @@
       class="pa-2 ma-2"
       title="CAPTURA RÁPIDA"
     >
-
       <v-card-text>
         NOTA: CADA SALTO DE LÍNEA ES UN PRODUCTO
       </v-card-text>
       <v-card-item>
+        <v-checkbox
+
+          v-model="order.state.is_clean_for_fast_quick"
+          hide-details
+          label="LIMPIAR LISTA Y AGREGAR"
+          @update:model-value="order.update_product_prices()"
+        />
         <v-textarea
-          v-model="txtFastQuick"
+          v-model="order.state.fast_quick"
           label="CLAVES Y CANTIDAD"
           prepend-icon="mdi-pencil-box-outline"
           variant="outlined"
@@ -31,12 +37,11 @@
         <v-btn
           color="primary"
           text="GUARDAR"
-          @click="updateProductsFastQuick"
+          @click="set_fast_quick"
         />
       </v-card-actions>
     </v-card>
   </v-dialog>
-
 
   <v-card
     prepend-icon="mdi-basket"
@@ -44,16 +49,17 @@
     rounded="xl"
     class="pa-3 ma-3"
     title="PEDIDO"
-    :subtitle="`${id} ${client}`"
+    :subtitle="`${order.state.id} ${order.state.client}`"
   >
-
     <template #append>
-
       <v-menu v-if="$vuetify.display.mobile">
-        <template v-slot:activator="{ props }">
-          <v-btn icon="mdi-dots-vertical" variant="text" v-bind="props"></v-btn>
+        <template #activator="{ props }">
+          <v-btn
+            icon="mdi-dots-vertical"
+            variant="text"
+            v-bind="props"
+          />
         </template>
-
         <v-list>
           <v-list-item>
             <v-btn
@@ -62,8 +68,8 @@
               block
               text="LIMPIAR PEDIDO"
               prepend-icon="mdi-basket-off-outline"
-              color="red  "
-              @click="clearOrder"
+              color="red"
+              @click="order.clean_order()"
             />
           </v-list-item>
 
@@ -75,7 +81,7 @@
               text="COMPARTIR"
               prepend-icon="mdi-share-variant"
               color="success"
-              @click="getShareOrder"
+              @click="copy_to_clipboard(order.share_order())"
             />
           </v-list-item>
 
@@ -100,7 +106,7 @@
           text="LIMPIAR PEDIDO"
           prepend-icon="mdi-basket-off-outline"
           color="red"
-          @click="clearOrder"
+          @click="order.clean_order()"
         />
 
         <v-btn
@@ -109,7 +115,7 @@
           text="COMPARTIR"
           prepend-icon="mdi-share-variant"
           color="success"
-          @click="getShareOrder"
+          @click="copy_to_clipboard(order.share_order())"
         />
 
 
@@ -134,86 +140,77 @@
           <v-row no-gutters>
             <v-col cols="12">
               <v-text-field
-                v-model="id"
+                v-model="order.state.id"
                 label="ID o USUARIO"
                 prepend-inner-icon="mdi-key"
                 variant="outlined"
                 type="number"
                 rounded="xl"
-                clearable
                 max="999999"
                 placeholder="COLOQUE SU ID O USUARIO"
                 :loading="loading"
                 @blur="getNameById"
-                @click:clear="id=''"
               />
             </v-col>
 
             <v-col cols="12">
               <v-text-field
-                v-model="client"
+                v-model="order.state.client"
                 label="NOMBRE DEL CLIENTE"
                 prepend-inner-icon="mdi-account-circle"
                 variant="outlined"
                 rounded="xl"
-                clearable
                 type="text"
                 placeholder="COLOQUE EL NOMBRE"
                 :loading="loading"
-                @click:clear="client=''"
               />
             </v-col>
 
             <v-col cols="12">
               <v-text-field
-                v-model="pvn"
+                v-model="order.state.pvn_old"
                 label="PVN ACTUALES"
                 prepend-inner-icon="mdi-dots-triangle"
                 variant="outlined"
                 rounded="xl"
-                clearable
                 type="number"
-                placeholder="COLOQUE LOS PUNTOS SI YA EXISTEN EN SISTEMA"
+                placeholder="COLOQUE LOS PUNTOS EXISTENTES EN SISTEMA"
                 :loading="loading"
-                @click:clear="pvn = 0"
               />
             </v-col>
 
             <v-col cols="12">
               <v-text-field
-                v-model="originalComission"
+                v-model="order.state.bonus_raw"
                 label="BONIFICACIONES"
                 prepend-inner-icon="mdi-cash"
                 variant="outlined"
                 rounded="xl"
-                clearable
                 type="number"
                 hide-details
                 step="any"
                 placeholder="COLOQUE AQUÍ LA BONIFICACIÓN CON O SIN EL 10%"
                 prefix="$"
                 :loading="loading"
-                @click:clear="originalComission=0"
               >
                 <template #append>
                   <v-btn
-                    v-show="originalComission != null && originalComission > 0"
                     flat
-                    :color=" isActiveComission ? 'primary' : 'blue-grey-darken-3'"
-                    icon="mdi-numeric-10-circle"
-                    @click=" updateComission() "
+                    :color="order.state.is_active_bonus ? 'primary' : 'blue-grey-darken-3'"
+                    icon="mdi-fast-forward-10"
+                    @click=" order.update_is_bonus_active() "
                   />
                 </template>
               </v-text-field>
               <div
                 class="text-h6 text-success"
-                v-text="isActiveComission ? `10% agregado: $${getAddcommission}`: ''"
+                v-text="order.state.is_active_bonus ? `10% AGREGADO: $${order.bonus}`: ''"
               />
             </v-col>
 
             <v-col cols="12">
               <v-textarea
-                v-model="notes"
+                v-model="order.state.notes"
                 bg-color="yellow-accent-1"
                 class="mt-5"
                 label="NOTAS"
@@ -234,19 +231,20 @@
           <v-row no-gutters>
             <v-col cols="12">
               <v-text-field
-                v-model="finalOrderPrice"
-                label="DINERO TOTAL PEDIDO"
-                prepend-inner-icon="mdi-currency-usd"
+                v-model="order.price"
+                label="DINERO PEDIDO"
+                prepend-inner-icon="mdi-cash"
                 variant="outlined"
                 readonly
                 rounded="xl"
+                prefix="$"
                 disabled
               />
             </v-col>
 
             <v-col cols="12">
               <v-text-field
-                v-model="orderPVN"
+                v-model="order.pvn"
                 label="PVN PEDIDO"
                 prepend-inner-icon="mdi-dots-triangle"
                 variant="outlined"
@@ -258,7 +256,7 @@
 
             <v-col cols="12">
               <v-text-field
-                v-model="finalOrderPVN"
+                v-model="order.final_pvn"
                 label="PVN TOTALES"
                 prepend-inner-icon="mdi-dots-triangle"
                 variant="outlined"
@@ -270,8 +268,8 @@
 
             <v-col cols="12">
               <v-text-field
-                v-model="getProductsOrderQuantity"
-                label="CANTIDAD DE PRODUCTOS"
+                v-model="order.products_selected_count"
+                label="PRODUCTOS TOTALES"
                 prepend-inner-icon="mdi-numeric"
                 variant="outlined"
                 readonly
@@ -282,31 +280,30 @@
 
             <v-col cols="12">
               <v-text-field
-                v-model="finalOrderPriceAndComission"
+                v-model="order.final_price"
                 label="PAGO TOTAL"
                 prepend-inner-icon="mdi-cash"
                 variant="outlined"
                 readonly
                 rounded="xl"
+                prefix="$"
                 hide-details
-                :base-color=" finalOrderPriceAndComission > 0 ? 'error' : finalOrderPriceAndComission < 0 ? 'success' : '' "
+                :base-color=" order.final_price > 0 ? 'error' : order.final_price < 0 ? 'success' : '' "
               />
               <div
-                v-if="finalOrderPriceAndComission != 0.00"
-                :class="`text-h6  text-${finalOrderPriceAndComission > 0 ? 'error' : 'success'}`"
-                v-text="`${finalOrderPriceAndComission > 0 ? 'TOTAL A PAGAR' : 'SALDO A FAVOR'}`"
+                v-if="order.final_price != 0.00"
+                :class="`text-h6  text-${order.final_price > 0 ? 'error' : 'success'}`"
+                v-text="`${order.final_price > 0 ? 'TOTAL A PAGAR' : 'SALDO A FAVOR'}`"
               />
             </v-col>
 
-<!--            <v-col cols="12">-->
-<!--              <v-checkbox-->
-<!--                v-model="isRounded"-->
-<!--                label="REDONDEAR PRODUCTOS"-->
-<!--                @click="updateIsRounded"-->
-<!--              />-->
-<!--            </v-col>-->
-
-
+            <v-col cols="12">
+              <v-checkbox
+                v-model="order.state.is_rounded_prices"
+                label="REDONDEAR PRODUCTOS"
+                @update:model-value="order.update_product_prices()"
+              />
+            </v-col>
           </v-row>
         </v-col>
 
@@ -319,21 +316,21 @@
             rounded="xl"
             prepend-icon="mdi-cart"
             title="LISTA"
-            :color="packOrder.color"
+            :color="order.packages.color"
           >
             <template #append>
 
               <v-tooltip
                 text="VACÍAR LISTA"
               >
-                <template v-slot:activator="{ props }">
+                <template #activator="{ props }">
                   <v-btn
                     v-bind="props"
                     icon="mdi-cart-arrow-up"
                     color="error"
                     flat
-                    :disabled="getProductsSelected.length <= 0"
-                    @click="clearList"
+                    :disabled="order.products_selected_count <= 0"
+                    @click="order.clean_products_selected()"
                   />
                 </template>
               </v-tooltip>
@@ -342,14 +339,14 @@
               <v-tooltip
                 text="COPIAR CLAVES"
               >
-                <template v-slot:activator="{ props }">
+                <template #activator="{ props }">
                   <v-btn
                     v-bind="props"
                     icon="mdi-content-copy"
                     color="blue"
                     flat
-                    :disabled="getProductsSelected.length <= 0"
-                    @click="getFastQuick"
+                    :disabled="order.products_selected_count <= 0"
+                    @click="copy_to_clipboard(order.share_id_products())"
                   />
                 </template>
               </v-tooltip>
@@ -357,14 +354,13 @@
 
 
             <v-snackbar
-              v-model="snackFastQuick"
-              color="primary"
+              v-model="snack"
+              :color="snack_noty.color"
               location="top"
             >
               <template #text>
-                <strong>{{ stackTxt.title }}</strong>
-                <br>
-                {{ stackTxt.text }}
+                <strong>{{ snack_noty.title }}</strong> <br>
+                {{ snack_noty.text }}
               </template>
             </v-snackbar>
 
@@ -375,12 +371,21 @@
                 class="bg-transparent"
                 disable-sort
                 hide-default-footer
-                :items="getProductsSelected"
+                :items="order.products_selected"
                 :headers="headersSelected"
                 :hide-default-header="!!$vuetify.display.mobile"
                 :mobile="!!$vuetify.display.mobile"
                 no-data-text="NO HAY PRODUCTOS SELECCIONADOS"
               >
+                <template #item.img="{ item }">
+                  <v-img
+                    width="20"
+                    aspect-ratio="1/1"
+                    cover
+                    :src="item.img"
+                  />
+                </template>
+
                 <template #item.quantity="{ item }">
                   <VueNumberComponent
                     v-model="item.quantity"
@@ -389,27 +394,19 @@
                     size="small"
                     :step="1"
                     :attrs="{ style: 'color: black;' }"
-                    :max="99"
+                    :max="999"
                     :min="0"
                     autofocus
                     controls
+                    @update:model-value="order.update_quantity_product($event, item)"
                   />
-                </template>
-
-
-                <template #item.sub_pvn="{item}">
-                  {{ getSubPVN(item) }}
-                </template>
-
-                <template #item.sub_price="{item}">
-                  ${{ getSubPrice(item) }}
                 </template>
 
                 <template #item.action_check="{item}">
                   <v-checkbox
-                    v-model="item.check"
+                    v-model="item.checked"
                     hide-details
-                    :label="`${item.check?'SI ✅':'NO ❌'}`"
+                    :label="`${item.checked?'SI ✅':'NO ❌'}`"
                   />
                 </template>
 
@@ -417,7 +414,7 @@
                   <v-tooltip
                     text="BORRAR PRODUCTO"
                   >
-                    <template v-slot:activator="{ props }">
+                    <template #activator="{ props }">
                       <v-btn
                         v-bind="props"
                         density="comfortable"
@@ -426,21 +423,19 @@
                         flat
                         @click="item.quantity = 0"
                       />
-
                     </template>
                   </v-tooltip>
 
 
                 </template>
               </v-data-table>
-
-              <h2
-                v-if="packOrder.text"
-                class="mt-3"
-                v-text="`${packOrder.text}`"
-              />
-
             </v-card-item>
+            <v-card-actions>
+              <h2
+                v-if="order.packages.text"
+                v-text="`${order.packages.text}`"
+              />
+            </v-card-actions>
 
           </v-card>
         </v-col>
@@ -463,33 +458,22 @@
 
     <v-card-item>
       <v-data-table
-        :items="[...products.values()]"
+        :items="order.products"
         :headers="headers"
         :search="search"
         items-per-page="100"
         :mobile="!!$vuetify.display.mobile"
         :hide-default-header="!!$vuetify.display.mobile"
         no-data-text="NO HAY PRODUCTOS"
+        density="compact"
       >
         <template #item.img="{ item }">
           <v-img
-            width="60"
+            width="30"
             aspect-ratio="1/1"
             cover
             :src="item.img"
           />
-        </template>
-
-        <template #item.price.public="{item}">
-          ${{ item.price.public }}
-        </template>
-
-        <template #item.price.member="{ item }">
-          ${{ getDiscountMember(item) }}
-        </template>
-
-        <template #item.pvn="{ item }">
-          {{ getPVNMember(item) }}
         </template>
 
         <template #item.quantity="{ item }">
@@ -500,10 +484,11 @@
             size="small"
             :step="1"
             :attrs="{ style: 'color: black;' }"
-            :max="99"
+            :max="999"
             :min="0"
             autofocus
             controls
+            @update:model-value="order.update_quantity_product($event, item)"
           />
         </template>
       </v-data-table>
@@ -512,10 +497,9 @@
 </template>
 
 <script>
-import {default as map} from "@/assets/products.js";
-import {reactive,} from 'vue';
 import VueNumberComponent from '@chenfengyuan/vue-number-input'
 import funcGetNameById from "@/assets/ids.js";
+import Order from "@/models/Order.js";
 
 export default {
   components: {
@@ -523,236 +507,45 @@ export default {
   },
   data() {
     return {
-      loading: false,
-      txtFastQuick: '',
-      snackFastQuick: false,
-      stackTxt: {
-        title: '',
-        text: ''
-      },
-
-      id: '',
-      client: '',
+      order: new Order(),
       search: '',
-      pvn: 0,
-      notes: '',
-      isRounded: false,
 
-
-      originalComission: 0,
-      isActiveComission: false,
+      loading: false,
+      snack: false,
+      snack_noty: {
+        title: '',
+        text: '',
+        color: 'success',
+      },
       dialogQuickCapture: false,
 
-      products: reactive(map),
       headersSelected: [
-        {
-          title: 'PRODUCTO',
-          value: 'name',
-        },
-        {
-          title: 'CANTIDAD',
-          value: 'quantity',
-        },
-        {
-          title: 'SUB. PRECIO',
-          value: 'sub_price',
-        },
-        {
-          title: 'SUB. PVN',
-          value: 'sub_pvn',
-        },
-        {
-          title: '¿ENTREGADO?',
-          value: 'action_check',
-        },
-        {
-          title: 'ELIMINAR',
-          value: 'action_delete',
-        },
+        {title: 'IMG', value: 'img',},
+        {title: 'PRODUCTO', value: 'name',},
+        {title: 'CANTIDAD', value: 'quantity',},
+        {title: '$SUB. PRECIO', value: 'sub_price',},
+        {title: 'SUB. PVN', value: 'sub_pvn',},
+        {title: '¿ENTREGADO?', value: 'action_check',},
+        {title: 'ELIMINAR', value: 'action_delete',},
       ],
       headers: [
-        {
-          title: 'IMG',
-          value: 'img',
-        },
-        {
-          title: 'ID',
-          value: 'id',
-
-        },
-        {
-          title: 'PRODUCTO',
-          value: 'name',
-        },
-        {
-          title: '$PÚBLICO',
-          value: 'price.public',
-        },
-        {
-          title: '$SOCIO',
-          value: 'price.member',
-        },
-        {
-          title: 'PVN',
-          value: 'pvn',
-        },
-        {
-          title: 'CANTIDAD',
-          value: 'quantity',
-        },
-
-        {
-          title: 'PALABRAS CLAVE',
-          value: 'alternative_name',
-        },
+        {title: 'IMG', value: 'img',},
+        {title: 'ID', value: 'id',},
+        {title: 'CANTIDAD', value: 'quantity',},
+        {title: 'PRODUCTO', value: 'name',},
+        {title: '$PÚBLICO', value: 'price.public',},
+        {title: '$SOCIO', value: 'price.member',},
+        {title: 'PVN', value: 'pvn',},
+        {title: 'PALABRAS CLAVE', value: 'alternative_name',},
 
       ]
     }
   },
-  computed: {
-
-    shareOrder() {
-      return "*👤 PEDIDO: " + this.id + " - " + this.client + "*\n\n" +
-        "💵 DINERO PEDIDO: $" + this.finalOrderPrice + "\n" +
-        "🪙 BONIFICACIONES: $" + this.getAddcommission + "\n" +
-        "💰 TOTAL A PAGAR: $" + this.finalOrderPriceAndComission + "\n\n" +
-        "▪️ PVN ACTUALES: " + this.pvn + "\n" +
-        "▫️ PVN PEDIDO: " + this.orderPVN + "\n" +
-        "🔳 PVN TOTALES: " + this.finalOrderPVN + "\n" +
-        "🔢 CANTIDAD DE PRODUCTOS: " + this.getProductsOrderQuantity + "\n\n" +
-        this.packOrder.text + "\n\n" +
-        "📋 LISTA:\n" +
-        this.getProductsSelected.map(item => "* " + item.quantity + " " + item.name + "  (" + item.quantity + " x " + item.price.member + ") = $" + item.sub_price).join("\n") + "\n\n" +
-        "🔑 CLAVES:\n" +
-        '```' + this.getProductsSelected.map(item => item.id + "," + item.quantity).join("\n") + "```";
-    },
-
-    packOrder() {
-      let obj = {
-        color: 'blue-grey-lighten-5',
-        text: ''
-      }
-      if (this.finalOrderPVN >= 8800) {
-        obj.color = '#5271ff'
-        obj.text = '🔵 CERRADO/A CON: 8800'
-      } else if (this.finalOrderPVN >= 4400 && this.finalOrderPVN < 8800) {
-        obj.color = '#e50c80'
-        obj.text = '🟣 CERRADO/A CON: 4400'
-      } else if (this.finalOrderPVN >= 2200 && this.finalOrderPVN < 4400) {
-        obj.color = '#b5d167'
-        obj.text = '🟢 CERRADO/A CON: 2200'
-      }
-      return obj
-    },
-
-    finalOrderPriceAndComission() {
-      return parseFloat(this.finalOrderPrice - this.getAddcommission).toFixed(2) || this.finalOrderPrice
-    },
-
-    txtFastQuickCopy() {
-      let copy = ''; // Reinicia la variable
-      for (const item of this.getProductsSelected.values()) {
-        copy += `${item.id},${item.quantity}\n`;
-      }
-      return copy;
-    },
-
-    getProductsOrderQuantity() {
-      return this.getProductsSelected.reduce((quantity, item) => quantity + item.quantity, 0)
-    },
-
-    finalOrderPrice() {
-      return this.getProductsSelected.reduce((price, item) => price + item.price.member * item.quantity, 0)
-    },
-    finalOrderPVN() {
-      return this.orderPVN + parseInt(this.pvn)
-    },
-    orderPVN() {
-      return this.getProductsSelected.reduce((pvn, item) => pvn + item.pvn * item.quantity, 0)
-    },
-    getProductsSelected() {
-      return [...this.products.values()].filter(item => item.quantity > 0)
-    },
-
-    getSubPVN() {
-      return item => {
-        item.sub_pvn = item.pvn * item.quantity
-        return item.sub_pvn
-      }
-    },
-    getSubPrice() {
-      return item => {
-        item.sub_price = item.price.member * item.quantity
-        return item.sub_price
-      }
-    },
-
-    getDiscountMember() {
-      return item => {
-        item.price.member = item.id.startsWith('HE') ? item.price.public : Math.round(item.price.public / 2)
-        return item.price.member
-      }
-    },
-    getPVNMember() {
-      return item => {
-        if (item.id.startsWith('HE')) {
-          item.pvn = 0
-        } else {
-          let value = 0.3858 * item.price.public + 0.7285;
-          let integerPart = Math.floor(value);
-          let decimalPart = value - integerPart;
-          if (decimalPart >= 0.6) {
-            item.pvn = Math.ceil(value);
-          } else {
-            item.pvn = Math.floor(value);
-          }
-        }
-        return item.pvn
-      }
-    },
-    getAddcommission() {
-      let commision = new Float32Array(0)
-      if (this.isActiveComission) {
-        commision = this.originalComission * 1.10;
-      } else {
-        commision = this.originalComission;
-      }
-      return parseFloat(commision).toFixed(2);
-    }
-  },
   methods: {
 
-    updateIsRounded() {
-      this.isRounded = !this.isRounded;
-      console.log(this.isRounded);
-      for (const item of this.products.values()) {
-        console.log(item)
-        item.price.member = this.isRounded ? Math.round(item.price.public / 2) : item.price.public / 2;
-      }
-    },
-    updateProductsFastQuick() {
-      let productData = {};
-
-      this.txtFastQuick = this.txtFastQuick.replace(/"/g, "");
-      this.txtFastQuick = this.txtFastQuick.replace(" ", "");
-      const lines = this.txtFastQuick.split(/[\n\s]+/);
-
-      lines.forEach((line) => {
-        const [code, quantity] = line.split(","); // Dividir en código y cantidad
-        if (code && quantity && !isNaN(quantity)) {
-          productData[code.trim()] = parseInt(quantity.trim(), 10); // Agregar al objeto
-        }
-      });
-
-      for (let key in productData) {
-        if (this.products.has(key)) {
-          let obj = this.products.get(key)
-          obj.quantity = productData[key]
-          this.products.set(key, obj);
-        }
-      }
+    set_fast_quick() {
+      this.order.clean_and_set_fast_quick();
       this.dialogQuickCapture = false;
-      this.txtFastQuick = '';
     },
 
     getNameById() {
@@ -761,46 +554,19 @@ export default {
       this.loading = false
     },
 
-    updateComission() {
-      this.isActiveComission = !this.isActiveComission;
-    },
-
-    async clearList() {
-      for (const item of this.getProductsSelected) {
-        item.quantity = 0;
-      }
-    },
-
-    async clearOrder() {
-      this.id = '';
-      this.client = '';
-      this.search = '';
-      this.pvn = 0;
-      this.notes = '';
-      this.clearList();
-    },
-
-    async getFastQuick() {
-      this.stackTxt.title = '¡CLAVES COPIADAS!';
-      this.stackTxt.text = this.txtFastQuickCopy;
-      this.snackFastQuick = true;
+    async copy_to_clipboard(to_copy) {
       try {
-        await navigator.clipboard.writeText(this.txtFastQuickCopy);
-      } catch (err) {
-        console.error("Error al copiar al portapapeles: ", err);
-      }
-    },
-
-    async getShareOrder() {
-      let replace = this.shareOrder.replace(/<br\/>/g, '\n');
-      this.stackTxt.title = '¡PEDIDO COPIADO!';
-      this.stackTxt.text = replace;
-      this.snackFastQuick = true;
-      try {
-        await navigator.clipboard.writeText(replace);
-        console.log('Order copied to clipboard successfully');
+        await navigator.clipboard.writeText(to_copy);
+        this.snack_noty.title = '¡COPIADO AL PORTAPAPELES!';
+        this.snack_noty.text = to_copy;
+        this.snack_noty.color = 'success';
       } catch (error) {
         console.error('Error copying order to clipboard:', error);
+        this.snack_noty.title = '¡ERROR DE COPIADO!';
+        this.snack_noty.text = 'NO SE PUDO COPIAR';
+        this.snack_noty.color = 'error';
+      } finally {
+        this.snack = true;
       }
 
     }
