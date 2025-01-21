@@ -23,9 +23,11 @@
               Merly
             </p>
           </div>
+
         </v-toolbar-title>
 
-        <v-spacer />
+
+        <v-spacer/>
 
         <v-btn
           icon
@@ -43,7 +45,6 @@
         v-model="drawer"
         color="primary"
         class="rounded-e-xl"
-        :location="$vuetify.display.mobile ? 'start' : undefined"
         elevation="0"
         temporary
         border="0"
@@ -56,11 +57,11 @@
 
 
       <v-main class="bg-primary-lighten-1">
-        <router-view />
+        <router-view/>
       </v-main>
 
 
-      <AppFooter />
+      <AppFooter/>
     </v-layout>
   </v-app>
 </template>
@@ -75,15 +76,26 @@ export default {
     group: null,
     items: [
       {
-        title: 'Pedidos',
-        value: 'foo',
+        title: 'Pedido',
+        value: '',
         props: {
           class: '',
           prependIcon: 'mdi-basket',
-          active: true,
+          active: false,
           to: '/orders'
         }
       },
+      {
+        title: 'Consolidados',
+        value: '',
+        props: {
+          class: '',
+          prependIcon: 'mdi-text-box-multiple',
+          active: false,
+          to: '/consolids'
+        }
+      },
+
     ],
   }),
 

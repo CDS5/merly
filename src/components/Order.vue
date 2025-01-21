@@ -6,7 +6,6 @@
       elevation="0"
       rounded="xl"
       prepend-icon="mdi-pencil"
-      class="pa-2 ma-2"
       title="CAPTURA RÁPIDA"
     >
       <v-card-text>
@@ -42,7 +41,6 @@
       </v-card-actions>
     </v-card>
   </v-dialog>
-
   <v-card
     prepend-icon="mdi-basket"
     elevation="0"
@@ -69,7 +67,7 @@
               text="LIMPIAR PEDIDO"
               prepend-icon="mdi-basket-off-outline"
               color="red"
-              @click="order.clean_order()"
+              @click="openDialogClear"
             />
           </v-list-item>
 
@@ -99,6 +97,7 @@
         </v-list>
       </v-menu>
 
+
       <template v-else>
         <v-btn
           rounded="xl"
@@ -106,7 +105,7 @@
           text="LIMPIAR PEDIDO"
           prepend-icon="mdi-basket-off-outline"
           color="red"
-          @click="order.clean_order()"
+          @click="openDialogClear"
         />
 
         <v-btn
@@ -127,8 +126,15 @@
           flat
           @click="dialogQuickCapture=true"
         />
+
       </template>
 
+      <v-btn
+        rounded="xl"
+        flat
+        icon="mdi-window-close"
+        @click="handleClose"
+      />
     </template>
 
     <template #text>
@@ -163,6 +169,7 @@
                 type="text"
                 placeholder="COLOQUE EL NOMBRE"
                 :loading="loading"
+                @input="event => {order.state.client = event.target.value.toUpperCase()}"
               />
             </v-col>
 
@@ -275,6 +282,19 @@
                 readonly
                 rounded="xl"
                 disabled
+              />
+            </v-col>
+
+            <v-col cols="12">
+              <v-text-field
+                v-model="order.state.reference"
+                label="REFERENCIA"
+                prepend-inner-icon="mdi-ticket-confirmation"
+                variant="outlined"
+                rounded="xl"
+                type="text"
+                placeholder="COLOQUE LA REFERENCIA"
+                :loading="loading"
               />
             </v-col>
 
@@ -449,19 +469,19 @@
             prepend-inner-icon="mdi-magnify"
             variant="outlined"
             rounded="xl"
+            :clearable="$vuetify.display.mobile"
             placeholder="ESCRIBA NOMBRE O PALABRA"
           />
         </v-col>
       </v-row>
     </template>
 
-
     <v-card-item>
       <v-data-table
         :items="order.products"
         :headers="headers"
         :search="search"
-        items-per-page="100"
+        items-per-page="20"
         :mobile="!!$vuetify.display.mobile"
         :hide-default-header="!!$vuetify.display.mobile"
         no-data-text="NO HAY PRODUCTOS"
@@ -494,31 +514,63 @@
       </v-data-table>
     </v-card-item>
   </v-card>
+
+  <MyAlert
+    v-if="myAlert.isActive"
+    :my-alert="myAlert"
+    @update:is-active="myAlert.isActive = $event"
+    @confirm="handleConfirmAlert"
+  />
+
 </template>
 
 <script>
 import VueNumberComponent from '@chenfengyuan/vue-number-input'
 import funcGetNameById from "@/assets/ids.js";
 import Order from "@/models/Order.js";
+import MyAlert from "@/components/MyAlert.vue";
 
 export default {
   components: {
+    MyAlert,
     VueNumberComponent
   },
+  props: {
+    order: {
+      type: Object,
+      required: false,
+      default: () => new Order(),
+      validator: (order) => {
+        return order instanceof Order
+      },
+    },
+    dialogOrderParent: {
+      type: Boolean,
+      required: false,
+      default: false,
+    }
+  },
+  emits: ['update:dialogOrderParent'],
   data() {
     return {
-      order: new Order(),
       search: '',
-
       loading: false,
       snack: false,
+
+      myAlert: {
+        isActive: false,
+        title: '',
+        message: '',
+        type: '',
+        icon: '',
+      },
+
       snack_noty: {
         title: '',
         text: '',
         color: 'success',
       },
       dialogQuickCapture: false,
-
       headersSelected: [
         {title: 'IMG', value: 'img',},
         {title: 'PRODUCTO', value: 'name',},
@@ -537,11 +589,28 @@ export default {
         {title: '$SOCIO', value: 'price.member',},
         {title: 'PVN', value: 'pvn',},
         {title: 'PALABRAS CLAVE', value: 'alternative_name',},
-
       ]
     }
   },
   methods: {
+
+    handleClose() {
+      this.$emit('update:dialogOrderParent', false);
+    },
+
+    openDialogClear(){
+      this.myAlert = {
+        isActive: true,
+        title: 'LIMPIAR PEDIDO',
+        message: `¿ESTÁ SEGURO DE LIMPIAR ESTE PEDIDO ${this.order.state.id} - ${this.order.state.client}?`,
+        type: 'error',
+        icon: 'mdi-basket-off-outline',
+      };
+    },
+
+    handleConfirmAlert(){
+      this.order.clean_order()
+    },
 
     set_fast_quick() {
       this.order.clean_and_set_fast_quick();

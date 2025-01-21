@@ -1,4 +1,4 @@
-import {reactive} from "vue";
+import {reactive, watch} from "vue";
 import all_products from "@/assets/products.js";
 
 const empty = {
@@ -13,22 +13,51 @@ const empty = {
   products_raw: all_products,
   bonus_raw: 0,
 
-  pack: {
-    color: '',
+  packages: {
+    color: 'grey-lighten-2',
     text: ''
   },
 
   fast_quick: '',
-  is_clean_for_fast_quick: true
+  is_clean_for_fast_quick: true,
 
+  created_at: new Date().toLocaleString(),
+  reference: '',
+
+
+  //COMPUTED
+  products: [],
+  bonus: 0,
+  products_selected: [],
+  products_selected_count: 0,
+  price: 0,
+  pvn: 0,
+  final_pvn: 0,
+  final_price: 0,
 }
 
 class Order {
 
-  constructor() {
-    this.state = reactive(empty)
+  constructor(data = null) {
+    if(!data){
+      this.clean_order()
+      this.clean_products_selected()
+    }
+    this.state = reactive({...empty, ...data})
+    this.setupWatchers();
   }
 
+  setupWatchers() {
+    watch(() => this.products, (newVal) => {this.state.products = newVal;});
+    watch(() => this.bonus, (newVal) => {this.state.bonus = newVal;});
+    watch(() => this.products_selected, (newVal) => {this.state.products_selected = newVal;});
+    watch(() => this.products_selected_count, (newVal) => {this.state.products_selected_count = newVal;});
+    watch(() => this.price, (newVal) => {this.state.price = newVal;});
+    watch(() => this.pvn, (newVal) => {this.state.pvn = newVal;});
+    watch(() => this.final_pvn, (newVal) => {this.state.final_pvn = newVal;});
+    watch(() => this.final_price, (newVal) => {this.state.final_price = newVal;});
+    watch(() => this.packages, (newVal) => {this.state.packages = newVal;});
+  }
 
   // COMPUTED
   get products() {
@@ -70,19 +99,19 @@ class Order {
 
   get packages() {
     if (this.final_pvn >= 8800) {
-      this.state.pack.color = '#5271ff'
-      this.state.pack.text = '🔵 CERRADO/A CON: 8800'
+      this.state.packages.color = '#5271ff'
+      this.state.packages.text = '🔵 CERRADO/A CON: 8800'
     } else if (this.final_pvn >= 4400 && this.final_pvn < 8800) {
-      this.state.pack.color = '#e50c80'
-      this.state.pack.text = '🟣 CERRADO/A CON: 4400'
+      this.state.packages.color = '#e50c80'
+      this.state.packages.text = '🟣 CERRADO/A CON: 4400'
     } else if (this.final_pvn >= 2200 && this.final_pvn < 4400) {
-      this.state.pack.color = '#b5d167'
-      this.state.pack.text = '🟢 CERRADO/A CON: 2200'
+      this.state.packages.color = '#b5d167'
+      this.state.packages.text = '🟢 CERRADO/A CON: 2200'
     } else {
-      this.state.pack.color = 'grey-lighten-3'
-      this.state.pack.text = ''
+      this.state.packages.color = 'grey-lighten-2'
+      this.state.packages.text = ''
     }
-    return this.state.pack
+    return this.state.packages
   }
 
 
@@ -111,7 +140,7 @@ class Order {
 
 
   clean_order() {
-    this.state = reactive(empty)
+    this.state = reactive({...empty})
     this.clean_products_selected()
   }
 
@@ -146,7 +175,7 @@ class Order {
 
   clean_and_set_fast_quick() {
 
-    if(this.state.is_clean_for_fast_quick) this.clean_products_selected();
+    if (this.state.is_clean_for_fast_quick) this.clean_products_selected();
 
     let data = {};
     this.state.fast_quick = this.state.fast_quick.replaceAll(/"/g, "");
