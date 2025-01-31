@@ -39,24 +39,43 @@ const empty = {
 class Order {
 
   constructor(data = null) {
-    if(!data){
+    if (!data) {
       this.clean_order()
       this.clean_products_selected()
     }
     this.state = reactive({...empty, ...data})
     this.setupWatchers();
+    this.initial()
   }
 
   setupWatchers() {
-    watch(() => this.products, (newVal) => {this.state.products = newVal;});
-    watch(() => this.bonus, (newVal) => {this.state.bonus = newVal;});
-    watch(() => this.products_selected, (newVal) => {this.state.products_selected = newVal;});
-    watch(() => this.products_selected_count, (newVal) => {this.state.products_selected_count = newVal;});
-    watch(() => this.price, (newVal) => {this.state.price = newVal;});
-    watch(() => this.pvn, (newVal) => {this.state.pvn = newVal;});
-    watch(() => this.final_pvn, (newVal) => {this.state.final_pvn = newVal;});
-    watch(() => this.final_price, (newVal) => {this.state.final_price = newVal;});
-    watch(() => this.packages, (newVal) => {this.state.packages = newVal;});
+    watch(() => this.products, (newVal) => {
+      this.state.products = newVal;
+    });
+    watch(() => this.bonus, (newVal) => {
+      this.state.bonus = newVal;
+    });
+    watch(() => this.products_selected, (newVal) => {
+      this.state.products_selected = newVal;
+    });
+    watch(() => this.products_selected_count, (newVal) => {
+      this.state.products_selected_count = newVal;
+    });
+    watch(() => this.price, (newVal) => {
+      this.state.price = newVal;
+    });
+    watch(() => this.pvn, (newVal) => {
+      this.state.pvn = newVal;
+    });
+    watch(() => this.final_pvn, (newVal) => {
+      this.state.final_pvn = newVal;
+    });
+    watch(() => this.final_price, (newVal) => {
+      this.state.final_price = newVal;
+    });
+    watch(() => this.packages, (newVal) => {
+      this.state.packages = newVal;
+    });
   }
 
   // COMPUTED
@@ -115,13 +134,19 @@ class Order {
   }
 
 
-  // METHODS
-
-  update_product_prices() {
+  initial() {
     for (const item of this.products) {
       item.price.member = this.state.is_rounded_prices ? Math.round(item.price.public / 2) : item.price.public / 2
       item.price.member = item.id.startsWith('HE') ? item.price.public : item.price.member
+      item.pvn = Math.round(0.3879 * item.price.public - 0.3911)
     }
+  }
+
+
+  // METHODS
+
+  update_product_prices() {
+    this.initial()
 
     for (const item of this.products_selected) {
       item.sub_price = item.price.member * item.quantity
