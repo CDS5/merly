@@ -176,7 +176,7 @@ const products = {
     id: 'PT770',
     name: 'BABA DE CARACOL Y ROSA MOSQUETA 120 ML',
     alternative_name: 'baba caracol rosa mosqueta',
-    price: {public: 319, member: 160},
+    price: {public: 429, member: 160},
     pvn: 124,
     quantity: 0,
     img: PT770,
