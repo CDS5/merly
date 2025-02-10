@@ -504,7 +504,7 @@ const products = {
     id: 'PT751',
     name: 'MAHAL TÉ 250 GR',
     alternative_name: 'mahal te saludable nervel',
-    price: {public: 489, member: 215},
+    price: {public: 589, member: 215},
     pvn: 166,
     quantity: 0,
     img: PT751,
