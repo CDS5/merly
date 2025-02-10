@@ -116,7 +116,7 @@ const products = {
     quantity: 0,
     img: PT746,
   },
-  /*
+  
   'PT747': {
     id: 'PT747',
     name: 'BE GREEN 500 ML',
@@ -126,7 +126,6 @@ const products = {
     quantity: 0,
     img: PT747,
   },
-   */
   'PT742': {
     id: 'PT742',
     name: 'MY BIO-NCO TÉ 250 GR',
