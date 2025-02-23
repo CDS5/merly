@@ -102,7 +102,7 @@ const products = {
     id: 'PT745',
     name: 'SAVERA JUICE 1L',
     alternative_name: 'savera, jugo, 1l, aloezabil, aloe',
-    price: {public: 529, member: 265},
+    price: {public: 589, member: 265},
     pvn: 205,
     quantity: 0,
     img: PT745,
@@ -116,7 +116,7 @@ const products = {
     quantity: 0,
     img: PT746,
   },
-  
+
   'PT747': {
     id: 'PT747',
     name: 'BE GREEN 500 ML',
@@ -691,7 +691,7 @@ const products = {
   },
   'PT743': {
     id: 'PT743',
-    name: 'MY SUCKER 60 CAPS',
+    name: 'MY SUKER 60 CAPS',
     alternative_name: 'sucker capsulas salud',
     price: {public: 429, member: 200},
     pvn: 155,
@@ -700,7 +700,7 @@ const products = {
   },
   'PT744': {
     id: 'PT744',
-    name: 'SUCKER JUICE 500 ML',
+    name: 'SUKER JUICE 500 ML',
     alternative_name: 'sucker juice 500ml tomado',
     price: {public: 589, member: 265},
     pvn: 205,
