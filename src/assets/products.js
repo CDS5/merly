@@ -692,7 +692,7 @@ const products = {
   'PT743': {
     id: 'PT743',
     name: 'MY SUKER 60 CAPS',
-    alternative_name: 'sucker capsulas salud',
+    alternative_name: 'suker capsulas salud',
     price: {public: 429, member: 200},
     pvn: 155,
     quantity: 0,
@@ -701,7 +701,7 @@ const products = {
   'PT744': {
     id: 'PT744',
     name: 'SUKER JUICE 500 ML',
-    alternative_name: 'sucker juice 500ml tomado',
+    alternative_name: 'suker juice 500ml tomado',
     price: {public: 589, member: 265},
     pvn: 205,
     quantity: 0,
