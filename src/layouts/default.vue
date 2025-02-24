@@ -29,15 +29,12 @@
 
         <v-spacer/>
 
-        <v-btn
-          icon
-          variant="flat"
-          @click="toggleTheme"
-        >
-          <v-icon>
-            {{ $vuetify.theme.global.name === 'light' ? 'mdi-weather-night' : 'mdi-white-balance-sunny' }}
-          </v-icon>
-        </v-btn>
+        <router-link to="/profile">
+          <v-btn
+            icon="mdi-account-circle"
+            variant="flat"
+          />
+        </router-link>
       </v-app-bar>
 
 
@@ -98,13 +95,5 @@ export default {
 
     ],
   }),
-
-
-  methods: {
-    toggleTheme() {
-      this.$vuetify.theme.global.name = this.$vuetify.theme.global.name === 'light' ? 'dark' : 'light'
-
-    }
-  }
 }
 </script>

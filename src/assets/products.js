@@ -280,7 +280,7 @@ const products = {
     quantity: 0,
     img: PT774,
   },
-  /*
+
   'PT724': {
     id: 'PT724',
     name: 'FT-ELYM DTOX OXIGEN 250 ML',
@@ -290,7 +290,6 @@ const products = {
     quantity: 0,
     img: PT724,
   },
-   */
   'PT725': {
     id: 'PT725',
     name: 'FT-ELYM DTOX OXIGEN 500 ML',
@@ -504,7 +503,7 @@ const products = {
     id: 'PT751',
     name: 'MAHAL TÉ 250 GR',
     alternative_name: 'mahal te saludable nervel mahal polvo',
-    price: {public: 490, member: 215},
+    price: {public: 489, member: 215},
     pvn: 166,
     quantity: 0,
     img: PT751,
