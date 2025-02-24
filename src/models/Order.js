@@ -175,10 +175,16 @@ class Order {
 
   clean_products_selected() {
     for (const item of this.products_selected) {
+      item.checked = true;
       item.quantity = 0;
       item.sub_price = 0;
       item.sub_pvn = 0;
-      item.checked = false;
+    }
+  }
+
+  checked_products_selected(flag) {
+    for (const item of this.products_selected) {
+      item.checked = flag;
     }
   }
 

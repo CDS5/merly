@@ -340,8 +340,8 @@
             title="LISTA"
             :color="order.packages.color"
           >
-            <template #append>
 
+            <template #append>
               <v-tooltip
                 text="VACÍAR LISTA"
               >
@@ -352,11 +352,10 @@
                     color="error"
                     flat
                     :disabled="order.products_selected_count <= 0"
-                    @click="order.clean_products_selected()"
+                    @click="() => {order.clean_products_selected(); checked_order = false}"
                   />
                 </template>
               </v-tooltip>
-
 
               <v-tooltip
                 text="COPIAR CLAVES"
@@ -387,6 +386,7 @@
             </v-snackbar>
 
             <v-card-item>
+
               <v-data-table
                 density="compact"
                 items-per-page="100"
@@ -399,6 +399,23 @@
                 :mobile="!!$vuetify.display.mobile"
                 no-data-text="NO HAY PRODUCTOS SELECCIONADOS"
               >
+
+                <template #top v-if="order.products_selected.length > 0">
+                  <v-row class="mb-2">
+                    <v-col>
+                      <v-btn
+                        :prepend-icon="`mdi-${checked_order ? 'check' : 'close'}`"
+                        flat
+                        :color="`${checked_order ? 'success' : 'error'}`"
+                        :text="`${checked_order ? 'ENTREGAR TODO' : 'NO ENTREGAR TODO'}`"
+                        rounded
+                        @click="checkedOrder"
+                      />
+                    </v-col>
+                  </v-row>
+
+                </template>
+
                 <template #item.img="{ item }">
                   <v-img
                     width="20"
@@ -452,6 +469,7 @@
                 </template>
               </v-data-table>
             </v-card-item>
+
             <v-card-actions>
               <h2
                 v-if="order.packages.text"
@@ -559,6 +577,7 @@ export default {
       search: '',
       loading: false,
       snack: false,
+      checked_order: false,
 
       myAlert: {
         isActive: false,
@@ -599,6 +618,11 @@ export default {
 
     handleClose() {
       this.$emit('update:dialogOrderParent', false);
+    },
+
+    checkedOrder() {
+      this.order.checked_products_selected(this.checked_order)
+      this.checked_order = !this.checked_order
     },
 
     openDialogClear() {

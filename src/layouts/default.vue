@@ -22,6 +22,10 @@
             <p class="font-weight-bold text-h5 text-lg-h4">
               Merly
             </p>
+
+            <v-chip>
+              Beta
+            </v-chip>
           </div>
 
         </v-toolbar-title>
@@ -82,6 +86,7 @@ export default {
           to: '/orders'
         }
       },
+
       {
         title: 'Consolidados',
         value: '',
@@ -92,6 +97,8 @@ export default {
           to: '/consolids'
         }
       },
+
+
 
     ],
   }),
