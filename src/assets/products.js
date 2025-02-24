@@ -68,6 +68,7 @@ import PT723 from '@/assets/products/PT723.png'
 import HE775 from '@/assets/products/HE775.png'
 import CBD500 from '@/assets/products/CBD500.png'
 import CBD1000 from '@/assets/products/CBD1000.png'
+import PT768 from '@/assets/products/PT768.png'
 
 
 const products = {
@@ -169,7 +170,7 @@ const products = {
     price: {public: 599, member: 250},
     pvn: 194,
     quantity: 0,
-    img: '',
+    img: PT768,
   },
   'PT770': {
     id: 'PT770',
@@ -502,8 +503,8 @@ const products = {
   'PT751': {
     id: 'PT751',
     name: 'MAHAL TÉ 250 GR',
-    alternative_name: 'mahal te saludable nervel',
-    price: {public: 589, member: 215},
+    alternative_name: 'mahal te saludable nervel mahal polvo',
+    price: {public: 490, member: 215},
     pvn: 166,
     quantity: 0,
     img: PT751,

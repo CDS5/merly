@@ -44,10 +44,11 @@ class Order {
       this.clean_products_selected()
     }
     this.state = reactive({...empty, ...data})
-    this.setupWatchers();
     this.initial()
+    //this.setupWatchers();
   }
 
+  /*
   setupWatchers() {
     watch(() => this.products, (newVal) => {
       this.state.products = newVal;
@@ -77,6 +78,9 @@ class Order {
       this.state.packages = newVal;
     });
   }
+
+   */
+
 
   // COMPUTED
   get products() {
@@ -207,10 +211,16 @@ class Order {
     this.state.fast_quick = this.state.fast_quick.replaceAll(" ", "");
     const lines = this.state.fast_quick.split(/[\n\s]+/);
     lines.forEach((line) => {
-      const [code, quantity] = line.split(","); // Dividir en código y cantidad
+      let [code, quantity] = line.split(","); // Dividir en código y cantidad
       if (code && quantity && !isNaN(quantity)) {
-        data[code.trim()] = parseInt(quantity.trim()); // Agregar al objeto
+        code = code.trim().toUpperCase()
+        if (data[code]){
+          data[code] = data[code] + parseInt(quantity.trim()) ; // Agregar al objeto
+        }else{
+          data[code] =  parseInt(quantity.trim()) ; // Agregar al objeto
+        }
       }
+      // PT748,5
     });
     for (let key in data) {
       if (this.state.products_raw[key]) {

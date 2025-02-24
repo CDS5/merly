@@ -141,7 +141,7 @@
       <v-row>
         <v-col
           cols="12"
-          lg="3"
+          md="3"
         >
           <v-row no-gutters>
             <v-col cols="12">
@@ -233,6 +233,7 @@
 
         <v-col
           cols="12"
+          md="3"
           lg="2"
         >
           <v-row no-gutters>
@@ -329,6 +330,7 @@
 
         <v-col
           cols="12"
+          md="6"
           lg="7"
         >
           <v-card
@@ -411,7 +413,7 @@
                     v-model="item.quantity"
                     inputtable
                     center
-                    size="small"
+                    size="large"
                     :step="1"
                     :attrs="{ style: 'color: black;' }"
                     :max="999"
@@ -477,6 +479,7 @@
     </template>
 
     <v-card-item>
+
       <v-data-table
         :items="order.products"
         :headers="headers"
@@ -485,7 +488,6 @@
         :mobile="!!$vuetify.display.mobile"
         :hide-default-header="!!$vuetify.display.mobile"
         no-data-text="NO HAY PRODUCTOS"
-        density="compact"
       >
         <template #item.img="{ item }">
           <v-img
@@ -501,7 +503,7 @@
             v-model="item.quantity"
             inputtable
             center
-            size="small"
+            size="large"
             :step="1"
             :attrs="{ style: 'color: black;' }"
             :max="999"
@@ -512,6 +514,7 @@
           />
         </template>
       </v-data-table>
+
     </v-card-item>
   </v-card>
 
@@ -598,7 +601,7 @@ export default {
       this.$emit('update:dialogOrderParent', false);
     },
 
-    openDialogClear(){
+    openDialogClear() {
       this.myAlert = {
         isActive: true,
         title: 'LIMPIAR PEDIDO',
@@ -608,7 +611,7 @@ export default {
       };
     },
 
-    handleConfirmAlert(){
+    handleConfirmAlert() {
       this.order.clean_order()
     },
 
