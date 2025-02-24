@@ -22,6 +22,10 @@
             <p class="font-weight-bold text-h5 text-lg-h4">
               Merly
             </p>
+
+            <v-chip>
+              Beta
+            </v-chip>
           </div>
 
         </v-toolbar-title>
@@ -29,15 +33,12 @@
 
         <v-spacer/>
 
-        <v-btn
-          icon
-          variant="flat"
-          @click="toggleTheme"
-        >
-          <v-icon>
-            {{ $vuetify.theme.global.name === 'light' ? 'mdi-weather-night' : 'mdi-white-balance-sunny' }}
-          </v-icon>
-        </v-btn>
+        <router-link to="/profile">
+          <v-btn
+            icon="mdi-account-circle"
+            variant="flat"
+          />
+        </router-link>
       </v-app-bar>
 
 
@@ -85,6 +86,7 @@ export default {
           to: '/orders'
         }
       },
+
       {
         title: 'Consolidados',
         value: '',
@@ -96,15 +98,9 @@ export default {
         }
       },
 
+
+
     ],
   }),
-
-
-  methods: {
-    toggleTheme() {
-      this.$vuetify.theme.global.name = this.$vuetify.theme.global.name === 'light' ? 'dark' : 'light'
-
-    }
-  }
 }
 </script>

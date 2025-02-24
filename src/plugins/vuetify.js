@@ -11,30 +11,26 @@ import '@/styles/main.scss'
 // Composables
 import { createVuetify } from 'vuetify'
 
-const lightTheme = {
-  dark: false,
-  colors: {
-    primary: '#FE40B4', // Morado oscuro
-    "primary-lighten-1": '#ffcfec', // FFEBF7FF  Morado oscuro
-  },
-};
-
-const darkTheme = {
-  dark: true,
-  colors: {
-    primary: '#FE40B4', // Morado claro
-    "primary-lighten-1": '#14000C', // Morado oscuro
-
-  },
-};
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
   theme: {
-    defaultTheme: 'light',
+    defaultTheme: 'dark',
     themes: {
-      light: lightTheme,
-      dark: darkTheme,
+      light: {
+        dark: false,
+        colors: {
+          primary: '#FE40B4',
+          'primary-lighten-1': '#ffcfec',
+        },
+      },
+      dark: {
+        dark: true,
+        colors: {
+          primary: '#FE40B4',
+          'primary-lighten-1': '#14000C',
+        },
+      },
     },
   },
 })

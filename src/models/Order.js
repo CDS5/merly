@@ -175,27 +175,50 @@ class Order {
 
   clean_products_selected() {
     for (const item of this.products_selected) {
+      item.checked = true;
       item.quantity = 0;
       item.sub_price = 0;
       item.sub_pvn = 0;
-      item.checked = false;
+    }
+  }
+
+  checked_products_selected(flag) {
+    for (const item of this.products_selected) {
+      item.checked = flag;
     }
   }
 
   share_order() {
     const render_package = this.packages.text !== '' ? "\n" + this.packages.text + "\n\n" : '\n';
-    return "*👤 PEDIDO: " + this.state.id + " - " + this.state.client + "*\n\n" +
-      "💵 DINERO PEDIDO: $" + this.price + "\n" +
-      "🪙 BONIFICACIONES: $" + this.bonus + "\n" +
-      "💰 TOTAL A PAGAR: $" + this.final_price + "\n\n" +
-      "▪️ PVN ACTUALES: " + this.state.pvn_old + "\n" +
-      "▫️ PVN PEDIDO: " + this.pvn + "\n" +
-      "🔳 PVN TOTALES: " + this.final_pvn + "\n" +
-      "🔢 CANTIDAD DE PRODUCTOS: " + this.products_selected_count + "\n" + render_package +
-      "📋 LISTA:\n" +
-      this.products_selected.map(item => "* " + item.quantity + " " + item.name + "  (" + item.quantity + " x " + item.price.member + ") = $" + item.sub_price).join("\n") + "\n\n" +
-      "🔑 CLAVES:\n" +
+
+    let txt = `*👤 PEDIDO${this.state.id ? ": " + this.state.id : ''}${this.state.client ? " - " + this.state.client : ''}*\n`;
+    txt += `📅 FECHA: ${this.state.created_at} \n\n`;
+
+    txt += this.bonus != 0 ? `💵 DINERO PEDIDO: $${this.price}\n` : '';
+    txt += this.bonus != 0 ? `🪙 BONIFICACIONES: $${this.bonus} \n` : '';
+    txt += `💰 TOTAL A PAGAR: $${this.final_price}\n\n`;
+
+    txt += this.state.pvn_old != 0 ? `▪️ PVN ACTUALES: ${this.state.pvn_old}  \n` : '';
+    txt += this.state.pvn_old != 0 ? `▫️ PVN PEDIDO: ${this.pvn} \n` : '';
+    txt += `🔳 PVN TOTALES: ${this.final_pvn}\n\n`;
+    txt += "🔢 CANTIDAD DE PRODUCTOS: " + this.products_selected_count + "\n" + render_package;
+    txt += "📋 LISTA:\n" + this.products_selected.map(
+      item => `* ${item.checked ? '✅' : '❌'} ${item.quantity} ${item.name}  (${item.quantity} x ${item.price.member}) = $${item.sub_price})`).join("\n") + "\n\n";
+
+    txt += "🔑 CLAVES:\n" +
       '```' + this.share_id_products() + "```";
+
+    txt += this.state.notes ? `\n\n📝 NOTAS:\n ${this.state.notes}` : '';
+
+    txt += `"\n\n❕ SIMBOLOGÍA:\n✅ ENTREGADO\n❌ NO ENTREGADO`;
+
+    txt += "\n\n🌀 Merly by hectorsaldes";
+    txt +=  "\nhttps://merlyapp.netlify.app/";
+
+    /*if(this.final_price == 0 || this.products_selected_count == 0 || this.final_pvn == 0)
+      txt = "❌ No se puede compartir un pedido vacío o con valores en 0.";*/
+
+    return txt
   }
 
   share_id_products() {
@@ -214,10 +237,10 @@ class Order {
       let [code, quantity] = line.split(","); // Dividir en código y cantidad
       if (code && quantity && !isNaN(quantity)) {
         code = code.trim().toUpperCase()
-        if (data[code]){
-          data[code] = data[code] + parseInt(quantity.trim()) ; // Agregar al objeto
-        }else{
-          data[code] =  parseInt(quantity.trim()) ; // Agregar al objeto
+        if (data[code]) {
+          data[code] = data[code] + parseInt(quantity.trim()); // Agregar al objeto
+        } else {
+          data[code] = parseInt(quantity.trim()); // Agregar al objeto
         }
       }
       // PT748,5

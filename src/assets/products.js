@@ -80,6 +80,7 @@ const products = {
     pvn: 151,
     quantity: 0,
     img: PT758,
+    checked: true
   },
   'PT779': {
     id: 'PT779',
@@ -89,6 +90,7 @@ const products = {
     pvn: 212,
     quantity: 0,
     img: PT779,
+    checked: true
   },
   'PT781': {
     id: 'PT781',
@@ -98,6 +100,7 @@ const products = {
     pvn: 205,
     quantity: 0,
     img: PT781,
+    checked: true
   },
   'PT745': {
     id: 'PT745',
@@ -107,6 +110,7 @@ const products = {
     pvn: 205,
     quantity: 0,
     img: PT745,
+    checked: true
   },
   'PT746': {
     id: 'PT746',
@@ -116,8 +120,8 @@ const products = {
     pvn: 232,
     quantity: 0,
     img: PT746,
+    checked: true
   },
-
   'PT747': {
     id: 'PT747',
     name: 'BE GREEN 500 ML',
@@ -126,6 +130,7 @@ const products = {
     pvn: 166,
     quantity: 0,
     img: PT747,
+    checked: true
   },
   'PT742': {
     id: 'PT742',
@@ -135,6 +140,7 @@ const products = {
     pvn: 205,
     quantity: 0,
     img: PT742,
+    checked: true
   },
   'PT753': {
     id: 'PT753',
@@ -144,6 +150,7 @@ const products = {
     pvn: 151,
     quantity: 0,
     img: PT753,
+    checked: true
   },
   'PT783': {
     id: 'PT783',
@@ -153,6 +160,7 @@ const products = {
     pvn: 213,
     quantity: 0,
     img: PT783,
+    checked: true
   },
   'PT754': {
     id: 'PT754',
@@ -162,6 +170,7 @@ const products = {
     pvn: 213,
     quantity: 0,
     img: PT754,
+    checked: true
   },
   'PT768': {
     id: 'PT768',
@@ -171,6 +180,7 @@ const products = {
     pvn: 194,
     quantity: 0,
     img: PT768,
+    checked: true
   },
   'PT770': {
     id: 'PT770',
@@ -180,6 +190,7 @@ const products = {
     pvn: 124,
     quantity: 0,
     img: PT770,
+    checked: true
   },
   'PT769': {
     id: 'PT769',
@@ -189,6 +200,7 @@ const products = {
     pvn: 124,
     quantity: 0,
     img: PT769,
+    checked: true
   },
   'PT771': {
     id: 'PT771',
@@ -198,6 +210,7 @@ const products = {
     pvn: 124,
     quantity: 0,
     img: PT771,
+    checked: true
   },
   'PT773': {
     id: 'PT773',
@@ -207,6 +220,7 @@ const products = {
     pvn: 124,
     quantity: 0,
     img: PT773,
+    checked: true
   },
   'PT790': {
     id: 'PT790',
@@ -216,6 +230,7 @@ const products = {
     pvn: 205,
     quantity: 0,
     img: PT790,
+    checked: true
   },
   'PT764': {
     id: 'PT764',
@@ -225,6 +240,7 @@ const products = {
     pvn: 151,
     quantity: 0,
     img: PT764,
+    checked: true
   },
   'PT726': {
     id: 'PT726',
@@ -234,6 +250,7 @@ const products = {
     pvn: 124,
     quantity: 0,
     img: PT726,
+    checked: true
   },
   'PT722': {
     id: 'PT722',
@@ -243,6 +260,7 @@ const products = {
     pvn: 205,
     quantity: 0,
     img: PT722,
+    checked: true
   },
   'PT720': {
     id: 'PT720',
@@ -252,24 +270,27 @@ const products = {
     pvn: 228,
     quantity: 0,
     img: PT720,
+    checked: true
   },
   'PT721': {
     id: 'PT721',
     name: 'FT-ELYM DTOX PRO TÉ 250 GR',
-    alternative_name: 'ftelym dtox te pro t 250g negra',
+    alternative_name: 'ftelym dtox pro t 250g negra frambuesa',
     price: {public: 589, member: 265},
     pvn: 205,
     quantity: 0,
     img: PT721,
+    checked: true
   },
   'PT723': {
     id: 'PT723',
     name: 'FT-ELYM DTOX TÉ 250 GR',
-    alternative_name: 'ftelym dtox te 250g suave',
+    alternative_name: 'ftelym dtox t mango 250g suave',
     price: {public: 589, member: 264},
     pvn: 205,
     quantity: 0,
     img: PT723,
+    checked: true
   },
   'PT774': {
     id: 'PT774',
@@ -279,8 +300,8 @@ const products = {
     pvn: 368,
     quantity: 0,
     img: PT774,
+    checked: true
   },
-  /*
   'PT724': {
     id: 'PT724',
     name: 'FT-ELYM DTOX OXIGEN 250 ML',
@@ -289,8 +310,8 @@ const products = {
     pvn: 116,
     quantity: 0,
     img: PT724,
+    checked: true
   },
-   */
   'PT725': {
     id: 'PT725',
     name: 'FT-ELYM DTOX OXIGEN 500 ML',
@@ -299,6 +320,7 @@ const products = {
     pvn: 213,
     quantity: 0,
     img: PT725,
+    checked: true
   },
   'PT788': {
     id: 'PT788',
@@ -308,6 +330,7 @@ const products = {
     pvn: 205,
     quantity: 0,
     img: PT788,
+    checked: true
   },
   'PT789': {
     id: 'PT789',
@@ -317,6 +340,7 @@ const products = {
     pvn: 58,
     quantity: 0,
     img: PT789,
+    checked: true
   },
   'PT728': {
     id: 'PT728',
@@ -326,6 +350,7 @@ const products = {
     pvn: 213,
     quantity: 0,
     img: PT728,
+    checked: true
   },
   'PT730': {
     id: 'PT730',
@@ -335,6 +360,7 @@ const products = {
     pvn: 213,
     quantity: 0,
     img: PT730,
+    checked: true
   },
   'PT729': {
     id: 'PT729',
@@ -344,6 +370,7 @@ const products = {
     pvn: 213,
     quantity: 0,
     img: PT729,
+    checked: true
   },
   'PT732': {
     id: 'PT732',
@@ -353,6 +380,7 @@ const products = {
     pvn: 213,
     quantity: 0,
     img: PT732,
+    checked: true
   },
   'PT727': {
     id: 'PT727',
@@ -362,6 +390,7 @@ const products = {
     pvn: 213,
     quantity: 0,
     img: PT727,
+    checked: true
   },
   'PT731': {
     id: 'PT731',
@@ -371,6 +400,7 @@ const products = {
     pvn: 213,
     quantity: 0,
     img: PT731,
+    checked: true
   },
   'PT777': {
     id: 'PT777',
@@ -380,6 +410,7 @@ const products = {
     pvn: 213,
     quantity: 0,
     img: PT777,
+    checked: true
   },
   'PT748': {
     id: 'PT748',
@@ -389,6 +420,7 @@ const products = {
     pvn: 166,
     quantity: 0,
     img: PT748,
+    checked: true
   },
   'PT775': {
     id: 'PT775',
@@ -398,6 +430,7 @@ const products = {
     pvn: 166,
     quantity: 0,
     img: PT775,
+    checked: true
   },
   /*
   'PT787': {
@@ -408,6 +441,7 @@ const products = {
     pvn: 271,
     quantity: 0,
     img: '',
+    checked: true
   },
    */
   'PT757': {
@@ -418,6 +452,7 @@ const products = {
     pvn: 151,
     quantity: 0,
     img: PT757,
+    checked: true
   },
   'PT761': {
     id: 'PT761',
@@ -427,6 +462,7 @@ const products = {
     pvn: 77,
     quantity: 0,
     img: PT761,
+    checked: true
   },
   'PT776': {
     id: 'PT776',
@@ -436,6 +472,7 @@ const products = {
     pvn: 194,
     quantity: 0,
     img: PT776,
+    checked: true
   },
   'PT793': {
     id: 'PT793',
@@ -445,6 +482,7 @@ const products = {
     pvn: 194,
     quantity: 0,
     img: PT793,
+    checked: true
   },
   'PT750': {
     id: 'PT750',
@@ -454,6 +492,7 @@ const products = {
     pvn: 151,
     quantity: 0,
     img: PT750,
+    checked: true
   },
   'PT772': {
     id: 'PT772',
@@ -463,6 +502,7 @@ const products = {
     pvn: 124,
     quantity: 0,
     img: PT772,
+    checked: true
   },
   'PT752': {
     id: 'PT752',
@@ -472,6 +512,7 @@ const products = {
     pvn: 205,
     quantity: 0,
     img: PT752,
+    checked: true
   },
   'PT786': {
     id: 'PT786',
@@ -481,6 +522,7 @@ const products = {
     pvn: 388,
     quantity: 0,
     img: PT786,
+    checked: true
   },
   'PT760': {
     id: 'PT760',
@@ -490,6 +532,7 @@ const products = {
     pvn: 151,
     quantity: 0,
     img: PT760,
+    checked: true
   },
   'PT766': {
     id: 'PT766',
@@ -499,15 +542,17 @@ const products = {
     pvn: 124,
     quantity: 0,
     img: PT766,
+    checked: true
   },
   'PT751': {
     id: 'PT751',
     name: 'MAHAL TÉ 250 GR',
     alternative_name: 'mahal te saludable nervel mahal polvo',
-    price: {public: 490, member: 215},
+    price: {public: 489, member: 215},
     pvn: 166,
     quantity: 0,
     img: PT751,
+    checked: true
   },
   'PT736': {
     id: 'PT736',
@@ -517,6 +562,7 @@ const products = {
     pvn: 232,
     quantity: 0,
     img: PT736,
+    checked: true
   },
   'PT737': {
     id: 'PT737',
@@ -526,6 +572,7 @@ const products = {
     pvn: 566,
     quantity: 0,
     img: PT737,
+    checked: true
   },
   'PT780': {
     id: 'PT780',
@@ -535,6 +582,7 @@ const products = {
     pvn: 232,
     quantity: 0,
     img: CAFE,
+    checked: true
   },
   'PT739': {
     id: 'PT739',
@@ -544,6 +592,7 @@ const products = {
     pvn: 205,
     quantity: 0,
     img: CAFE,
+    checked: true
   },
   'PT740': {
     id: 'PT740',
@@ -553,6 +602,7 @@ const products = {
     pvn: 205,
     quantity: 0,
     img: CAFE,
+    checked: true
   },
   'PT738': {
     id: 'PT738',
@@ -562,6 +612,7 @@ const products = {
     pvn: 205,
     quantity: 0,
     img: CAFE,
+    checked: true
   },
   'PT741': {
     id: 'PT741',
@@ -571,6 +622,7 @@ const products = {
     pvn: 205,
     quantity: 0,
     img: CAFE,
+    checked: true
   },
   'PT785': {
     id: 'PT785',
@@ -580,6 +632,7 @@ const products = {
     pvn: 232,
     quantity: 0,
     img: CAFE,
+    checked: true
   },
   'PT756': {
     id: 'PT756',
@@ -589,6 +642,7 @@ const products = {
     pvn: 151,
     quantity: 0,
     img: PT756,
+    checked: true
   },
   'PT767': {
     id: 'PT767',
@@ -598,6 +652,7 @@ const products = {
     pvn: 213,
     quantity: 0,
     img: PT767,
+    checked: true
   },
   'PT733': {
     id: 'PT733',
@@ -607,6 +662,7 @@ const products = {
     pvn: 349,
     quantity: 0,
     img: PT733,
+    checked: true
   },
   'PT735': {
     id: 'PT735',
@@ -616,6 +672,7 @@ const products = {
     pvn: 232,
     quantity: 0,
     img: PT735,
+    checked: true
   },
   'PT734': {
     id: 'PT734',
@@ -625,6 +682,7 @@ const products = {
     pvn: 306,
     quantity: 0,
     img: PT734,
+    checked: true
   },
   'PT784': {
     id: 'PT784',
@@ -634,6 +692,7 @@ const products = {
     pvn: 271,
     quantity: 0,
     img: PT784,
+    checked: true
   },
   'PT759': {
     id: 'PT759',
@@ -643,6 +702,7 @@ const products = {
     pvn: 151,
     quantity: 0,
     img: PT759,
+    checked: true
   },
   'PT765': {
     id: 'PT765',
@@ -652,6 +712,7 @@ const products = {
     pvn: 151,
     quantity: 0,
     img: PT765,
+    checked: true
   },
   'PT755': {
     id: 'PT755',
@@ -661,6 +722,7 @@ const products = {
     pvn: 155,
     quantity: 0,
     img: PT755,
+    checked: true
   },
   /*
   'CBD1000': {
@@ -671,6 +733,7 @@ const products = {
     pvn: 1163,
     quantity: 0,
     img: CBD1000,
+    checked: true
   },
   'CBD500': {
     id: 'CBD500',
@@ -680,6 +743,7 @@ const products = {
     pvn: 775,
     quantity: 0,
     img: CBD500,
+    checked: true
   },*/
   'PT762': {
     id: 'PT762',
@@ -689,6 +753,7 @@ const products = {
     pvn: 124,
     quantity: 0,
     img: PT762,
+    checked: true
   },
   'PT743': {
     id: 'PT743',
@@ -698,6 +763,7 @@ const products = {
     pvn: 155,
     quantity: 0,
     img: PT743,
+    checked: true
   },
   'PT744': {
     id: 'PT744',
@@ -707,6 +773,7 @@ const products = {
     pvn: 205,
     quantity: 0,
     img: PT744,
+    checked: true
   },
   'PT749': {
     id: 'PT749',
@@ -716,6 +783,7 @@ const products = {
     pvn: 151,
     quantity: 0,
     img: PT749,
+    checked: true
   },
   /*
   'PT791': {
@@ -726,6 +794,7 @@ const products = {
     pvn: 271,
     quantity: 0,
     img: PT791,
+    checked: true
   },
    */
   'PT796': {
@@ -736,6 +805,7 @@ const products = {
     pvn: 232,
     quantity: 0,
     img: PT796,
+    checked: true
   },
   'PT795': {
     id: 'PT795',
@@ -745,6 +815,7 @@ const products = {
     pvn: 232,
     quantity: 0,
     img: PT795,
+    checked: true
   },
   'PT797': {
     id: 'PT797',
@@ -754,6 +825,7 @@ const products = {
     pvn: 166,
     quantity: 0,
     img: PT797,
+    checked: true
   },
   'HE801': {
     id: 'HE801',
@@ -763,6 +835,7 @@ const products = {
     pvn: 0,
     quantity: 0,
     img: CATALOGO,
+    checked: true
   },
   'HE802': {
     id: 'HE802',
@@ -772,6 +845,7 @@ const products = {
     pvn: 0,
     quantity: 0,
     img: CATALOGO,
+    checked: true
   },
   'HE796': {
     id: 'HE796',
@@ -781,6 +855,7 @@ const products = {
     pvn: 0,
     quantity: 0,
     img: CATALOGO,
+    checked: true
   },
   'HE775': {
     id: 'HE775',
@@ -790,6 +865,7 @@ const products = {
     pvn: 0,
     quantity: 0,
     img: HE775,
+    checked: true
   },
 }
 
