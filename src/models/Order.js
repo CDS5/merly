@@ -205,12 +205,12 @@ class Order {
     txt += "📋 LISTA:\n" + this.products_selected.map(
       item => `* ${item.checked ? '✅' : '❌'} ${item.quantity} ${item.name}  (${item.quantity} x ${item.price.member}) = $${item.sub_price})`).join("\n") + "\n\n";
 
-    txt += "🔑 CLAVES:\n" +
-      '```' + this.share_id_products() + "```";
+    txt += "🔑 CLAVES:\n"
+    txt += '```' + this.share_id_products() + '```';
 
     txt += this.state.notes ? `\n\n📝 NOTAS:\n ${this.state.notes}` : '';
 
-    txt += `"\n\n❕ SIMBOLOGÍA:\n✅ ENTREGADO\n❌ NO ENTREGADO`;
+    txt += `\n\n❕ SIMBOLOGÍA:\n✅ ENTREGADO\n❌ NO ENTREGADO`;
 
     txt += "\n\n🌀 Merly by hectorsaldes";
     txt +=  "\nhttps://merlyapp.netlify.app/";
