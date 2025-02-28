@@ -69,6 +69,8 @@ import HE775 from '@/assets/products/HE775.png'
 import CBD500 from '@/assets/products/CBD500.png'
 import CBD1000 from '@/assets/products/CBD1000.png'
 import PT768 from '@/assets/products/PT768.png'
+import PT802 from '@/assets/products/PT802.png'
+import PT794 from '@/assets/products/PT794.png'
 
 
 const products = {
@@ -410,6 +412,16 @@ const products = {
     pvn: 213,
     quantity: 0,
     img: PT777,
+    checked: true
+  },
+  'PT794': {
+    id: 'PT794',
+    name: 'FT-ELYM DTOX SHAKE 500 GR. SABOR PLATANO Y DULCE DE LECHE',
+    alternative_name: 'ftelym dtox shake platano dulce leche malteada',
+    price: {public: 589, member: 275},
+    pvn: 213,
+    quantity: 0,
+    img: PT794,
     checked: true
   },
   'PT748': {
@@ -827,6 +839,18 @@ const products = {
     img: PT797,
     checked: true
   },
+
+  'PT802': {
+    id: 'PT802',
+    name: 'X-PRO 60 ML',
+    alternative_name: 'xpro',
+    price: {public: 429, member: 215},
+    pvn: 166,
+    quantity: 0,
+    img: PT802,
+    checked: true
+  },
+
   'HE801': {
     id: 'HE801',
     name: 'CATÁLOGO UNITARIO ISMERELY',
