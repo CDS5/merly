@@ -430,7 +430,6 @@
                     v-model="item.quantity"
                     inputtable
                     center
-                    size="large"
                     :step="1"
                     :attrs="{ style: 'color: black;' }"
                     :max="999"
@@ -521,7 +520,6 @@
             v-model="item.quantity"
             inputtable
             center
-            size="large"
             :step="1"
             :attrs="{ style: 'color: black;' }"
             :max="999"
