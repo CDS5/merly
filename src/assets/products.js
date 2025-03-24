@@ -71,6 +71,7 @@ import CBD1000 from '@/assets/products/CBD1000.png'
 import PT768 from '@/assets/products/PT768.png'
 import PT802 from '@/assets/products/PT802.png'
 import PT794 from '@/assets/products/PT794.png'
+import PT787 from '@/assets/products/PT787.png'
 
 
 const products = {
@@ -444,7 +445,7 @@ const products = {
     img: PT775,
     checked: true
   },
-  /*
+
   'PT787': {
     id: 'PT787',
     name: 'GUDDUS GUMMY BEARS KIDS',
@@ -452,10 +453,10 @@ const products = {
     price: {public: 699, member: 350},
     pvn: 271,
     quantity: 0,
-    img: '',
+    img: PT787,
     checked: true
   },
-   */
+
   'PT757': {
     id: 'PT757',
     name: 'MY LIDY FELL 60 CAPS',
@@ -797,7 +798,7 @@ const products = {
     img: PT749,
     checked: true
   },
-  /*
+
   'PT791': {
     id: 'PT791',
     name: 'BIOTELLE COLAGENO GOMITAS',
@@ -808,7 +809,7 @@ const products = {
     img: PT791,
     checked: true
   },
-   */
+
   'PT796': {
     id: 'PT796',
     name: 'INTENS-MN',
