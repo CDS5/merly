@@ -61,7 +61,7 @@ export default defineConfig({
             '.vue',
         ],
     },
-    server: {
+     server: {
         port: 3000,
         proxy: {
             '/api': {
