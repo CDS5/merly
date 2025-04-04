@@ -1,4 +1,4 @@
-import {reactive, watch} from "vue";
+import {reactive} from "vue";
 import all_products from "@/assets/products.js";
 
 const empty = {

@@ -546,6 +546,7 @@
 <script>
 import VueNumberComponent from '@chenfengyuan/vue-number-input'
 import funcGetNameById from "@/assets/ids.js";
+import {getIDIsmerely} from "@/controller/apiIsmerelyPlatform.js";
 import Order from "@/models/Order.js";
 import MyAlert from "@/components/MyAlert.vue";
 
@@ -642,10 +643,12 @@ export default {
       this.dialogQuickCapture = false;
     },
 
-    getNameById() {
-      this.loading = true
-      this.client = funcGetNameById(this.id)
-      this.loading = false
+    async getNameById() {
+      if (this.order.state.id !== '') {
+        this.loading = true
+        this.order.state.client = await getIDIsmerely(this.order.state.id)
+        this.loading = false
+      }
     },
 
     async copy_to_clipboard(to_copy) {
