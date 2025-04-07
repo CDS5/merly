@@ -874,9 +874,9 @@ const products = {
   },
   'HE796': {
     id: 'HE796',
-    name: 'CAJA DE 180 CATALOGOS ISMERELY',
+    name: 'CAJA DE 140 CATALOGOS ISMERELY',
     alternative_name: 'catalogo, ismerely',
-    price: {public: 3420, member: 3420},
+    price: {public: 2660, member: 2660},
     pvn: 0,
     quantity: 0,
     img: CATALOGO,
