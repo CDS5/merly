@@ -45,7 +45,7 @@
     prepend-icon="mdi-basket"
     elevation="0"
     rounded="xl"
-    class="pa-3 ma-3"
+    class="pa-3"
     title="PEDIDO"
     :subtitle="`${order.state.id} ${order.state.client}`"
   >
@@ -496,7 +496,6 @@
     </template>
 
     <v-card-item>
-
       <v-data-table
         :items="order.products"
         :headers="headers"
@@ -545,7 +544,6 @@
 
 <script>
 import VueNumberComponent from '@chenfengyuan/vue-number-input'
-import funcGetNameById from "@/assets/ids.js";
 import {getIDIsmerely} from "@/controller/apiIsmerelyPlatform.js";
 import Order from "@/models/Order.js";
 import MyAlert from "@/components/MyAlert.vue";
