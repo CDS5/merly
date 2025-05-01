@@ -1,12 +1,12 @@
 <template>
-  <Orders />
+  <Dashboard />
 </template>
 
 <script>
-import Orders from "@/pages/orders.vue";
+import Dashboard from "@/components/Dashboard.vue";
 export default {
   components: {
-    Orders,
+    Dashboard,
   }
 }
 </script>

@@ -3,7 +3,7 @@
     prepend-icon="mdi-text-box-multiple"
     elevation="0"
     rounded="xl"
-    class="pa-3 ma-3"
+    class="pa-3"
     title="CONSOLIDADO"
   >
     <template #append>
@@ -148,7 +148,7 @@ export default {
       headers: [
         {title: 'ID', value: 'state.id',},
         {title: 'CLIENTE', value: 'state.client',},
-        {title: '$PRECIO', value: 'state.price',},
+        {title: '$DINERO PEDIDO', value: 'state.price',},
         {title: '$BONIFICACIÓN', value: 'state.bonus',},
         {title: '$TOTAL', value: 'state.final_price',},
         {title: 'REFERENCIA', value: 'state.reference',},
