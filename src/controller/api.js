@@ -2,11 +2,17 @@
 
 import axios from 'axios';
 
-const apiRequest = async (method, url, payload = {}, params = {}) => {
+// Crea una instancia de Axios con la URL base
+const apiClient = axios.create({
+  baseURL: 'https://merly-rest-api-production.up.railway.app/', // URL base
+  timeout: 10000, // Tiempo de espera opcional
+});
+
+const apiRequest = async (method, endpoint, payload = {}, params = {}) => {
   try {
-    const response = await axios({
+    const response = await apiClient({
       method,
-      url,
+      url: endpoint, // Solo necesitas pasar el endpoint
       data: method !== 'get' ? payload : {},
       params: method === 'get' ? params : {},
     });

@@ -1,12 +1,12 @@
 export const router = [
-  {
+  /*{
     title: 'Panel principal',
     value: '',
     props: {
       class: '',
       prependIcon: 'mdi-view-dashboard',
       active: false,
-      to: '/'
+      to: '/dashboard'
     }
   },
   {
@@ -30,7 +30,7 @@ export const router = [
       to: '/consolids'
     }
   },
-
+*/
   {
     title: 'Pedido',
     value: '',
@@ -42,7 +42,7 @@ export const router = [
     }
   },
 
-  {
+ /* {
     title: 'Etiquetas',
     value: '',
     props: {
@@ -62,7 +62,7 @@ export const router = [
       active: false,
       to: '/stock'
     }
-  },
+  },*/
 
   {
     title: 'Perfil',

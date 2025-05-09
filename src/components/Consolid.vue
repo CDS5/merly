@@ -4,7 +4,8 @@
     elevation="0"
     rounded="xl"
     class="pa-3"
-    title="CONSOLIDADO"
+    title="CONSOLIDADOS"
+    subtitle="TODOS LOS PEDIDOS"
   >
     <template #append>
       <v-btn
@@ -13,7 +14,7 @@
         flat
         block
         prepend-icon="mdi-plus"
-        text="NUEVO PEDIDO"
+        text="NUEVO"
         @click="openOrderDialog"
       />
     </template>

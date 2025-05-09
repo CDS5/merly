@@ -19,6 +19,7 @@ export default {
     rounded="xl"
     class="pa-3"
     title="COLECCIONES"
+    subtitle="TODOS LOS CONSOLIDADO(S)"
   >
     <template #append>
       <v-btn
@@ -27,7 +28,7 @@ export default {
         flat
         block
         prepend-icon="mdi-plus"
-        text="NUEVO CONSOLIDADO"
+        text="NUEVO"
         @click="openOrderDialog"
       />
     </template>

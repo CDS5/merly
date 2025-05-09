@@ -25,7 +25,7 @@
               Merly
             </p>
 
-            <v-chip>
+            <v-chip size="x-small" color="primary">
               Beta
             </v-chip>
           </div>
@@ -33,7 +33,6 @@
         </v-toolbar-title>
 
 
-        <v-spacer/>
         <v-btn
           class="color-changing-border"
           rounded

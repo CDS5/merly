@@ -544,7 +544,7 @@
 
 <script>
 import VueNumberComponent from '@chenfengyuan/vue-number-input'
-import {getIDIsmerely} from "@/controller/apiIsmerelyPlatform.js";
+import API_REQUEST from '@/controller/api.js'
 import Order from "@/models/Order.js";
 import MyAlert from "@/components/MyAlert.vue";
 
@@ -634,6 +634,7 @@ export default {
 
     handleConfirmAlert() {
       this.order.clean_order()
+      this.search = ''
     },
 
     set_fast_quick() {
@@ -644,7 +645,8 @@ export default {
     async getNameById() {
       if (this.order.state.id !== '') {
         this.loading = true
-        this.order.state.client = await getIDIsmerely(this.order.state.id)
+        const response = await API_REQUEST('get', `api/cliente/${this.order.state.id}` );
+        this.order.state.client = response['cliente'] || ''
         this.loading = false
       }
     },

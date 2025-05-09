@@ -1,6 +1,7 @@
 <script>
 import VueNumberComponent from "@chenfengyuan/vue-number-input";
 import Order from "@/models/Order.js";
+import API_REQUEST from '@/controller/api.js'
 
 export default {
   name: "stock",
@@ -18,6 +19,7 @@ export default {
   data() {
     return {
       search: "",
+      products: [],
       headers: [
         {title: 'IMG', value: 'img',},
         {title: 'ID', value: 'id',},
@@ -30,6 +32,15 @@ export default {
       ]
     };
   },
+  mounted() {
+    this.initial()
+  },
+  methods: {
+    async initial(){
+      const _products = await API_REQUEST('get', 'products')
+      console.log(_products)
+    }
+  }
 }
 </script>
 

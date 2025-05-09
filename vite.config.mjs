@@ -63,13 +63,6 @@ export default defineConfig({
     },
     server: {
         port: 3000 ,
-        proxy: {
-            '/api': {
-                target: 'https://www.ismerely.me',
-                changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/api/, ''), // This line ensures the /api prefix is removed
-            },
-        },
     },
     css: {
         preprocessorOptions: {
