@@ -476,7 +476,58 @@
               />
             </v-card-actions>
 
+
           </v-card>
+
+          <v-row class="mt-3">
+            <v-col
+              cols="12"
+              lg="4"
+            >
+              <v-text-field
+                v-model="pvn_to_2200"
+                label="PVN PARA ALCANZAR 2200 PVN 🟢"
+                prepend-inner-icon="mdi-dots-triangle"
+                variant="outlined"
+                rounded="xl"
+                readonly
+                type="number"
+                :loading="loading"
+              />
+            </v-col>
+            <v-col
+              cols="12"
+              lg="4"
+            >
+              <v-text-field
+                v-model="pvn_to_4400"
+                label="PVN PARA ALCANZAR 4400 PVN 🟣"
+                prepend-inner-icon="mdi-dots-triangle"
+                variant="outlined"
+                rounded="xl"
+                readonly
+                type="number"
+                :loading="loading"
+              />
+            </v-col>
+            <v-col
+              cols="12"
+              lg="4"
+            >
+              <v-text-field
+                v-model="pvn_to_8800"
+                label="PVN PARA ALCANZAR 8800 PVN 🔵"
+                prepend-inner-icon="mdi-dots-triangle"
+                variant="outlined"
+                rounded="xl"
+                readonly
+                type="number"
+                :loading="loading"
+              />
+            </v-col>
+          </v-row>
+
+
         </v-col>
 
 
@@ -484,7 +535,7 @@
           <v-text-field
             v-model="search"
             label="BUSCAR PRODUCTO(S)"
-            bg-color="primary-lighten-1"
+            bg-color="secondary-lighten-1"
             prepend-inner-icon="mdi-magnify"
             variant="outlined"
             rounded="xl"
@@ -611,6 +662,17 @@ export default {
       ]
     }
   },
+  computed:{
+   pvn_to_2200() {
+      return 2200 - this.order.final_pvn
+    },
+    pvn_to_4400() {
+      return 4400 - this.order.final_pvn
+    },
+    pvn_to_8800() {
+      return 8800 - this.order.final_pvn
+    }
+  },
   methods: {
 
     handleClose() {
@@ -645,7 +707,7 @@ export default {
     async getNameById() {
       if (this.order.state.id !== '') {
         this.loading = true
-        const response = await API_REQUEST('get', `api/cliente/${this.order.state.id}` );
+        const response = await API_REQUEST('get', `api/cliente/${this.order.state.id}`);
         this.order.state.client = response['cliente'] || ''
         this.loading = false
       }

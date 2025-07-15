@@ -1,43 +1,33 @@
 <script>
 import VueNumberComponent from "@chenfengyuan/vue-number-input";
-import Order from "@/models/Order.js";
 import API_REQUEST from '@/controller/api.js'
 
 export default {
   name: "stock",
   components: {VueNumberComponent},
-  props:{
-    order: {
-      type: Object,
-      required: false,
-      default: () => new Order(),
-      validator: (order) => {
-        return order instanceof Order
-      },
-    },
-  },
   data() {
     return {
       search: "",
       products: [],
       headers: [
-        {title: 'IMG', value: 'img',},
-        {title: 'ID', value: 'id',},
+        {title: 'IMG', value: 'img_url',},
+        {title: 'ID', value: 'code',},
         {title: 'CANTIDAD', value: 'quantity',},
         {title: 'PRODUCTO', value: 'name',},
-        {title: '$PÚBLICO', value: 'price.public',},
-        {title: '$SOCIO', value: 'price.member',},
+        {title: '$PÚBLICO', value: 'public_price',},
+        {title: '$SOCIO', value: 'social_price',},
         {title: 'PVN', value: 'pvn',},
-        {title: 'PALABRAS CLAVE', value: 'alternative_name',},
+        {title: 'PALABRAS CLAVE', value: 'keywords',},
       ]
     };
+
   },
   mounted() {
     this.initial()
   },
   methods: {
     async initial(){
-      const _products = await API_REQUEST('get', 'products')
+      const _products = await API_REQUEST('get', 'products/')
       console.log(_products)
     }
   }
@@ -71,7 +61,7 @@ export default {
         <v-text-field
           v-model="search"
           label="BUSCAR PRODUCTO(S)"
-          bg-color="primary-lighten-1"
+          bg-color="secondary-lighten-1"
           prepend-inner-icon="mdi-magnify"
           variant="outlined"
           rounded="xl"
@@ -84,7 +74,7 @@ export default {
 
     <v-card-item>
       <v-data-table
-        :items="order.products"
+        :items="products"
         :headers="headers"
         :search="search"
         items-per-page="20"
@@ -92,12 +82,12 @@ export default {
         :hide-default-header="!!$vuetify.display.mobile"
         no-data-text="NO HAY PRODUCTOS"
       >
-        <template #item.img="{ item }">
+        <template #item.img_url="{ item }">
           <v-img
-            width="50"
+            width="100"
             aspect-ratio="1/1"
             cover
-            :src="item.img"
+            :src="item.img_url"
           />
         </template>
 
@@ -113,7 +103,6 @@ export default {
             autofocus
             controls
             size="large"
-            @update:model-value="order.update_quantity_product($event, item)"
           />
         </template>
       </v-data-table>

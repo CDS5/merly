@@ -28,7 +28,7 @@
     "eslint-plugin-promise": "^6.4.0",
     "eslint-plugin-vue": "^9.30.0",
     "http-proxy-middleware": "^3.0.3",
-    "pinia": "^2.1.7",
+    "pinia": "^3.0.3",
     "sass": "1.77.8",
     "sass-embedded": "^1.77.8",
     "unplugin-auto-import": "^0.17.6",

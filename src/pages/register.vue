@@ -22,7 +22,7 @@ export default {
             <div class="d-flex justify-content-center">
               <img
                 height="50"
-                src="@/assets/logo.svg"
+                src="@/assets/isotipo.svg"
                 alt="logo"
                 class="mr-2"
               >

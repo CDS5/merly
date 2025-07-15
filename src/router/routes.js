@@ -1,12 +1,25 @@
 export const router = [
-  /*{
+  {
+    title: 'Pedido',
+    value: '',
+    props: {
+      class: '',
+      prependIcon: 'mdi-basket',
+      active: true,
+      to: '/orders'
+
+    }
+  },
+
+  {
     title: 'Panel principal',
     value: '',
     props: {
       class: '',
       prependIcon: 'mdi-view-dashboard',
       active: false,
-      to: '/dashboard'
+      //to: '/dashboard'
+      disabled: true,
     }
   },
   {
@@ -16,7 +29,8 @@ export const router = [
       class: '',
       prependIcon: 'mdi-collapse-all',
       active: false,
-      to: '/collections'
+     // to: '/collections'
+      disabled: true,
     }
   },
 
@@ -27,29 +41,22 @@ export const router = [
       class: '',
       prependIcon: 'mdi-text-box-multiple',
       active: false,
-      to: '/consolids'
-    }
-  },
-*/
-  {
-    title: 'Pedido',
-    value: '',
-    props: {
-      class: '',
-      prependIcon: 'mdi-basket',
-      active: false,
-      to: '/orders'
+     // to: '/consolids'
+      disabled: true,
     }
   },
 
- /* {
+
+
+  {
     title: 'Etiquetas',
     value: '',
     props: {
       class: '',
       prependIcon: 'mdi-bookmark-multiple',
       active: false,
-      to: '/labels'
+     // to: '/labels'
+      disabled: true,
     }
   },
 
@@ -60,9 +67,10 @@ export const router = [
       class: '',
       prependIcon: 'mdi-warehouse',
       active: false,
-      to: '/stock'
+     // to: '/stock'
+      disabled: true,
     }
-  },*/
+  },
 
   {
     title: 'Perfil',

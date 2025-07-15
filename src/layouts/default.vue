@@ -17,7 +17,7 @@
           <div class="d-flex align-center">
             <img
               height="40"
-              src="@/assets/logo.svg"
+              src="@/assets/isotipo.svg"
               alt="logo"
               class="mr-2"
             >
@@ -40,12 +40,17 @@
         >
           ✨ Novedades ✨
         </v-btn>
-        <!--        <router-link to="/profile">
-                  <v-btn
-                    icon="mdi-account-circle"
-                    variant="flat"
-                  />
-                </router-link>-->
+
+        <v-btn
+          class="bg-pink-darken-1"
+          rounded
+          tag="a"
+          href="https://www.instagram.com/merlydtox/"
+          target="_blank"
+        >
+          ✨IG: Merly DTOX ✨
+        </v-btn>
+
       </v-app-bar>
 
 
