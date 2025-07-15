@@ -40,12 +40,17 @@
         >
           ✨ Novedades ✨
         </v-btn>
-        <!--        <router-link to="/profile">
-                  <v-btn
-                    icon="mdi-account-circle"
-                    variant="flat"
-                  />
-                </router-link>-->
+
+        <v-btn
+          class="bg-pink-darken-1"
+          rounded
+          tag="a"
+          href="https://www.instagram.com/merlydtox/"
+          target="_blank"
+        >
+          ✨IG: Merly DTOX ✨
+        </v-btn>
+
       </v-app-bar>
 
 
