@@ -476,7 +476,61 @@
               />
             </v-card-actions>
 
+
           </v-card>
+
+          <v-row class="mt-3">
+            <v-col
+              cols="12"
+              lg="4"
+            >
+              <v-text-field
+                v-model="order.final_pvn"
+                label="PVN PARA 2200 PVN 🟢"
+                prepend-inner-icon="mdi-dots-triangle"
+                variant="outlined"
+                rounded="xl"
+                readonly
+                type="number"
+                placeholder="COLOQUE LOS PUNTOS EXISTENTES EN SISTEMA"
+                :loading="loading"
+              />
+            </v-col>
+            <v-col
+              cols="12"
+              lg="4"
+            >
+              <v-text-field
+                v-model="order.final_pvn"
+                label="PVN PARA 4400 PVN 🟣"
+                prepend-inner-icon="mdi-dots-triangle"
+                variant="outlined"
+                rounded="xl"
+                readonly
+                type="number"
+                placeholder="COLOQUE LOS PUNTOS EXISTENTES EN SISTEMA"
+                :loading="loading"
+              />
+            </v-col>
+            <v-col
+              cols="12"
+              lg="4"
+            >
+              <v-text-field
+                v-model="order.final_pvn"
+                label="PVN PARA 8800 PVN 🔵"
+                prepend-inner-icon="mdi-dots-triangle"
+                variant="outlined"
+                rounded="xl"
+                readonly
+                type="number"
+                placeholder="COLOQUE LOS PUNTOS EXISTENTES EN SISTEMA"
+                :loading="loading"
+              />
+            </v-col>
+          </v-row>
+
+
         </v-col>
 
 
@@ -645,7 +699,7 @@ export default {
     async getNameById() {
       if (this.order.state.id !== '') {
         this.loading = true
-        const response = await API_REQUEST('get', `api/cliente/${this.order.state.id}` );
+        const response = await API_REQUEST('get', `api/cliente/${this.order.state.id}`);
         this.order.state.client = response['cliente'] || ''
         this.loading = false
       }
