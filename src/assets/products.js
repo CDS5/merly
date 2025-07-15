@@ -73,6 +73,9 @@ import PT768 from '@/assets/products/PT768.png'
 import PT802 from '@/assets/products/PT802.png'
 import PT794 from '@/assets/products/PT794.png'
 import PT787 from '@/assets/products/PT787.png'
+import PT804 from '@/assets/products/PT804.png'
+import PT806 from '@/assets/products/PT806.png'
+import PT803 from '@/assets/products/PT803.png'
 
 
 const products = {
@@ -642,7 +645,7 @@ const products = {
     id: 'PT785',
     name: 'ORIGEN CAFÉ 250 GR. SABOR VAINILLA',
     alternative_name: 'origen cafe 250g vainilla',
-    price: {public: 589, member: 300},
+    price: {public: 599, member: 300},
     pvn: 232,
     quantity: 0,
     img: CAFE,
@@ -853,19 +856,42 @@ const products = {
     checked: true
   },
 
-  'HE801': {
-    id: 'HE801',
-    name: 'CATÁLOGO UNITARIO ISMERELY',
-    alternative_name: 'catalogo, ismerely',
-    price: {public: 35, member: 35},
-    pvn: 0,
+  'PT804': {
+    id: 'PT804',
+    name: 'VYBES LACTO IGNIZE SABOR BLISS VAINILLA 500 G',
+    alternative_name: 'malteada vybes lacto ignize sabor bliss vainilla',
+    price: {public: 999, member: 215},
+    pvn: 166,
     quantity: 0,
-    img: CATALOGO,
+    img: PT804,
     checked: true
   },
-  'HE802': {
-    id: 'HE802',
-    name: 'PAQUETE DE 4 CATALOGO ISMERELY',
+
+  'PT806': {
+    id: 'PT806',
+    name: 'VYBES THERRA PROTEIN SABOR BLISS VAINILLA 1 KG',
+    alternative_name: 'malteada vybes therra protein sabor bliss vainilla',
+    price: {public: 1499, member: 215},
+    pvn: 166,
+    quantity: 0,
+    img: PT806,
+    checked: true
+  },
+
+  'PT803': {
+    id: 'PT803',
+    name: 'VYBES THERRA PROTEIN SABOR PRIDE CACAO 1 KG',
+    alternative_name: 'malteada vybes therra protein sabor pride cacao',
+    price: {public: 1499, member: 215},
+    pvn: 166,
+    quantity: 0,
+    img: PT803,
+    checked: true
+  },
+
+  'HE805': {
+    id: 'HE805',
+    name: 'PAQUETE DE 3 CATALOGOS UNITARIOS ISMERELY 2025',
     alternative_name: 'catalogo, ismerely',
     price: {public: 100, member: 100},
     pvn: 0,
@@ -873,11 +899,11 @@ const products = {
     img: CATALOGO,
     checked: true
   },
-  'HE796': {
-    id: 'HE796',
-    name: 'CAJA DE 140 CATALOGOS ISMERELY',
+  'HE806': {
+    id: 'HE806',
+    name: 'CAJA DE 82 CATALOGOS ISMERELY 2025',
     alternative_name: 'catalogo, ismerely',
-    price: {public: 2660, member: 2660},
+    price: {public: 2000, member: 2000},
     pvn: 0,
     quantity: 0,
     img: CATALOGO,

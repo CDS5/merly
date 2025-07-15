@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     async initial(){
-      const _products = await API_REQUEST('get', 'products')
+      const _products = await API_REQUEST('get', 'products/')
       console.log(_products)
     }
   }

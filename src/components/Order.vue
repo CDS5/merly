@@ -485,14 +485,13 @@
               lg="4"
             >
               <v-text-field
-                v-model="order.final_pvn"
-                label="PVN PARA 2200 PVN 🟢"
+                v-model="pvn_to_2200"
+                label="PVN PARA ALCANZAR 2200 PVN 🟢"
                 prepend-inner-icon="mdi-dots-triangle"
                 variant="outlined"
                 rounded="xl"
                 readonly
                 type="number"
-                placeholder="COLOQUE LOS PUNTOS EXISTENTES EN SISTEMA"
                 :loading="loading"
               />
             </v-col>
@@ -501,14 +500,13 @@
               lg="4"
             >
               <v-text-field
-                v-model="order.final_pvn"
-                label="PVN PARA 4400 PVN 🟣"
+                v-model="pvn_to_4400"
+                label="PVN PARA ALCANZAR 4400 PVN 🟣"
                 prepend-inner-icon="mdi-dots-triangle"
                 variant="outlined"
                 rounded="xl"
                 readonly
                 type="number"
-                placeholder="COLOQUE LOS PUNTOS EXISTENTES EN SISTEMA"
                 :loading="loading"
               />
             </v-col>
@@ -517,14 +515,13 @@
               lg="4"
             >
               <v-text-field
-                v-model="order.final_pvn"
-                label="PVN PARA 8800 PVN 🔵"
+                v-model="pvn_to_8800"
+                label="PVN PARA ALCANZAR 8800 PVN 🔵"
                 prepend-inner-icon="mdi-dots-triangle"
                 variant="outlined"
                 rounded="xl"
                 readonly
                 type="number"
-                placeholder="COLOQUE LOS PUNTOS EXISTENTES EN SISTEMA"
                 :loading="loading"
               />
             </v-col>
@@ -663,6 +660,17 @@ export default {
         {title: 'PVN', value: 'pvn',},
         {title: 'PALABRAS CLAVE', value: 'alternative_name',},
       ]
+    }
+  },
+  computed:{
+   pvn_to_2200() {
+      return 2200 - this.order.final_pvn
+    },
+    pvn_to_4400() {
+      return 4400 - this.order.final_pvn
+    },
+    pvn_to_8800() {
+      return 8800 - this.order.final_pvn
     }
   },
   methods: {
