@@ -17,7 +17,7 @@
           <div class="d-flex align-center">
             <img
               height="40"
-              src="@/assets/logo.svg"
+              src="@/assets/isotipo.svg"
               alt="logo"
               class="mr-2"
             >

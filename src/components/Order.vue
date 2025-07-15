@@ -484,7 +484,7 @@
           <v-text-field
             v-model="search"
             label="BUSCAR PRODUCTO(S)"
-            bg-color="primary-lighten-1"
+            bg-color="secondary-lighten-1"
             prepend-inner-icon="mdi-magnify"
             variant="outlined"
             rounded="xl"

@@ -19,7 +19,7 @@
           <img
             height="100"
             width="100"
-            src="@/assets/logo.png"
+            src="@/assets/isotipo.svg"
             alt="logo"
             class="mr-2"
           >

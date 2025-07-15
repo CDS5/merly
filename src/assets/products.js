@@ -66,6 +66,7 @@ import PT791 from '@/assets/products/PT791.png'
 import CATALOGO from '@/assets/products/CATALOGO.png'
 import PT723 from '@/assets/products/PT723.png'
 import HE775 from '@/assets/products/HE775.png'
+import HE782 from '@/assets/products/HE782.png'
 import CBD500 from '@/assets/products/CBD500.png'
 import CBD1000 from '@/assets/products/CBD1000.png'
 import PT768 from '@/assets/products/PT768.png'
@@ -737,7 +738,7 @@ const products = {
     img: PT755,
     checked: true
   },
-  /*
+
   'CBD1000': {
     id: 'CBD1000',
     name: 'SPECTRUM CBD 1000 MG. 30 ML',
@@ -757,7 +758,7 @@ const products = {
     quantity: 0,
     img: CBD500,
     checked: true
-  },*/
+  },
   'PT762': {
     id: 'PT762',
     name: 'STEFYA ENDULZANTE 20 ML',
@@ -890,6 +891,16 @@ const products = {
     pvn: 0,
     quantity: 0,
     img: HE775,
+    checked: true
+  },
+  'HE782': {
+    id: 'HE782',
+    name: 'PAQ 5 - CUCHARAS MEDIDORAS ISMERELY',
+    alternative_name: 'cucharas, medidoras, ismerely',
+    price: {public: 110, member: 110},
+    pvn: 0,
+    quantity: 0,
+    img: HE782,
     checked: true
   },
 }
