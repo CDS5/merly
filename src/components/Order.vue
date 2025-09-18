@@ -479,52 +479,103 @@
 
           </v-card>
 
-          <v-row class="mt-3">
-            <v-col
-              cols="12"
-              lg="4"
-            >
-              <v-text-field
-                v-model="pvn_to_2200"
-                label="PVN PARA ALCANZAR 2200 PVN 🟢"
-                prepend-inner-icon="mdi-dots-triangle"
-                variant="outlined"
-                rounded="xl"
-                readonly
-                type="number"
-                :loading="loading"
-              />
+          <v-row class="mt-2">
+
+
+            <v-col cols="12" lg="4">
+              <v-row no-gutters>
+                <v-col>
+                  <v-text-field
+                    v-model="pvn_to_2200"
+                    label="🟢 2200 PVN"
+                    prepend-inner-icon="mdi-dots-triangle"
+                    variant="outlined"
+                    rounded="xl"
+                    readonly
+                    type="number"
+                    :loading="loading"
+                  />
+                </v-col>
+
+                <v-col
+                >
+                  <v-text-field
+                    v-model="pvn_to_2200"
+                    label="🟢 EN DINERO"
+                    prepend-inner-icon="mdi-dots-triangle"
+                    variant="outlined"
+                    rounded="xl"
+                    readonly
+                    type="number"
+                    :loading="loading"
+                  />
+                </v-col>
+
+
+              </v-row>
             </v-col>
-            <v-col
-              cols="12"
-              lg="4"
-            >
-              <v-text-field
-                v-model="pvn_to_4400"
-                label="PVN PARA ALCANZAR 4400 PVN 🟣"
-                prepend-inner-icon="mdi-dots-triangle"
-                variant="outlined"
-                rounded="xl"
-                readonly
-                type="number"
-                :loading="loading"
-              />
+
+
+            <v-col cols="12" lg="4">
+              <v-row no-gutters>
+                <v-col>
+                  <v-text-field
+                    v-model="pvn_to_4400"
+                    label="🟣 4400 PVN"
+                    prepend-inner-icon="mdi-dots-triangle"
+                    variant="outlined"
+                    rounded="xl"
+                    readonly
+                    type="number"
+                    :loading="loading"
+                  />
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    v-model="pvn_to_4400"
+                    label="🟣 EN DINERO"
+                    prepend-inner-icon="mdi-dots-triangle"
+                    variant="outlined"
+                    rounded="xl"
+                    readonly
+                    type="number"
+                    :loading="loading"
+                  />
+                </v-col>
+              </v-row>
             </v-col>
-            <v-col
-              cols="12"
-              lg="4"
-            >
-              <v-text-field
-                v-model="pvn_to_8800"
-                label="PVN PARA ALCANZAR 8800 PVN 🔵"
-                prepend-inner-icon="mdi-dots-triangle"
-                variant="outlined"
-                rounded="xl"
-                readonly
-                type="number"
-                :loading="loading"
-              />
+
+
+            <v-col cols="12" lg="4">
+             <v-row no-gutters>
+               <v-col cols>
+                 <v-text-field
+                   v-model="pvn_to_8800"
+                   label="🔵 8800 PVN"
+                   prepend-inner-icon="mdi-dots-triangle"
+                   variant="outlined"
+                   rounded="xl"
+                   readonly
+                   type="number"
+                   :loading="loading"
+                 />
+               </v-col>
+               <v-col cols>
+                 <v-text-field
+                   v-model="pvn_to_8800"
+                   label="🔵 EN DINERO"
+                   prepend-inner-icon="mdi-dots-triangle"
+                   variant="outlined"
+                   rounded="xl"
+                   readonly
+                   type="number"
+                   :loading="loading"
+                 />
+               </v-col>
+             </v-row>
             </v-col>
+
+
           </v-row>
 
 
@@ -662,8 +713,8 @@ export default {
       ]
     }
   },
-  computed:{
-   pvn_to_2200() {
+  computed: {
+    pvn_to_2200() {
       return 2200 - this.order.final_pvn
     },
     pvn_to_4400() {
@@ -671,7 +722,13 @@ export default {
     },
     pvn_to_8800() {
       return 8800 - this.order.final_pvn
-    }
+    },
+
+    money_to_2200() {
+      return 0
+    },
+
+
   },
   methods: {
 
@@ -697,6 +754,9 @@ export default {
     handleConfirmAlert() {
       this.order.clean_order()
       this.search = ''
+      this.pvn_to_2200 = 2200
+      this.pvn_to_4400 = 4400
+      this.pvn_to_8800 = 8800
     },
 
     set_fast_quick() {
