@@ -1,12 +1,14 @@
 <template>
-  <Order />
+  <LandingPage />
 </template>
 
 <script>
+import LandingPage from "@/components/LandingPage.vue";
 import Order from "@/components/Order.vue";
 
 export default {
   components: {
+    LandingPage,
     Order
   }
 }
