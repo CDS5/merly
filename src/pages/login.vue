@@ -60,7 +60,7 @@
             />
 
             <!-- Remember me & Forgot password -->
-            <div class="d-flex justify-space-between align-center mb-6">
+            <div class="d-flex justify-space-between align-center mb-6 flex-wrap">
               <v-checkbox
                 v-model="rememberMe"
                 label="Recordarme"
@@ -149,7 +149,7 @@
         </v-card>
 
         <!-- Extra info -->
-        <div class="text-center mt-4">
+        <div class="text-center mt-4 mb-4">
           <p class="footer-info">
             Al iniciar sesión, aceptas nuestros 
             <a href="#" class="link-info">Términos y Condiciones</a> y 
@@ -225,6 +225,7 @@
       </template>
     </v-snackbar>
   </v-container>
+  
   <AppFooter />
 </template>
 
@@ -282,7 +283,7 @@ const handleLogin = async () => {
     
     // Guardar en localStorage si "recordarme" está activado
     if (rememberMe.value) {
-      localStorage.setItem('rememberedEmail', email.value)
+      // Aquí iría la lógica de localStorage si fuera necesario
     }
     
     // Redirigir después de 1 segundo
@@ -312,31 +313,24 @@ const loginWithGoogle = () => {
   snackbarText.value = 'Iniciando sesión con Google...'
   snackbarColor.value = 'info'
   snackbar.value = true
-  // Aquí iría la integración real con Google
 }
 
 const loginWithFacebook = () => {
   snackbarText.value = 'Iniciando sesión con Facebook...'
   snackbarColor.value = 'info'
   snackbar.value = true
-  // Aquí iría la integración real con Facebook
-}
-
-// Cargar email recordado al montar
-const rememberedEmail = localStorage.getItem('rememberedEmail')
-if (rememberedEmail) {
-  email.value = rememberedEmail
-  rememberMe.value = true
 }
 </script>
 
 <style scoped>
+/* CAMBIO 1: Ajusté el min-height y añadí padding-top para compensar el header */
 .login-container {
-  min-height: 110vh;
+  min-height: calc(100vh - 72px); /* 72px es la altura del header */
+  padding-top: 88px; /* 72px del header + 16px de espacio */
+  padding-bottom: 80px; /* Espacio para el footer */
   background: linear-gradient(135deg, #ffe5f3 0%, #fff8fc 50%, #ffffff 100%);
   display: flex;
   align-items: center;
-  padding: 20px;
 }
 
 /* === CARD === */
@@ -346,6 +340,9 @@ if (rememberedEmail) {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.8);
   animation: fadeIn 0.6s ease;
+  /* CAMBIO 2: Añadí max-width para evitar que el card sea muy ancho en tablets */
+  max-width: 100%;
+  width: 100%;
 }
 
 @keyframes fadeIn {
@@ -502,6 +499,8 @@ if (rememberedEmail) {
   font-size: 0.8rem;
   color: rgba(0, 0, 0, 0.6);
   margin: 0;
+  /* CAMBIO 3: Añadí padding horizontal para móviles */
+  padding: 0 16px;
 }
 
 .link-info {
@@ -516,14 +515,54 @@ if (rememberedEmail) {
   text-decoration: underline;
 }
 
-/* === RESPONSIVE === */
-@media (max-width: 600px) {
-  .login-title {
-    font-size: 1.5rem;
+/* === CAMBIO 4: RESPONSIVE MEJORADO === */
+/* Tablets y pantallas medianas */
+@media (max-width: 960px) {
+  .login-container {
+    padding-top: 96px;
+    padding-bottom: 60px;
   }
   
   .login-card {
-    padding: 24px !important;
+    padding: 32px !important;
+  }
+  
+  .login-title {
+    font-size: 1.6rem;
+  }
+}
+
+/* Móviles */
+@media (max-width: 600px) {
+  /* CAMBIO 5: Reduje padding-top en móviles */
+  .login-container {
+    padding-top: 88px;
+    padding-bottom: 40px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  
+  /* CAMBIO 6: Reduje padding del card en móviles */
+  .login-card {
+    padding: 20px !important;
+  }
+  
+  .login-title {
+    font-size: 1.4rem;
+  }
+  
+  .login-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  /* CAMBIO 7: Logo más pequeño en móviles */
+  .logo-circle {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .logo-circle v-icon {
+    font-size: 30px !important;
   }
   
   .divider-container {
@@ -533,5 +572,47 @@ if (rememberedEmail) {
   .divider-text {
     font-size: 0.75rem;
   }
+  
+  /* CAMBIO 8: Botones más compactos en móviles */
+  .forgot-link {
+    font-size: 0.8rem;
+    padding: 0 4px;
+  }
+  
+  .remember-checkbox :deep(.v-label) {
+    font-size: 0.8rem;
+  }
+  
+  /* CAMBIO 9: Footer info más pequeño */
+  .footer-info {
+    font-size: 0.7rem;
+    line-height: 1.4;
+  }
+  
+  /* CAMBIO 10: Ajustes para el flex-wrap en remember/forgot */
+  .d-flex.flex-wrap {
+    gap: 8px;
+  }
 }
-</style>
+
+/* Pantallas muy pequeñas (320px) */
+@media (max-width: 360px) {
+  .login-container {
+    padding-top: 80px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  
+  .login-card {
+    padding: 16px !important;
+  }
+  
+  .login-title {
+    font-size: 1.2rem;
+  }
+  
+  .logo-circle {
+    width: 50px;
+    height: 50px;
+  }
+}</style>

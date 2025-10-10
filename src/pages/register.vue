@@ -26,7 +26,7 @@
             v-model="step"
             elevation="0"
             hide-actions
-            class="mb-6"
+            class="mb-6 custom-stepper"
           >
             <v-stepper-header>
               <v-stepper-item
@@ -268,16 +268,17 @@
             </div>
 
             <!-- Navigation Buttons -->
-            <div class="d-flex justify-space-between mt-6">
+            <div class="d-flex justify-space-between mt-6 nav-buttons">
               <v-btn
                 v-if="step > 1"
                 variant="outlined"
                 color="#195030"
                 rounded="lg"
+                class="nav-btn-back"
                 @click="step--"
               >
                 <v-icon start>mdi-arrow-left</v-icon>
-                Anterior
+                <span class="btn-text">Anterior</span>
               </v-btn>
               <v-spacer v-if="step === 1" />
               
@@ -285,10 +286,11 @@
                 v-if="step < 3"
                 color="#195030"
                 rounded="lg"
+                class="nav-btn-next"
                 @click="nextStep"
                 :disabled="!canProceed"
               >
-                Siguiente
+                <span class="btn-text">Siguiente</span>
                 <v-icon end>mdi-arrow-right</v-icon>
               </v-btn>
 
@@ -302,7 +304,7 @@
                 :disabled="!valid || !acceptTerms"
                 @click="handleRegister"
               >
-                <span class="font-weight-bold">Crear Cuenta</span>
+                <span class="font-weight-bold btn-text-register">Crear Cuenta</span>
                 <v-icon end>mdi-check</v-icon>
               </v-btn>
             </div>
@@ -363,7 +365,7 @@
     <!-- Dialog: Terms -->
     <v-dialog v-model="dialogTerms" max-width="600" scrollable>
       <v-card rounded="xl">
-        <v-card-title class="d-flex align-center justify-space-between">
+        <v-card-title class="d-flex align-center justify-space-between pa-4">
           <span class="text-h6">Términos y Condiciones</span>
           <v-btn icon="mdi-close" variant="text" size="small" @click="dialogTerms = false" />
         </v-card-title>
@@ -383,7 +385,7 @@
           </p>
         </v-card-text>
         <v-divider />
-        <v-card-actions>
+        <v-card-actions class="pa-4">
           <v-spacer />
           <v-btn color="#195030" variant="flat" rounded="lg" @click="dialogTerms = false">
             Entendido
@@ -395,7 +397,7 @@
     <!-- Dialog: Privacy -->
     <v-dialog v-model="dialogPrivacy" max-width="600" scrollable>
       <v-card rounded="xl">
-        <v-card-title class="d-flex align-center justify-space-between">
+        <v-card-title class="d-flex align-center justify-space-between pa-4">
           <span class="text-h6">Política de Privacidad</span>
           <v-btn icon="mdi-close" variant="text" size="small" @click="dialogPrivacy = false" />
         </v-card-title>
@@ -415,7 +417,7 @@
           </p>
         </v-card-text>
         <v-divider />
-        <v-card-actions>
+        <v-card-actions class="pa-4">
           <v-spacer />
           <v-btn color="#195030" variant="flat" rounded="lg" @click="dialogPrivacy = false">
             Entendido
@@ -438,6 +440,7 @@
       </template>
     </v-snackbar>
   </v-container>
+  
   <app-footer />
 </template>
 
@@ -570,7 +573,6 @@ const searchLocation = async () => {
     
     // Simular búsqueda de ubicación
     setTimeout(() => {
-      // Aquí iría la llamada real a una API de códigos postales
       form.value.municipality = 'Cuauhtémoc'
       form.value.state = 'Ciudad de México'
       searchingLocation.value = false
@@ -608,12 +610,14 @@ const registerWithFacebook = () => {
 </script>
 
 <style scoped>
+/* CAMBIO 1: Ajusté el min-height y añadí padding-top para compensar el header */
 .register-container {
-  min-height: 125vh;
+  min-height: calc(100vh - 72px);
+  padding-top: 88px; /* 72px del header + 16px de espacio */
+  padding-bottom: 80px; /* Espacio para el footer */
   background: linear-gradient(135deg, #ffe5f3 0%, #fff8fc 50%, #ffffff 100%);
   display: flex;
   align-items: center;
-  padding: 40px 20px;
 }
 
 /* === CARD === */
@@ -623,6 +627,9 @@ const registerWithFacebook = () => {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.8);
   animation: fadeIn 0.6s ease;
+  /* CAMBIO 2: Añadí max-width */
+  max-width: 100%;
+  width: 100%;
 }
 
 @keyframes fadeIn {
@@ -677,7 +684,11 @@ const registerWithFacebook = () => {
   margin: 0;
 }
 
-/* === STEPPER === */
+/* CAMBIO 3: Mejoré el stepper para móviles */
+.custom-stepper {
+  background: transparent;
+}
+
 .stepper-item :deep(.v-stepper-item__title) {
   font-size: 0.85rem;
   font-weight: 600;
@@ -722,6 +733,7 @@ const registerWithFacebook = () => {
 .terms-text {
   font-size: 0.9rem;
   color: #666;
+  line-height: 1.4;
 }
 
 .terms-link {
@@ -733,6 +745,11 @@ const registerWithFacebook = () => {
 .terms-link:hover {
   color: #FE40B4;
   text-decoration: underline;
+}
+
+/* CAMBIO 4: Botones de navegación más flexibles */
+.nav-buttons {
+  gap: 8px;
 }
 
 /* === REGISTER BUTTON === */
@@ -794,18 +811,186 @@ const registerWithFacebook = () => {
   text-decoration: underline;
 }
 
-/* === RESPONSIVE === */
-@media (max-width: 600px) {
-  .register-title {
-    font-size: 1.5rem;
+/* CAMBIO 5: RESPONSIVE MEJORADO */
+/* Tablets y pantallas medianas */
+@media (max-width: 960px) {
+  .register-container {
+    padding-top: 96px;
+    padding-bottom: 60px;
   }
   
   .register-card {
-    padding: 24px !important;
+    padding: 32px !important;
+  }
+  
+  .register-title {
+    font-size: 1.6rem;
   }
   
   .stepper-item :deep(.v-stepper-item__title) {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Móviles */
+@media (max-width: 600px) {
+  /* CAMBIO 6: Ajustes de padding */
+  .register-container {
+    padding-top: 88px;
+    padding-bottom: 40px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  
+  /* CAMBIO 7: Card más compacto */
+  .register-card {
+    padding: 20px !important;
+  }
+  
+  .register-title {
+    font-size: 1.4rem;
+  }
+  
+  .register-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  /* CAMBIO 8: Logo más pequeño */
+  .logo-circle {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .logo-circle .v-icon {
+    font-size: 30px !important;
+  }
+  
+  /* CAMBIO 9: Stepper compacto en móviles */
+  .stepper-item :deep(.v-stepper-item__title) {
+    font-size: 0.65rem;
+    line-height: 1.2;
+  }
+  
+  .custom-stepper {
+    margin-bottom: 16px !important;
+  }
+  
+  /* CAMBIO 10: Ocultar texto en botones de navegación */
+  .nav-btn-back .btn-text,
+  .nav-btn-next .btn-text {
+    display: none;
+  }
+  
+  .nav-btn-back,
+  .nav-btn-next {
+    min-width: 48px !important;
+    padding: 0 12px !important;
+  }
+  
+  /* CAMBIO 11: Botón de registro más compacto */
+  .btn-text-register {
+    font-size: 0.9rem;
+  }
+  
+  .divider-container {
+    gap: 12px;
+    margin: 20px 0 !important;
+  }
+  
+  .divider-text {
+    font-size: 0.75rem;
+  }
+  
+  /* CAMBIO 12: Terms más legible */
+  .terms-text {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+  
+  /* CAMBIO 13: Password strength más compacto */
+  .password-strength {
+    padding: 6px 10px;
+  }
+  
+  .strength-label {
+    font-size: 0.75rem;
+  }
+}
+
+/* Pantallas muy pequeñas (360px) */
+@media (max-width: 360px) {
+  .register-container {
+    padding-top: 80px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  
+  .register-card {
+    padding: 16px !important;
+  }
+  
+  .register-title {
+    font-size: 1.2rem;
+  }
+  
+  .register-subtitle {
+    font-size: 0.8rem;
+  }
+  
+  .logo-circle {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .logo-circle .v-icon {
+    font-size: 24px !important;
+  }
+  
+  /* CAMBIO 14: Stepper súper compacto */
+  .stepper-item :deep(.v-stepper-item__title) {
+    font-size: 0.6rem;
+  }
+  
+  /* CAMBIO 15: Iconos más pequeños en inputs */
+  :deep(.v-field__prepend-inner .v-icon),
+  :deep(.v-field__append-inner .v-icon) {
+    font-size: 18px !important;
+  }
+  
+  /* CAMBIO 16: Botones sociales más compactos */
+  .social-btn {
+    padding: 8px 12px !important;
+  }
+  
+  .social-btn .v-icon {
+    font-size: 18px !important;
+  }
+}
+
+/* CAMBIO 17: Ajuste para orientación horizontal en móviles */
+@media (max-height: 600px) and (orientation: landscape) {
+  .register-container {
+    padding-top: 100px;
+    padding-bottom: 60px;
+  }
+  
+  .logo-circle {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 8px;
+  }
+  
+  .register-title {
+    font-size: 1.3rem;
+    margin-bottom: 8px !important;
+  }
+  
+  .register-subtitle {
+    font-size: 0.85rem;
+  }
+  
+  .custom-stepper {
+    margin-bottom: 12px !important;
   }
 }
 </style>
