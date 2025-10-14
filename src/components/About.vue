@@ -55,7 +55,7 @@
                     </v-row>
                 </v-container>
             </section>
-
+            
             <!-- Nuestros Números -->
             <section class="stats-section py-16">
                 <v-container>
@@ -446,7 +446,7 @@ const team = ref([
 
 /* === STATS SECTION === */
 .stats-section {
-    background: linear-gradient(135deg, #9c5f85 0%, #e6e2e4 100%);
+    background: linear-gradient(135deg, #ffe5f3 0%, #fff8fc 50%, #ffffff 100%);
     position: relative;
     overflow: hidden;
 }
@@ -471,7 +471,7 @@ const team = ref([
 
 .section-subtitle {
     font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(0, 0, 0, 0.8);
 }
 
 .stat-card {
@@ -502,14 +502,14 @@ const team = ref([
 .stat-number-big {
     font-size: 3rem;
     font-weight: 900;
-    color: white;
+    color: #195030;
     line-height: 1;
     margin-bottom: 8px;
 }
 
 .stat-label-big {
     font-size: 1rem;
-    color: rgba(255, 255, 255, 0.9);
+    color: #195030(255, 255, 255, 0.9);
     font-weight: 600;
 }
 

@@ -5,24 +5,25 @@
       :class="{ 'elevated': scrolled }">
       <v-container fluid class="d-flex align-center justify-space-between pa-0">
         <!-- Logo -->
-        <div class="d-flex align-center logo-container ms-4">
-          <div class="logo-circle">
+        <div class="d-flex align-center logo-container ms-4" @click="scrollToSection('inicio')">
+          <div class="d-flex align-center">
             <img height="40" src="@/assets/isotipo.svg" alt="logo" class="mr-2">
+            <p class="font-weight-bold text-h5 text-lg-h4">Merly</p>
+            <v-chip size="x-small" color="primary">Beta</v-chip>
           </div>
-          <span class="text-h6 font-weight-bold logo-text">Merly</span>
         </div>
 
         <!-- Desktop Nav -->
         <div class="hidden-sm-and-down d-flex align-center">
-          <v-btn text class="nav-btn" to="/">
+          <v-btn text class="nav-btn" rounded="xl" @click="scrollToSection('inicio')">
             Inicio
             <div class="nav-underline"></div>
           </v-btn>
-          <v-btn text class="nav-btn" to="/products">
+          <v-btn text class="nav-btn" rounded="xl" @click="scrollToSection('productos')">
             Productos
             <div class="nav-underline"></div>
           </v-btn>
-          <v-btn text class="nav-btn" to="/about">
+          <v-btn text class="nav-btn" rounded="xl" @click="scrollToSection('conocenos')">
             Conócenos
             <div class="nav-underline"></div>
           </v-btn>
@@ -30,12 +31,12 @@
 
         <!-- Action Buttons -->
         <div class="hidden-sm-and-down d-flex align-center gap-2">
-          <v-btn variant="outlined" color="#195030" rounded="pill" class="font-weight-bold action-btn-outlined me-2"
+          <v-btn variant="outlined" color="#195030" rounded="xl" class="font-weight-bold action-btn-outlined me-2"
             to="/register">
             <v-icon start>mdi-store</v-icon>
             Regístrate
           </v-btn>
-          <v-btn variant="outlined" color="#FE40B4" rounded="pill" class="font-weight-bold text-white action-btn-filled"
+          <v-btn variant="outlined" color="#FE40B4" rounded="xl" class="font-weight-bold text-white action-btn-filled"
             to="/login">
             <v-icon start>mdi-account</v-icon>
             Iniciar Sesión
@@ -50,13 +51,13 @@
     <!-- Mobile Drawer -->
     <v-navigation-drawer v-model="drawer" temporary location="right">
       <v-list>
-        <v-list-item to="/" prepend-icon="mdi-home">
+        <v-list-item @click="scrollToSection('inicio')" prepend-icon="mdi-home">
           <v-list-item-title>Inicio</v-list-item-title>
         </v-list-item>
-        <v-list-item to="/products" prepend-icon="mdi-shopping">
+        <v-list-item @click="scrollToSection('productos')" prepend-icon="mdi-shopping">
           <v-list-item-title>Productos</v-list-item-title>
         </v-list-item>
-        <v-list-item to="/about" prepend-icon="mdi-information">
+        <v-list-item @click="scrollToSection('conocenos')" prepend-icon="mdi-information">
           <v-list-item-title>Conócenos</v-list-item-title>
         </v-list-item>
         <v-divider class="my-2"></v-divider>
@@ -83,6 +84,27 @@ const scrolled = ref(false)
 
 const handleScroll = () => {
   scrolled.value = window.scrollY > 50
+}
+
+// Función para scroll suave a secciones
+const scrollToSection = (sectionId) => {
+  // Cerrar drawer si está abierto
+  drawer.value = false
+  
+  // Esperar un momento para que se cierre el drawer
+  setTimeout(() => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      const offset = 72 // Altura del header
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - offset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    }
+  }, 100)
 }
 
 onMounted(() => {
@@ -113,26 +135,6 @@ onUnmounted(() => {
   transform: scale(1.05);
 }
 
-.logo-circle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #ffe5f3, #fff8fc);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 12px;
-  box-shadow: 0 2px 8px rgba(254, 64, 180, 0.2);
-}
-
-.logo-text {
-  color: #195030;
-  background: linear-gradient(135deg, #195030, #2a7050);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
 /* === NAV BUTTONS === */
 .nav-btn {
   color: #000000;
@@ -140,6 +142,7 @@ onUnmounted(() => {
   margin: 0 8px;
   position: relative;
   transition: color 0.3s;
+  cursor: pointer;
 }
 
 .nav-underline {
@@ -147,7 +150,7 @@ onUnmounted(() => {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%) scaleX(0);
-  width: 80%;
+  width: 70%;
   height: 2px;
   background: linear-gradient(90deg, #FE40B4, #195030);
   transition: transform 0.3s ease;

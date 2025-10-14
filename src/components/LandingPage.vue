@@ -2,10 +2,9 @@
   <v-app>
     <AppHeader />
 
-    <!-- HERO SECTION -->
     <v-main>
-      <section class="hero-section">
-        <!-- Floating Elements Background -->
+      <!-- SECCIÓN 1: HERO (INICIO) -->
+      <section id="inicio" class="hero-section">
         <div class="floating-shapes">
           <div class="shape shape-1"></div>
           <div class="shape shape-2"></div>
@@ -15,7 +14,6 @@
 
         <v-container class="py-12 py-md-16">
           <v-row align="center" justify="center">
-            <!-- LEFT: TEXT -->
             <v-col cols="12" md="6" class="text-left px-6 px-md-12">
               <div class="fade-up">
                 <v-chip color="#FE40B4" text-color="white" class="mb-4 chip-pulse" size="small">
@@ -34,7 +32,6 @@
                   Sistema de punto de venta rápido y confiable para distribuidores y consumidores finales.
                 </p>
 
-                <!-- Features Pills -->
                 <div class="features-pills mb-8 fade-up delay-3">
                   <v-chip class="feature-chip" color="#195030" variant="tonal">
                     <v-icon start>mdi-leaf</v-icon>
@@ -51,12 +48,12 @@
                 </div>
 
                 <v-btn color="#FE40B4" size="x-large"
-                  class="text-white font-weight-bold px-10 cta-button fade-up delay-4" rounded="pill" elevation="0">
+                  class="text-white font-weight-bold px-10 cta-button fade-up delay-4" rounded="pill" elevation="0"
+                  @click="scrollToSection('productos')">
                   Ver Catálogo
                   <v-icon end>mdi-arrow-right</v-icon>
                 </v-btn>
 
-                <!-- Stats -->
                 <v-row class="mt-10 fade-up delay-5">
                   <v-col cols="4" class="text-center stat-item">
                     <div class="stat-number">150+</div>
@@ -74,15 +71,13 @@
               </div>
             </v-col>
 
-            <!-- RIGHT: IMAGE -->
             <v-col cols="12" lg="6" class="d-flex justify-center mt-8 mt-lg-0">
               <div class="image-container fade-up delay-1">
                 <div class="image-wrapper">
                   <v-img src="@/assets/mujerCorriendo.png" alt="Productos Ismerely" max-width="580"
                     class="rounded-xl hero-image" cover></v-img>
 
-                  <!-- Floating Cards -->
-                  <v-card class="floating-card card-1" elevation="8">
+                  <v-card class="floating-card card-1" elevation="8" rounded="xl">
                     <v-card-text class="pa-3">
                       <div class="d-flex align-center">
                         <v-avatar color="#FE40B4" size="40" class="mr-3">
@@ -96,7 +91,7 @@
                     </v-card-text>
                   </v-card>
 
-                  <v-card class="floating-card card-2" elevation="8">
+                  <v-card class="floating-card card-2" elevation="8" rounded="xl">
                     <v-card-text class="pa-3">
                       <div class="d-flex align-center">
                         <v-avatar color="#195030" size="40" class="mr-3">
@@ -110,7 +105,7 @@
                     </v-card-text>
                   </v-card>
 
-                  <v-card class="floating-card card-3" elevation="8">
+                  <v-card class="floating-card card-3" elevation="8" rounded="xl">
                     <v-card-text class="pa-3">
                       <div class="d-flex align-center">
                         <v-avatar color="#FE40B4" size="40" class="mr-3">
@@ -124,16 +119,225 @@
                     </v-card-text>
                   </v-card>
                 </div>
-
                 <div class="image-glow"></div>
               </div>
             </v-col>
           </v-row>
         </v-container>
 
-        <!-- Scroll Indicator -->
-        <div class="scroll-indicator">
+        <div class="scroll-indicator" @click="scrollToSection('productos')">
           <v-icon color="#FE40B4" class="bounce">mdi-chevron-down</v-icon>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 2: PRODUCTOS -->
+      <section id="productos" class="productos-section py-16">
+        <v-container>
+          <div class="text-center mb-12">
+            <v-chip color="#FE40B4" text-color="white" class="mb-4" size="small">
+              <v-icon start size="16">mdi-package-variant</v-icon>
+              NUESTROS PRODUCTOS
+            </v-chip>
+            <h2 class="section-title mb-4">Productos Premium para tu Salud</h2>
+            <p class="section-subtitle">Explora nuestra selección de productos naturales diseñados para tu bienestar</p>
+          </div>
+
+          <!-- Categorías de Productos -->
+          <v-row class="mb-8">
+            <v-col cols="12" class="text-center">
+              <v-chip-group v-model="selectedCategory" mandatory color="#FE40B4">
+                <v-chip value="todos" variant="outlined" class="category-chip">
+                  <v-icon start>mdi-view-grid</v-icon>
+                  Todos
+                </v-chip>
+                <v-chip value="suplementos" variant="outlined" class="category-chip">
+                  <v-icon start>mdi-pill</v-icon>
+                  Suplementos
+                </v-chip>
+                <v-chip value="bebidas" variant="outlined" class="category-chip">
+                  <v-icon start>mdi-cup</v-icon>
+                  Bebidas
+                </v-chip>
+                <v-chip value="cuidado" variant="outlined" class="category-chip">
+                  <v-icon start>mdi-heart-pulse</v-icon>
+                  Cuidado Personal
+                </v-chip>
+              </v-chip-group>
+            </v-col>
+          </v-row>
+
+          <!-- Grid de Productos -->
+          <v-row>
+            <v-col cols="12" sm="6" md="4" lg="3" v-for="(product, i) in filteredProducts" :key="i">
+              <v-card class="product-card" elevation="0" height="100%">
+                <div class="product-image-container">
+                  <v-img :src="product.image" height="220" cover class="product-image">
+                    <template v-slot:placeholder>
+                      <div class="d-flex align-center justify-center fill-height">
+                        <v-icon size="64" color="#FE40B4">mdi-package-variant</v-icon>
+                      </div>
+                    </template>
+                  </v-img>
+                  <v-chip v-if="product.badge" class="product-badge" :color="product.badgeColor" size="small">
+                    {{ product.badge }}
+                  </v-chip>
+                </div>
+                <v-card-text class="pa-4">
+                  <v-chip size="x-small" :color="product.categoryColor" variant="tonal" class="mb-2">
+                    {{ product.categoryLabel }}
+                  </v-chip>
+                  <h4 class="product-title mb-2">{{ product.name }}</h4>
+                  <p class="product-description mb-3">{{ product.description }}</p>
+                  <div class="d-flex align-center justify-space-between">
+                    <div>
+                      <div class="product-price">${{ product.price }}</div>
+                      <div v-if="product.oldPrice" class="product-old-price">${{ product.oldPrice }}</div>
+                    </div>
+                    <v-btn icon size="small" color="#FE40B4" variant="tonal">
+                      <v-icon>mdi-cart-plus</v-icon>
+                    </v-btn>
+                  </div>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+
+          <!-- Características de Productos -->
+          <v-row class="mt-12">
+            <v-col cols="12" md="3" v-for="(benefit, i) in productBenefits" :key="i" class="text-center">
+              <v-avatar :color="benefit.color" size="80" class="mb-4">
+                <v-icon color="white" size="40">{{ benefit.icon }}</v-icon>
+              </v-avatar>
+              <h4 class="benefit-title mb-2">{{ benefit.title }}</h4>
+              <p class="benefit-text">{{ benefit.text }}</p>
+            </v-col>
+          </v-row>
+        </v-container>
+      </section>
+
+      <!-- SECCIÓN 3: CONÓCENOS -->
+      <section id="conocenos" class="about-section">
+        <!-- Hero About -->
+        <div class="about-hero">
+          <v-container class="py-4">
+            <v-row justify="center">
+              <v-col cols="12" md="10" lg="8" class="text-center">
+                <v-chip color="#FE40B4" text-color="white" class="mb-4 chip-pulse" size="small">
+                  <img height="20" src="@/assets/isotipo.svg" alt="logo" class="mr-2">
+                  NUESTRA HISTORIA
+                </v-chip>
+                <h1 class="about-title mb-6">
+                  Transformando vidas a través del bienestar natural
+                </h1>
+                <p class="about-subtitle">
+                  Desde 2015, Merly se ha dedicado a ofrecer productos naturales de la más alta calidad,
+                  ayudando a miles de personas a alcanzar sus objetivos de salud y bienestar.
+                </p>
+              </v-col>
+            </v-row>
+          </v-container>
+          <div class="wave-divider">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+              <path
+                d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                fill="#ffffff"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Misión, Visión, Valores -->
+        <div class="values-section py-16">
+          <v-container>
+            <v-row>
+              <v-col cols="12" md="4" v-for="(item, i) in values" :key="i">
+                <v-card class="value-card" elevation="0" height="100%">
+                  <v-card-text class="pa-8 text-center">
+                    <div class="value-icon-wrapper mb-4">
+                      <v-avatar :color="item.color" size="80" class="value-icon">
+                        <v-icon color="white" size="40">{{ item.icon }}</v-icon>
+                      </v-avatar>
+                    </div>
+                    <h3 class="value-title mb-3">{{ item.title }}</h3>
+                    <p class="value-text">{{ item.text }}</p>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+        </div>
+
+        <!-- Estadísticas -->
+        <div class="stats-section py-16">
+          <v-container>
+            <div class="text-center mb-12">
+              <h2 class="section-title mb-4">Nuestro Impacto</h2>
+              <p class="section-subtitle-dark">Resultados que hablan por sí mismos</p>
+            </div>
+            <v-row>
+              <v-col cols="6" md="3" v-for="(stat, i) in stats" :key="i" class="text-center">
+                <div class="stat-card">
+                  <div class="stat-icon-bg" :style="`background: ${stat.color}15`">
+                    <v-icon :color="stat.color" size="32">{{ stat.icon }}</v-icon>
+                  </div>
+                  <div class="stat-number-big">{{ stat.number }}</div>
+                  <div class="stat-label-big">{{ stat.label }}</div>
+                </div>
+              </v-col>
+            </v-row>
+          </v-container>
+        </div>
+
+        <!-- Equipo -->
+        <div class="team-section py-16">
+          <v-container>
+            <div class="text-center mb-12">
+              <h2 class="section-title-dark mb-4">Nuestro Equipo</h2>
+              <p class="section-subtitle-dark">Expertos comprometidos con tu bienestar</p>
+            </div>
+            <v-row>
+              <v-col cols="12" sm="6" md="3" v-for="(member, i) in team" :key="i">
+                <v-card class="team-card" elevation="0">
+                  <div class="team-image-wrapper">
+                    <v-avatar size="200" class="team-avatar">
+                      <v-icon size="100" color="#195030">mdi-account-circle</v-icon>
+                    </v-avatar>
+                    <div class="team-overlay">
+                      <v-btn icon size="small" color="white" class="ma-1">
+                        <v-icon color="#195030">mdi-linkedin</v-icon>
+                      </v-btn>
+                      <v-btn icon size="small" color="white" class="ma-1">
+                        <v-icon color="#FE40B4">mdi-instagram</v-icon>
+                      </v-btn>
+                    </div>
+                  </div>
+                  <v-card-text class="text-center pa-4">
+                    <h4 class="team-name">{{ member.name }}</h4>
+                    <p class="team-role">{{ member.role }}</p>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+        </div>
+
+        <!-- CTA Final -->
+        <div class="cta-section py-16">
+          <v-container>
+            <v-card class="cta-card" elevation="0">
+              <v-card-text class="pa-12 text-center">
+                <v-icon color="#FE40B4" size="60" class="mb-4">mdi-handshake</v-icon>
+                <h2 class="cta-title mb-4">¿Listo para comenzar tu transformación?</h2>
+                <p class="cta-text mb-8">
+                  Únete a nuestra comunidad y descubre cómo nuestros productos pueden cambiar tu vida
+                </p>
+                <v-btn color="#FE40B4" size="x-large" class="text-white font-weight-bold px-12 cta-button"
+                  rounded="pill" elevation="0" @click="scrollToSection('productos')">
+                  Explorar Productos
+                  <v-icon end>mdi-arrow-right</v-icon>
+                </v-btn>
+              </v-card-text>
+            </v-card>
+          </v-container>
         </div>
       </section>
     </v-main>
@@ -143,19 +347,192 @@
       <v-icon size="32">mdi-whatsapp</v-icon>
       <div class="whatsapp-pulse"></div>
     </v-btn>
+
+    <AppFooter />
   </v-app>
 </template>
 
 <script setup>
 import AppHeader from './AppHeader.vue';
+import AppFooter from './AppFooter.vue';
+import { ref, computed } from 'vue';
+
+// Función para scroll suave
+const scrollToSection = (sectionId) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+};
+
+// Categoría seleccionada
+const selectedCategory = ref('todos');
+
+// Productos
+const products = ref([
+  {
+    name: 'Colágeno Hidrolizado',
+    description: 'Mejora la elasticidad de la piel y fortalece articulaciones',
+    price: '349',
+    oldPrice: '449',
+    image: '@/assets/products/colageno.jpg',
+    category: 'suplementos',
+    categoryLabel: 'Suplemento',
+    categoryColor: '#195030',
+    badge: '20% OFF',
+    badgeColor: '#FE40B4'
+  },
+  {
+    name: 'Té Verde Detox',
+    description: 'Antioxidante natural que ayuda a la pérdida de peso',
+    price: '199',
+    image: '@/assets/products/te-verde.jpg',
+    category: 'bebidas',
+    categoryLabel: 'Bebida',
+    categoryColor: '#FE40B4',
+    badge: 'NUEVO',
+    badgeColor: '#195030'
+  },
+  {
+    name: 'Omega 3 Premium',
+    description: 'Ácidos grasos esenciales para salud cardiovascular',
+    price: '299',
+    image: '@/assets/products/omega3.jpg',
+    category: 'suplementos',
+    categoryLabel: 'Suplemento',
+    categoryColor: '#195030'
+  },
+  {
+    name: 'Crema Hidratante Natural',
+    description: 'Hidratación profunda con ingredientes orgánicos',
+    price: '249',
+    oldPrice: '299',
+    image: '@/assets/products/crema.jpg',
+    category: 'cuidado',
+    categoryLabel: 'Cuidado Personal',
+    categoryColor: '#FE40B4',
+    badge: '15% OFF',
+    badgeColor: '#FE40B4'
+  },
+  {
+    name: 'Proteína Vegetal',
+    description: 'Proteína plant-based con 25g por porción',
+    price: '549',
+    image: '@/assets/products/proteina.jpg',
+    category: 'suplementos',
+    categoryLabel: 'Suplemento',
+    categoryColor: '#195030',
+    badge: 'BESTSELLER',
+    badgeColor: '#195030'
+  },
+  {
+    name: 'Jugo Verde Energizante',
+    description: 'Mezcla de vegetales verdes para energía natural',
+    price: '179',
+    image: '@/assets/products/jugo.jpg',
+    category: 'bebidas',
+    categoryLabel: 'Bebida',
+    categoryColor: '#FE40B4'
+  },
+  {
+    name: 'Serum Facial Vitamina C',
+    description: 'Ilumina y rejuvenece tu piel naturalmente',
+    price: '399',
+    image: '@/assets/products/serum.jpg',
+    category: 'cuidado',
+    categoryLabel: 'Cuidado Personal',
+    categoryColor: '#FE40B4',
+    badge: 'NUEVO',
+    badgeColor: '#195030'
+  },
+  {
+    name: 'Multivitamínico Completo',
+    description: 'Todas las vitaminas esenciales en una cápsula',
+    price: '279',
+    image: '@/assets/products/multivitaminico.jpg',
+    category: 'suplementos',
+    categoryLabel: 'Suplemento',
+    categoryColor: '#195030'
+  }
+]);
+
+// Productos filtrados
+const filteredProducts = computed(() => {
+  if (selectedCategory.value === 'todos') {
+    return products.value;
+  }
+  return products.value.filter(p => p.category === selectedCategory.value);
+});
+
+// Beneficios de productos
+const productBenefits = ref([
+  {
+    icon: 'mdi-shield-check',
+    color: '#195030',
+    title: 'Garantía de Calidad',
+    text: '100% productos certificados y seguros'
+  },
+  {
+    icon: 'mdi-truck-delivery',
+    color: '#FE40B4',
+    title: 'Envío Gratis',
+    text: 'En compras mayores a $500'
+  },
+  {
+    icon: 'mdi-cash-multiple',
+    color: '#195030',
+    title: 'Mejor Precio',
+    text: 'Precios competitivos garantizados'
+  },
+  {
+    icon: 'mdi-headset',
+    color: '#FE40B4',
+    title: 'Soporte 24/7',
+    text: 'Te ayudamos cuando lo necesites'
+  }
+]);
+
+// Valores (Conócenos)
+const values = ref([
+  {
+    icon: 'mdi-target',
+    color: '#FE40B4',
+    title: 'Misión',
+    text: 'Proporcionar productos naturales de calidad superior que mejoren la salud y el bienestar de nuestros clientes de manera sostenible.'
+  },
+  {
+    icon: 'mdi-eye',
+    color: '#195030',
+    title: 'Visión',
+    text: 'Ser la marca líder en productos naturales para el bienestar, reconocida por nuestra calidad, innovación y compromiso con la salud.'
+  },
+  {
+    icon: 'mdi-heart-multiple',
+    color: '#FE40B4',
+    title: 'Valores',
+    text: 'Integridad, calidad, innovación, sostenibilidad y un compromiso genuino con el bienestar de nuestros clientes y el planeta.'
+  }
+]);
+
+// Estadísticas
+const stats = ref([
+  { number: '8+', label: 'Años de experiencia', icon: 'mdi-calendar-star', color: '#195030' },
+  { number: '150+', label: 'Productos', icon: 'mdi-package-variant', color: '#FE40B4' },
+  { number: '5,000+', label: 'Clientes felices', icon: 'mdi-account-heart', color: '#195030' },
+  { number: '98%', label: 'Satisfacción', icon: 'mdi-thumb-up', color: '#FE40B4' }
+]);
+
+// Equipo
+const team = ref([
+  { name: 'Dr. María González', role: 'Directora General' },
+  { name: 'Lic. Carlos Méndez', role: 'Director de Ventas' },
+  { name: 'Dra. Ana Martínez', role: 'Nutrióloga' },
+  { name: 'Ing. Roberto Silva', role: 'Director de Operaciones' }
+]);
 </script>
 
 <style scoped>
-/* === GENERAL === */
-* {
-  box-sizing: border-box;
-}
-
+/* === HERO SECTION === */
 .hero-section {
   background: linear-gradient(135deg, #ffe5f3 0%, #fff8fc 50%, #ffffff 100%);
   min-height: calc(100vh - 72px);
@@ -165,8 +542,6 @@ import AppHeader from './AppHeader.vue';
   overflow: hidden;
 }
 
-
-/* === FLOATING SHAPES === */
 .floating-shapes {
   position: absolute;
   inset: 0;
@@ -187,7 +562,6 @@ import AppHeader from './AppHeader.vue';
   background: #FE40B4;
   top: 10%;
   left: 5%;
-  animation-delay: 0s;
 }
 
 .shape-2 {
@@ -218,40 +592,22 @@ import AppHeader from './AppHeader.vue';
 }
 
 @keyframes float {
-
-  0%,
-  100% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-
-  33% {
-    transform: translate(30px, -30px) rotate(120deg);
-  }
-
-  66% {
-    transform: translate(-20px, 20px) rotate(240deg);
-  }
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(30px, -30px) rotate(120deg); }
+  66% { transform: translate(-20px, 20px) rotate(240deg); }
 }
 
-/* === HERO TEXT === */
 .chip-pulse {
   animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgba(254, 64, 180, 0.4);
-  }
-
-  50% {
-    box-shadow: 0 0 0 10px rgba(254, 64, 180, 0);
-  }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(254, 64, 180, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(254, 64, 180, 0); }
 }
 
 .hero-title {
-  color: #195030;
+  color: #000000;
   font-weight: 900;
   font-size: clamp(2.5rem, 6vw, 4.5rem);
   line-height: 1.1;
@@ -283,9 +639,7 @@ import AppHeader from './AppHeader.vue';
 }
 
 @keyframes expandWidth {
-  to {
-    transform: scaleX(1);
-  }
+  to { transform: scaleX(1); }
 }
 
 .hero-subtitle {
@@ -298,7 +652,6 @@ import AppHeader from './AppHeader.vue';
   z-index: 1;
 }
 
-/* === FEATURES PILLS === */
 .features-pills {
   display: flex;
   flex-wrap: wrap;
@@ -315,7 +668,6 @@ import AppHeader from './AppHeader.vue';
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* === CTA BUTTON === */
 .cta-button {
   background: linear-gradient(135deg, #FE40B4, #ff1493) !important;
   transition: all 0.4s ease;
@@ -347,7 +699,6 @@ import AppHeader from './AppHeader.vue';
   box-shadow: 0 12px 32px rgba(254, 64, 180, 0.4);
 }
 
-/* === STATS === */
 .stat-item {
   transition: transform 0.3s ease;
 }
@@ -371,7 +722,6 @@ import AppHeader from './AppHeader.vue';
   font-weight: 600;
 }
 
-/* === IMAGE === */
 .image-container {
   position: relative;
   max-width: 580px;
@@ -407,7 +757,6 @@ import AppHeader from './AppHeader.vue';
   filter: blur(40px);
 }
 
-/* === FLOATING CARDS === */
 .floating-card {
   position: absolute;
   background: white;
@@ -420,7 +769,6 @@ import AppHeader from './AppHeader.vue';
 .card-1 {
   top: 10%;
   right: -10%;
-  animation-delay: 0s;
 }
 
 .card-2 {
@@ -436,15 +784,8 @@ import AppHeader from './AppHeader.vue';
 }
 
 @keyframes floatCard {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-15px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
 }
 
 .card-value {
@@ -458,6 +799,352 @@ import AppHeader from './AppHeader.vue';
   font-size: 0.75rem;
   color: #666;
   margin-top: 2px;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  cursor: pointer;
+}
+
+.bounce {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+/* === PRODUCTOS SECTION === */
+.productos-section {
+  background: white;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 900;
+  color: #195030;
+  letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.category-chip {
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.category-chip:hover {
+  transform: translateY(-2px);
+}
+
+.product-card {
+  background: white;
+  border: 2px solid #f5f5f5;
+  border-radius: 20px;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  border-color: #FE40B4;
+  box-shadow: 0 10px 30px rgba(254, 64, 180, 0.15);
+}
+
+.product-image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-image {
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.1);
+}
+
+.product-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-weight: 700;
+  z-index: 2;
+}
+
+.product-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #195030;
+  line-height: 1.3;
+}
+
+.product-description {
+  font-size: 0.875rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+.product-price {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #FE40B4;
+  line-height: 1;
+}
+
+.product-old-price {
+  font-size: 0.875rem;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.benefit-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #195030;
+  margin-bottom: 8px;
+}
+
+.benefit-text {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* === ABOUT SECTION === */
+.about-section {
+  background: white;
+}
+
+.about-hero {
+  background: linear-gradient(135deg, #ffe5f3 0%, #fff8fc 50%, #ffffff 100%);
+  padding-top: 80px;
+  position: relative;
+}
+
+.about-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  color: #195030;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.about-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: #195030;
+  opacity: 0.8;
+  line-height: 1.7;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.wave-divider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.wave-divider svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 60px;
+}
+
+.values-section {
+  background: white;
+}
+
+.value-card {
+  background: white;
+  border: 2px solid #f5f5f5;
+  border-radius: 20px;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.value-card:hover {
+  transform: translateY(-10px);
+  border-color: #FE40B4;
+  box-shadow: 0 10px 30px rgba(254, 64, 180, 0.15);
+}
+
+.value-icon-wrapper {
+  display: inline-block;
+  animation:  ease-in-out infinite;
+}
+
+.value-icon {
+  transition: transform 0.3s ease;
+}
+
+.value-card:hover .value-icon {
+  transform: rotate(360deg);
+}
+
+.value-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #195030;
+  margin-bottom: 12px;
+}
+
+.value-text {
+  color: #666;
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.stats-section {
+  background: linear-gradient(135deg, #ffe5f3 0%, #fff8fc 50%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.section-subtitle-dark {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.stat-card {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-icon-bg {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover .stat-icon-bg {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.stat-number-big {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #195030;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label-big {
+  font-size: 1rem;
+  color: #195030;
+  font-weight: 600;
+}
+
+.team-section {
+  background: #f9f9f9;
+}
+
+.section-title-dark {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 900;
+  color: #195030;
+  letter-spacing: -0.02em;
+}
+
+.team-card {
+  background: white;
+  border-radius: 20px;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.team-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.team-image-wrapper {
+  position: relative;
+  padding: 24px;
+  background: linear-gradient(135deg, #ffe5f3, #fff8fc);
+  display: flex;
+  justify-content: center;
+}
+
+.team-avatar {
+  transition: transform 0.3s ease;
+}
+
+.team-card:hover .team-avatar {
+  transform: scale(1.05);
+}
+
+.team-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(25, 80, 48, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.team-card:hover .team-overlay {
+  opacity: 1;
+}
+
+.team-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #195030;
+  margin-bottom: 4px;
+}
+
+.team-role {
+  font-size: 0.9rem;
+  color: #FE40B4;
+  font-weight: 600;
+}
+
+.cta-section {
+  background: linear-gradient(135deg, #ffe5f3 0%, #fff8fc 100%);
+}
+
+.cta-card {
+  background: white;
+  border-radius: 32px;
+  border: 3px solid #FE40B4;
+}
+
+.cta-title {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 900;
+  color: #195030;
+}
+
+.cta-text {
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 /* === WHATSAPP FAB === */
@@ -483,40 +1170,8 @@ import AppHeader from './AppHeader.vue';
 }
 
 @keyframes ping {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  100% {
-    transform: scale(1.5);
-    opacity: 0;
-  }
-}
-
-/* === SCROLL INDICATOR === */
-.scroll-indicator {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-}
-
-.bounce {
-  animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(10px);
-  }
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
 }
 
 /* === ANIMATIONS === */
@@ -526,25 +1181,11 @@ import AppHeader from './AppHeader.vue';
   animation: fadeUp 0.9s ease forwards;
 }
 
-.delay-1 {
-  animation-delay: 0.2s;
-}
-
-.delay-2 {
-  animation-delay: 0.4s;
-}
-
-.delay-3 {
-  animation-delay: 0.6s;
-}
-
-.delay-4 {
-  animation-delay: 0.8s;
-}
-
-.delay-5 {
-  animation-delay: 1s;
-}
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+.delay-4 { animation-delay: 0.8s; }
+.delay-5 { animation-delay: 1s; }
 
 @keyframes fadeUp {
   to {
@@ -590,6 +1231,14 @@ import AppHeader from './AppHeader.vue';
 
   .stat-number {
     font-size: 1.5rem;
+  }
+
+  .stat-number-big {
+    font-size: 2rem;
+  }
+
+  .team-overlay {
+    opacity: 1;
   }
 
   .whatsapp-fab {

@@ -5,7 +5,6 @@
     <v-row align="center" justify="center" class="fill-height">
       <v-col cols="12" sm="10" md="8" lg="5" xl="4">
         <v-card
-          elevation="24"
           rounded="xl"
           class="login-card pa-8"
         >
@@ -29,7 +28,7 @@
               label="Correo electrónico"
               prepend-inner-icon="mdi-email-outline"
               variant="outlined"
-              rounded="lg"
+              rounded="xl"
               placeholder="tu@email.com"
               :rules="emailRules"
               type="email"
@@ -51,7 +50,7 @@
               :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
               :type="showPassword ? 'text' : 'password'"
               variant="outlined"
-              rounded="lg"
+              rounded="xl"
               placeholder="Ingresa tu contraseña"
               :rules="passwordRules"
               color="#195030"
@@ -87,7 +86,7 @@
               color="#195030"
               size="x-large"
               block
-              rounded="lg"
+              rounded="xl"
               elevation="0"
               class="login-btn mb-4"
               :loading="loading"
@@ -110,7 +109,7 @@
                 variant="outlined"
                 size="large"
                 block
-                rounded="lg"
+                rounded="xl"
                 class="social-btn mb-3"
                 @click="loginWithGoogle"
               >
@@ -122,7 +121,7 @@
                 variant="outlined"
                 size="large"
                 block
-                rounded="lg"
+                rounded="xl"
                 class="social-btn"
                 @click="loginWithFacebook"
               >
@@ -182,7 +181,7 @@
             label="Correo electrónico"
             prepend-inner-icon="mdi-email-outline"
             variant="outlined"
-            rounded="lg"
+            rounded="xl"
             placeholder="tu@email.com"
             type="email"
             color="#195030"
@@ -200,7 +199,7 @@
           <v-btn
             color="#FE40B4"
             variant="flat"
-            rounded="lg"
+            rounded="xl"
             @click="handleForgotPassword"
           >
             Enviar enlace
@@ -215,7 +214,7 @@
       :color="snackbarColor"
       :timeout="3000"
       location="top"
-      rounded="lg"
+      rounded="xl"
     >
       {{ snackbarText }}
       <template #actions>
@@ -387,7 +386,7 @@ const loginWithFacebook = () => {
 .login-title {
   font-size: 1.8rem;
   font-weight: 900;
-  color: #195030;
+  color: black;
   letter-spacing: -0.02em;
 }
 

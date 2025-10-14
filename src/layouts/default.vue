@@ -30,7 +30,7 @@
           </div>
         </v-toolbar-title>
 
-        <v-btn
+        <!--<v-btn
           class="color-changing-border"
           rounded
           @click="dialogFeatures = true"
@@ -47,6 +47,7 @@
         >
           ✨IG: Merly DTOX ✨
         </v-btn>
+        -->
       </v-app-bar>
 
       <v-navigation-drawer
@@ -67,7 +68,7 @@
         <!-- Botón de Cerrar sesión -->
         <v-list>
           <v-list-item
-            @click="$router.push('/login')"
+            @click="$router.push('/')"
             prepend-icon="mdi-logout"
             title="Cerrar sesión"
           />
