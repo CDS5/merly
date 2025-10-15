@@ -1,14 +1,14 @@
 <template>
   <div>
     <!-- HEADER -->
-    <v-app-bar app elevation="0" color="white" height="72" class="px-6 app-bar-animated"
+    <v-app-bar app elevation="0" height="72" rounded="b-xl" class="px-6 app-bar-animated"
       :class="{ 'elevated': scrolled }">
       <v-container fluid class="d-flex align-center justify-space-between pa-0">
         <!-- Logo -->
         <div class="d-flex align-center logo-container ms-4" @click="scrollToSection('inicio')">
           <div class="d-flex align-center">
             <img height="40" src="@/assets/isotipo.svg" alt="logo" class="mr-2">
-            <p class="font-weight-bold text-h5 text-lg-h4">Merly</p>
+            <p class="font-weight-bold text-h5 text-lg-h4 text-high-emphasis">Merly</p>
             <v-chip size="x-small" color="primary">Beta</v-chip>
           </div>
         </div>
@@ -120,10 +120,15 @@ onUnmounted(() => {
 /* === HEADER === */
 .app-bar-animated {
   transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
 }
 
 .app-bar-animated.elevated {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.theme--dark .app-bar-animated.elevated {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3) !important;
 }
 
 .logo-container {
@@ -137,12 +142,15 @@ onUnmounted(() => {
 
 /* === NAV BUTTONS === */
 .nav-btn {
-  color: #000000;
   font-weight: 600;
   margin: 0 8px;
   position: relative;
   transition: color 0.3s;
   cursor: pointer;
+}
+
+.nav-btn :deep(.v-btn__content) {
+  color: rgb(var(--v-theme-on-surface));
 }
 
 .nav-underline {
@@ -156,7 +164,7 @@ onUnmounted(() => {
   transition: transform 0.3s ease;
 }
 
-.nav-btn:hover {
+.nav-btn:hover :deep(.v-btn__content) {
   color: #FE40B4;
 }
 
@@ -175,6 +183,14 @@ onUnmounted(() => {
   color: white !important;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(25, 80, 48, 0.3);
+}
+
+.action-btn-outlined:hover :deep(.v-btn__content) {
+  color: white !important;
+}
+
+.action-btn-outlined:hover :deep(.v-icon) {
+  color: white !important;
 }
 
 .action-btn-filled {

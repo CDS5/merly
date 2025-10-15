@@ -6,9 +6,9 @@
         <v-col cols="12" sm="auto" class="text-center text-sm-left mb-2 mb-sm-0">
           <div class="d-flex align-center justify-center justify-sm-start">
             <div class="footer-logo-small">
-              <v-icon size="20" color="black">mdi-cart-heart</v-icon>
+              <v-icon size="20" color="#FE40B4">mdi-cart-heart</v-icon>
             </div>
-            <span class="footer-text">
+            <span class="footer-text text-medium-emphasis">
               &copy; {{ currentYear }} 
               <span class="brand-name">Merly</span>
             </span>
@@ -17,7 +17,7 @@
 
         <!-- Center: Made with love -->
         <v-col cols="12" sm="auto" class="text-center mb-2 mb-sm-0">
-          <div class="footer-credits">
+          <div class="footer-credits text-medium-emphasis">
             Hecho con 
             <v-icon color="#FE40B4" size="14" class="heart-beat mx-1">mdi-heart</v-icon> 
             por 
@@ -83,10 +83,13 @@ const socialItems = [
 
 <style scoped>
 .footer-compact {
-  background: white;
-  color: white;
-  border-top: 1px solid #FE40B4;
+  background: rgb(var(--v-theme-surface));
+  border-top: 2px solid #FE40B4;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.theme--dark .footer-compact {
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* === LOGO === */
@@ -94,24 +97,33 @@ const socialItems = [
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(254, 64, 180, 0.1);
   backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 8px;
   transition: all 0.3s ease;
+  border: 1px solid rgba(254, 64, 180, 0.2);
+}
+
+.theme--dark .footer-logo-small {
+  background: rgba(254, 64, 180, 0.2);
+  border-color: rgba(254, 64, 180, 0.3);
 }
 
 .footer-logo-small:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(254, 64, 180, 0.2);
   transform: rotate(360deg) scale(1.1);
+}
+
+.theme--dark .footer-logo-small:hover {
+  background: rgba(254, 64, 180, 0.3);
 }
 
 /* === TEXT === */
 .footer-text {
   font-size: 0.85rem;
-  color: rgba(0, 0, 0, 0.9);
   font-weight: 500;
 }
 
@@ -124,7 +136,6 @@ const socialItems = [
 /* === CREDITS === */
 .footer-credits {
   font-size: 0.8rem;
-  color: rgba(0, 0, 0, 0.85);
   display: inline-flex;
   align-items: center;
   gap: 2px;
@@ -156,8 +167,11 @@ const socialItems = [
 }
 
 .credits-link:hover {
-  color: white;
-  background: rgba(254, 64, 180, 0.2);
+  background: rgba(254, 64, 180, 0.15);
+}
+
+.theme--dark .credits-link:hover {
+  background: rgba(254, 64, 180, 0.25);
 }
 
 /* === SOCIAL === */
@@ -182,9 +196,17 @@ const socialItems = [
   transition: all 0.2s ease;
 }
 
+.theme--dark .social-avatar-compact {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
 .social-link-compact:hover .social-avatar-compact {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transform: scale(1.15);
+}
+
+.theme--dark .social-link-compact:hover .social-avatar-compact {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 /* === RESPONSIVE === */

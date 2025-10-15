@@ -16,18 +16,18 @@
           <v-row align="center" justify="center">
             <v-col cols="12" md="6" class="text-left px-6 px-md-12">
               <div class="fade-up">
-                <v-chip color="#FE40B4" text-color="white" class="mb-4 chip-pulse" size="small">
-                  <v-icon start size="16">mdi-storefront</v-icon>
+                <v-chip color="#FE40B4" class="mb-4 chip-pulse" size="small">
+                  <img height="20" src="@/assets/isotipo.svg" alt="logo" class="mr-2">
                   Merly
                 </v-chip>
 
-                <h1 class="hero-title mb-4">
+                <h1 class="hero-title mb-4 text-high-emphasis">
                   <span class="title-line">Productos</span><br />
                   <span class="title-line delay-1">para tu bienestar</span>
                   <div class="title-decoration"></div>
                 </h1>
 
-                <p class="hero-subtitle mb-8 fade-up delay-2">
+                <p class="hero-subtitle mb-8 fade-up delay-2 text-medium-emphasis">
                   Descubre nuestra línea completa de productos naturales y suplementos alimenticios.
                   Sistema de punto de venta rápido y confiable para distribuidores y consumidores finales.
                 </p>
@@ -56,16 +56,16 @@
 
                 <v-row class="mt-10 fade-up delay-5">
                   <v-col cols="4" class="text-center stat-item">
-                    <div class="stat-number">150+</div>
-                    <div class="stat-label">Productos</div>
+                    <div class="stat-number text-high-emphasis">150+</div>
+                    <div class="stat-label text-medium-emphasis">Productos</div>
                   </v-col>
                   <v-col cols="4" class="text-center stat-item">
-                    <div class="stat-number">98%</div>
-                    <div class="stat-label">Satisfacción</div>
+                    <div class="stat-number text-high-emphasis">98%</div>
+                    <div class="stat-label text-medium-emphasis">Satisfacción</div>
                   </v-col>
                   <v-col cols="4" class="text-center stat-item">
-                    <div class="stat-number">500+</div>
-                    <div class="stat-label">Clientes</div>
+                    <div class="stat-number text-high-emphasis">500+</div>
+                    <div class="stat-label text-medium-emphasis">Clientes</div>
                   </v-col>
                 </v-row>
               </div>
@@ -84,8 +84,8 @@
                           <v-icon color="white">mdi-shopping</v-icon>
                         </v-avatar>
                         <div>
-                          <div class="card-value">+15 ventas</div>
-                          <div class="card-label">Hoy</div>
+                          <div class="card-value text-high-emphasis">+15 ventas</div>
+                          <div class="card-label text-medium-emphasis">Hoy</div>
                         </div>
                       </div>
                     </v-card-text>
@@ -98,8 +98,8 @@
                           <v-icon color="white">mdi-tag-heart</v-icon>
                         </v-avatar>
                         <div>
-                          <div class="card-value">20% OFF</div>
-                          <div class="card-label">Promoción</div>
+                          <div class="card-value text-high-emphasis">20% OFF</div>
+                          <div class="card-label text-medium-emphasis">Promoción</div>
                         </div>
                       </div>
                     </v-card-text>
@@ -112,8 +112,8 @@
                           <v-icon color="white">mdi-star</v-icon>
                         </v-avatar>
                         <div>
-                          <div class="card-value">4.9★</div>
-                          <div class="card-label">Valoración</div>
+                          <div class="card-value text-high-emphasis">4.9★</div>
+                          <div class="card-label text-medium-emphasis">Valoración</div>
                         </div>
                       </div>
                     </v-card-text>
@@ -131,15 +131,15 @@
       </section>
 
       <!-- SECCIÓN 2: PRODUCTOS -->
-      <section id="productos" class="productos-section py-16">
+      <section id="productos" class="productos-section py-16 bg-surface">
         <v-container>
           <div class="text-center mb-12">
-            <v-chip color="#FE40B4" text-color="white" class="mb-4" size="small">
-              <v-icon start size="16">mdi-package-variant</v-icon>
-              NUESTROS PRODUCTOS
+            <v-chip color="#FE40B4" class="mb-4" size="small">
+              <img height="20" src="@/assets/isotipo.svg" alt="logo" class="mr-2">
+                NUESTROS PRODUCTOS
             </v-chip>
-            <h2 class="section-title mb-4">Productos Premium para tu Salud</h2>
-            <p class="section-subtitle">Explora nuestra selección de productos naturales diseñados para tu bienestar</p>
+            <h2 class="section-title mb-4 text-high-emphasis">Productos Premium para tu Salud</h2>
+            <p class="section-subtitle text-medium-emphasis">Explora nuestra selección de productos naturales diseñados para tu bienestar</p>
           </div>
 
           <!-- Categorías de Productos -->
@@ -186,12 +186,12 @@
                   <v-chip size="x-small" :color="product.categoryColor" variant="tonal" class="mb-2">
                     {{ product.categoryLabel }}
                   </v-chip>
-                  <h4 class="product-title mb-2">{{ product.name }}</h4>
-                  <p class="product-description mb-3">{{ product.description }}</p>
+                  <h4 class="product-title mb-2 text-high-emphasis">{{ product.name }}</h4>
+                  <p class="product-description mb-3 text-medium-emphasis">{{ product.description }}</p>
                   <div class="d-flex align-center justify-space-between">
                     <div>
                       <div class="product-price">${{ product.price }}</div>
-                      <div v-if="product.oldPrice" class="product-old-price">${{ product.oldPrice }}</div>
+                      <div v-if="product.oldPrice" class="product-old-price text-disabled">${{ product.oldPrice }}</div>
                     </div>
                     <v-btn icon size="small" color="#FE40B4" variant="tonal">
                       <v-icon>mdi-cart-plus</v-icon>
@@ -208,8 +208,8 @@
               <v-avatar :color="benefit.color" size="80" class="mb-4">
                 <v-icon color="white" size="40">{{ benefit.icon }}</v-icon>
               </v-avatar>
-              <h4 class="benefit-title mb-2">{{ benefit.title }}</h4>
-              <p class="benefit-text">{{ benefit.text }}</p>
+              <h4 class="benefit-title mb-2 text-high-emphasis">{{ benefit.title }}</h4>
+              <p class="benefit-text text-medium-emphasis">{{ benefit.text }}</p>
             </v-col>
           </v-row>
         </v-container>
@@ -222,14 +222,14 @@
           <v-container class="py-4">
             <v-row justify="center">
               <v-col cols="12" md="10" lg="8" class="text-center">
-                <v-chip color="#FE40B4" text-color="white" class="mb-4 chip-pulse" size="small">
+                <v-chip color="#FE40B4" class="mb-4 chip-pulse" size="small">
                   <img height="20" src="@/assets/isotipo.svg" alt="logo" class="mr-2">
                   NUESTRA HISTORIA
                 </v-chip>
-                <h1 class="about-title mb-6">
+                <h1 class="about-title mb-6 text-high-emphasis">
                   Transformando vidas a través del bienestar natural
                 </h1>
-                <p class="about-subtitle">
+                <p class="about-subtitle text-medium-emphasis">
                   Desde 2015, Merly se ha dedicado a ofrecer productos naturales de la más alta calidad,
                   ayudando a miles de personas a alcanzar sus objetivos de salud y bienestar.
                 </p>
@@ -240,13 +240,13 @@
             <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
               <path
                 d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-                fill="#ffffff"></path>
+                class="wave-path"></path>
             </svg>
           </div>
         </div>
 
         <!-- Misión, Visión, Valores -->
-        <div class="values-section py-16">
+        <div class="values-section py-16 bg-surface">
           <v-container>
             <v-row>
               <v-col cols="12" md="4" v-for="(item, i) in values" :key="i">
@@ -257,8 +257,8 @@
                         <v-icon color="white" size="40">{{ item.icon }}</v-icon>
                       </v-avatar>
                     </div>
-                    <h3 class="value-title mb-3">{{ item.title }}</h3>
-                    <p class="value-text">{{ item.text }}</p>
+                    <h3 class="value-title mb-3 text-high-emphasis">{{ item.title }}</h3>
+                    <p class="value-text text-medium-emphasis">{{ item.text }}</p>
                   </v-card-text>
                 </v-card>
               </v-col>
@@ -270,8 +270,8 @@
         <div class="stats-section py-16">
           <v-container>
             <div class="text-center mb-12">
-              <h2 class="section-title mb-4">Nuestro Impacto</h2>
-              <p class="section-subtitle-dark">Resultados que hablan por sí mismos</p>
+              <h2 class="section-title mb-4 text-high-emphasis">Nuestro Impacto</h2>
+              <p class="section-subtitle-dark text-medium-emphasis">Resultados que hablan por sí mismos</p>
             </div>
             <v-row>
               <v-col cols="6" md="3" v-for="(stat, i) in stats" :key="i" class="text-center">
@@ -279,8 +279,8 @@
                   <div class="stat-icon-bg" :style="`background: ${stat.color}15`">
                     <v-icon :color="stat.color" size="32">{{ stat.icon }}</v-icon>
                   </div>
-                  <div class="stat-number-big">{{ stat.number }}</div>
-                  <div class="stat-label-big">{{ stat.label }}</div>
+                  <div class="stat-number-big text-high-emphasis">{{ stat.number }}</div>
+                  <div class="stat-label-big text-medium-emphasis">{{ stat.label }}</div>
                 </div>
               </v-col>
             </v-row>
@@ -288,11 +288,11 @@
         </div>
 
         <!-- Equipo -->
-        <div class="team-section py-16">
+        <div class="values-section py-16">
           <v-container>
             <div class="text-center mb-12">
-              <h2 class="section-title-dark mb-4">Nuestro Equipo</h2>
-              <p class="section-subtitle-dark">Expertos comprometidos con tu bienestar</p>
+              <h2 class="section-title-dark mb-4 text-high-emphasis">Nuestro Equipo</h2>
+              <p class="section-subtitle-dark text-medium-emphasis">Expertos comprometidos con tu bienestar</p>
             </div>
             <v-row>
               <v-col cols="12" sm="6" md="3" v-for="(member, i) in team" :key="i">
@@ -311,7 +311,7 @@
                     </div>
                   </div>
                   <v-card-text class="text-center pa-4">
-                    <h4 class="team-name">{{ member.name }}</h4>
+                    <h4 class="team-name text-high-emphasis">{{ member.name }}</h4>
                     <p class="team-role">{{ member.role }}</p>
                   </v-card-text>
                 </v-card>
@@ -326,8 +326,8 @@
             <v-card class="cta-card" elevation="0">
               <v-card-text class="pa-12 text-center">
                 <v-icon color="#FE40B4" size="60" class="mb-4">mdi-handshake</v-icon>
-                <h2 class="cta-title mb-4">¿Listo para comenzar tu transformación?</h2>
-                <p class="cta-text mb-8">
+                <h2 class="cta-title mb-4 text-high-emphasis">¿Listo para comenzar tu transformación?</h2>
+                <p class="cta-text mb-8 text-medium-emphasis">
                   Únete a nuestra comunidad y descubre cómo nuestros productos pueden cambiar tu vida
                 </p>
                 <v-btn color="#FE40B4" size="x-large" class="text-white font-weight-bold px-12 cta-button"
@@ -534,12 +534,16 @@ const team = ref([
 <style scoped>
 /* === HERO SECTION === */
 .hero-section {
-  background: linear-gradient(135deg, #ffe5f3 0%, #fff8fc 50%, #ffffff 100%);
+  background: linear-gradient(135deg, rgba(254, 64, 180, 0.08) 0%, rgba(254, 64, 180, 0.04) 50%, transparent 100%);
   min-height: calc(100vh - 72px);
   display: flex;
   align-items: center;
   position: relative;
   overflow: hidden;
+}
+
+.theme--dark .hero-section {
+  background: linear-gradient(135deg, rgba(254, 64, 180, 0.15) 0%, rgba(254, 64, 180, 0.08) 50%, transparent 100%);
 }
 
 .floating-shapes {
@@ -554,6 +558,10 @@ const team = ref([
   border-radius: 50%;
   opacity: 0.1;
   animation: float 20s infinite ease-in-out;
+}
+
+.theme--dark .shape {
+  opacity: 0.15;
 }
 
 .shape-1 {
@@ -592,9 +600,15 @@ const team = ref([
 }
 
 @keyframes float {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  33% { transform: translate(30px, -30px) rotate(120deg); }
-  66% { transform: translate(-20px, 20px) rotate(240deg); }
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(30px, -30px) rotate(120deg);
+  }
+  66% {
+    transform: translate(-20px, 20px) rotate(240deg);
+  }
 }
 
 .chip-pulse {
@@ -602,12 +616,15 @@ const team = ref([
 }
 
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(254, 64, 180, 0.4); }
-  50% { box-shadow: 0 0 0 10px rgba(254, 64, 180, 0); }
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(254, 64, 180, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(254, 64, 180, 0);
+  }
 }
 
 .hero-title {
-  color: #000000;
   font-weight: 900;
   font-size: clamp(2.5rem, 6vw, 4.5rem);
   line-height: 1.1;
@@ -639,15 +656,15 @@ const team = ref([
 }
 
 @keyframes expandWidth {
-  to { transform: scaleX(1); }
+  to {
+    transform: scaleX(1);
+  }
 }
 
 .hero-subtitle {
-  color: #195030;
   font-size: clamp(1rem, 2vw, 1.25rem);
   line-height: 1.7;
   max-width: 540px;
-  opacity: 0.85;
   position: relative;
   z-index: 1;
 }
@@ -710,15 +727,12 @@ const team = ref([
 .stat-number {
   font-size: 2rem;
   font-weight: 900;
-  color: #195030;
   line-height: 1;
   margin-bottom: 4px;
 }
 
 .stat-label {
   font-size: 0.875rem;
-  color: #195030;
-  opacity: 0.7;
   font-weight: 600;
 }
 
@@ -744,8 +758,16 @@ const team = ref([
   transition: all 0.5s ease;
 }
 
+.theme--dark .hero-image {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
 .image-wrapper:hover .hero-image {
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+}
+
+.theme--dark .image-wrapper:hover .hero-image {
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
 }
 
 .image-glow {
@@ -757,13 +779,15 @@ const team = ref([
   filter: blur(40px);
 }
 
+.theme--dark .image-glow {
+  background: radial-gradient(circle at 50% 50%, rgba(254, 64, 180, 0.25), transparent 70%);
+}
+
 .floating-card {
   position: absolute;
-  background: white;
   border-radius: 16px;
   animation: floatCard 3s infinite ease-in-out;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
 .card-1 {
@@ -784,20 +808,22 @@ const team = ref([
 }
 
 @keyframes floatCard {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
 }
 
 .card-value {
   font-size: 1.1rem;
   font-weight: 900;
-  color: #195030;
   line-height: 1;
 }
 
 .card-label {
   font-size: 0.75rem;
-  color: #666;
   margin-top: 2px;
 }
 
@@ -815,25 +841,27 @@ const team = ref([
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(10px); }
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
 }
 
 /* === PRODUCTOS SECTION === */
 .productos-section {
-  background: white;
+  background: rgb(var(--v-theme-surface));
 }
 
 .section-title {
   font-size: clamp(1.8rem, 4vw, 2.5rem);
   font-weight: 900;
-  color: #195030;
   letter-spacing: -0.02em;
 }
 
 .section-subtitle {
   font-size: 1.1rem;
-  color: #666;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -848,8 +876,7 @@ const team = ref([
 }
 
 .product-card {
-  background: white;
-  border: 2px solid #f5f5f5;
+  border: 2px solid rgba(var(--v-border-color), var(--v-border-opacity));
   border-radius: 20px;
   transition: all 0.4s ease;
   overflow: hidden;
@@ -859,6 +886,10 @@ const team = ref([
   transform: translateY(-10px);
   border-color: #FE40B4;
   box-shadow: 0 10px 30px rgba(254, 64, 180, 0.15);
+}
+
+.theme--dark .product-card:hover {
+  box-shadow: 0 10px 30px rgba(254, 64, 180, 0.25);
 }
 
 .product-image-container {
@@ -885,13 +916,11 @@ const team = ref([
 .product-title {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #195030;
   line-height: 1.3;
 }
 
 .product-description {
   font-size: 0.875rem;
-  color: #666;
   line-height: 1.5;
 }
 
@@ -904,46 +933,44 @@ const team = ref([
 
 .product-old-price {
   font-size: 0.875rem;
-  color: #999;
   text-decoration: line-through;
 }
 
 .benefit-title {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #195030;
   margin-bottom: 8px;
 }
 
 .benefit-text {
   font-size: 0.9rem;
-  color: #666;
   line-height: 1.5;
 }
 
 /* === ABOUT SECTION === */
 .about-section {
-  background: white;
+  background: rgb(var(--v-theme-background));
 }
 
 .about-hero {
-  background: linear-gradient(135deg, #ffe5f3 0%, #fff8fc 50%, #ffffff 100%);
+  background: linear-gradient(135deg, rgba(254, 64, 180, 0.08) 0%, rgba(254, 64, 180, 0.04) 50%, transparent 100%);
   padding-top: 80px;
   position: relative;
+}
+
+.theme--dark .about-hero {
+  background: linear-gradient(135deg, rgba(254, 64, 180, 0.15) 0%, rgba(254, 64, 180, 0.08) 50%, transparent 100%);
 }
 
 .about-title {
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 900;
-  color: #195030;
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
 
 .about-subtitle {
   font-size: clamp(1rem, 2vw, 1.25rem);
-  color: #195030;
-  opacity: 0.8;
   line-height: 1.7;
   max-width: 700px;
   margin: 0 auto;
@@ -963,13 +990,16 @@ const team = ref([
   height: 60px;
 }
 
+.wave-path {
+  fill: rgb(var(--v-theme-surface));
+}
+
 .values-section {
-  background: white;
+  background: rgb(var(--v-theme-surface));
 }
 
 .value-card {
-  background: white;
-  border: 2px solid #f5f5f5;
+  border: 2px solid rgba(var(--v-border-color), var(--v-border-opacity));
   border-radius: 20px;
   transition: all 0.4s ease;
   cursor: pointer;
@@ -981,9 +1011,12 @@ const team = ref([
   box-shadow: 0 10px 30px rgba(254, 64, 180, 0.15);
 }
 
+.theme--dark .value-card:hover {
+  box-shadow: 0 10px 30px rgba(254, 64, 180, 0.25);
+}
+
 .value-icon-wrapper {
   display: inline-block;
-  animation:  ease-in-out infinite;
 }
 
 .value-icon {
@@ -997,25 +1030,26 @@ const team = ref([
 .value-title {
   font-size: 1.5rem;
   font-weight: 800;
-  color: #195030;
   margin-bottom: 12px;
 }
 
 .value-text {
-  color: #666;
   line-height: 1.7;
   font-size: 1rem;
 }
 
 .stats-section {
-  background: linear-gradient(135deg, #ffe5f3 0%, #fff8fc 50%, #ffffff 100%);
+  background: linear-gradient(135deg, rgba(254, 64, 180, 0.08) 0%, rgba(254, 64, 180, 0.04) 50%, transparent 100%);
   position: relative;
   overflow: hidden;
 }
 
+.theme--dark .stats-section {
+  background: linear-gradient(135deg, rgba(254, 64, 180, 0.15) 0%, rgba(254, 64, 180, 0.08) 50%, transparent 100%);
+}
+
 .section-subtitle-dark {
   font-size: 1.1rem;
-  color: #666;
 }
 
 .stat-card {
@@ -1046,30 +1080,27 @@ const team = ref([
 .stat-number-big {
   font-size: 3rem;
   font-weight: 900;
-  color: #195030;
   line-height: 1;
   margin-bottom: 8px;
 }
 
 .stat-label-big {
   font-size: 1rem;
-  color: #195030;
   font-weight: 600;
 }
 
 .team-section {
-  background: #f9f9f9;
+  background: rgb(var(--v-theme-surface-variant));
 }
 
 .section-title-dark {
   font-size: clamp(1.8rem, 4vw, 2.5rem);
   font-weight: 900;
-  color: #195030;
   letter-spacing: -0.02em;
 }
 
 .team-card {
-  background: white;
+  border: 2px solid rgba(var(--v-border-color), var(--v-border-opacity));
   border-radius: 20px;
   transition: all 0.4s ease;
   overflow: hidden;
@@ -1080,12 +1111,20 @@ const team = ref([
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
+.theme--dark .team-card:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
 .team-image-wrapper {
   position: relative;
   padding: 24px;
-  background: linear-gradient(135deg, #ffe5f3, #fff8fc);
+  background: linear-gradient(135deg, rgba(254, 64, 180, 0.1), rgba(254, 64, 180, 0.05));
   display: flex;
   justify-content: center;
+}
+
+.theme--dark .team-image-wrapper {
+  background: linear-gradient(135deg, rgba(254, 64, 180, 0.2), rgba(254, 64, 180, 0.1));
 }
 
 .team-avatar {
@@ -1114,7 +1153,6 @@ const team = ref([
 .team-name {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #195030;
   margin-bottom: 4px;
 }
 
@@ -1125,11 +1163,14 @@ const team = ref([
 }
 
 .cta-section {
-  background: linear-gradient(135deg, #ffe5f3 0%, #fff8fc 100%);
+  background: linear-gradient(135deg, rgba(254, 64, 180, 0.08) 0%, rgba(254, 64, 180, 0.04) 100%);
+}
+
+.theme--dark .cta-section {
+  background: linear-gradient(135deg, rgba(254, 64, 180, 0.15) 0%, rgba(254, 64, 180, 0.08) 100%);
 }
 
 .cta-card {
-  background: white;
   border-radius: 32px;
   border: 3px solid #FE40B4;
 }
@@ -1137,12 +1178,10 @@ const team = ref([
 .cta-title {
   font-size: clamp(1.5rem, 4vw, 2.5rem);
   font-weight: 900;
-  color: #195030;
 }
 
 .cta-text {
   font-size: 1.1rem;
-  color: #666;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -1170,8 +1209,14 @@ const team = ref([
 }
 
 @keyframes ping {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(1.5); opacity: 0; }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
 }
 
 /* === ANIMATIONS === */
@@ -1181,11 +1226,25 @@ const team = ref([
   animation: fadeUp 0.9s ease forwards;
 }
 
-.delay-1 { animation-delay: 0.2s; }
-.delay-2 { animation-delay: 0.4s; }
-.delay-3 { animation-delay: 0.6s; }
-.delay-4 { animation-delay: 0.8s; }
-.delay-5 { animation-delay: 1s; }
+.delay-1 {
+  animation-delay: 0.2s;
+}
+
+.delay-2 {
+  animation-delay: 0.4s;
+}
+
+.delay-3 {
+  animation-delay: 0.6s;
+}
+
+.delay-4 {
+  animation-delay: 0.8s;
+}
+
+.delay-5 {
+  animation-delay: 1s;
+}
 
 @keyframes fadeUp {
   to {
