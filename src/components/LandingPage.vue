@@ -817,7 +817,7 @@ const team = ref([
 }
 
 .card-value {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 900;
   line-height: 1;
 }

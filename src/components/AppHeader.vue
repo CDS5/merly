@@ -78,7 +78,10 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 
+const router = useRouter()
+const route = useRoute()
 const drawer = ref(false)
 const scrolled = ref(false)
 
@@ -91,20 +94,41 @@ const scrollToSection = (sectionId) => {
   // Cerrar drawer si está abierto
   drawer.value = false
   
-  // Esperar un momento para que se cierre el drawer
-  setTimeout(() => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      const offset = 72 // Altura del header
-      const elementPosition = element.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - offset
+  // Verificar si estamos en la landing page
+  if (route.path === '/' || route.path === '/landing') {
+    // Si ya estamos en la landing, solo hacer scroll
+    setTimeout(() => {
+      const element = document.getElementById(sectionId)
+      if (element) {
+        const offset = 72 // Altura del header
+        const elementPosition = element.getBoundingClientRect().top
+        const offsetPosition = elementPosition + window.pageYOffset - offset
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      })
-    }
-  }, 100)
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        })
+      }
+    }, 100)
+  } else {
+    // Si estamos en otra página, navegar a landing primero
+    router.push('/').then(() => {
+      // Esperar a que se cargue la página
+      setTimeout(() => {
+        const element = document.getElementById(sectionId)
+        if (element) {
+          const offset = 72
+          const elementPosition = element.getBoundingClientRect().top
+          const offsetPosition = elementPosition + window.pageYOffset - offset
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          })
+        }
+      }, 300)
+    })
+  }
 }
 
 onMounted(() => {
