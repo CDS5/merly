@@ -136,14 +136,48 @@
             </div>
 
             <!-- Navigation Buttons -->
-            <div class="d-flex flex-column gap-4 mt-6 nav-buttons">
-              <v-btn v-if="step > 1" variant="outlined" color="#195030" rounded="xl"  block @click="step--">
+            <div class="nav-buttons mt-6">
+              <!-- Botón Anterior -->
+              <v-btn 
+                v-if="step > 1" 
+                variant="outlined" 
+                color="#195030" 
+                rounded="xl" 
+                block 
+                class="mb-3"
+                @click="step--"
+              >
                 <v-icon start>mdi-arrow-left</v-icon>
                 <span class="btn-text">Anterior</span>
               </v-btn>
 
-              <v-btn v-if="step < 3" color="#195030" rounded="xl" block @click="nextStep" :disabled="!canProceed">
+              <!-- Botón Siguiente (pasos 1 y 2) -->
+              <v-btn 
+                v-if="step < 3" 
+                color="#195030" 
+                rounded="xl" 
+                block 
+                @click="nextStep" 
+                :disabled="!canProceed"
+              >
                 <span class="btn-text">Siguiente</span>
+                <v-icon end>mdi-arrow-right</v-icon>
+              </v-btn>
+
+              <!-- Botón Registrarse (paso 3) -->
+              <v-btn 
+                v-if="step === 3" 
+                color="#FE40B4" 
+                rounded="xl" 
+                block 
+                size="large"
+                class="register-btn"
+                :disabled="!canRegister"
+                :loading="loading"
+                @click="handleRegister"
+              >
+                <v-icon start>mdi-check-circle</v-icon>
+                <span class="btn-text-register">Crear mi cuenta</span>
                 <v-icon end>mdi-arrow-right</v-icon>
               </v-btn>
             </div>
@@ -375,6 +409,13 @@ const canProceed = computed(() => {
   return true
 })
 
+const canRegister = computed(() => {
+  return form.value.postalCode && 
+         form.value.municipality && 
+         form.value.state && 
+         acceptTerms.value
+})
+
 // Methods
 const nextStep = () => {
   if (canProceed.value) {
@@ -382,20 +423,11 @@ const nextStep = () => {
   }
 }
 
-const searchLocation = async () => {
-  if (form.value.postalCode.length === 5) {
-    searchingLocation.value = true
 
-    // Simular búsqueda de ubicación
-    setTimeout(() => {
-      form.value.municipality = 'Cuauhtémoc'
-      form.value.state = 'Ciudad de México'
-      searchingLocation.value = false
-    }, 1000)
-  }
-}
 
 const handleRegister = async () => {
+  if (!canRegister.value) return
+  
   loading.value = true
 
   // Simular registro
@@ -580,19 +612,47 @@ const registerWithFacebook = () => {
 
 /* === NAVIGATION BUTTONS === */
 .nav-buttons {
-  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 /* === REGISTER BUTTON === */
 .register-btn {
-  background: linear-gradient(135deg, #195030, #2a7050) !important;
+  background: linear-gradient(135deg, #FE40B4, #ff1493) !important;
   color: white !important;
   transition: all 0.3s ease;
+  font-weight: 700 !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.register-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.register-btn:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 .register-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(25, 80, 48, 0.3);
+  box-shadow: 0 8px 24px rgba(254, 64, 180, 0.4);
+}
+
+.register-btn:disabled {
+  opacity: 0.6;
+  transform: none !important;
 }
 
 /* === DIVIDER === */
@@ -704,15 +764,8 @@ const registerWithFacebook = () => {
     margin-bottom: 16px !important;
   }
 
-  .nav-btn-back .btn-text,
-  .nav-btn-next .btn-text {
-    display: none;
-  }
-
-  .nav-btn-back,
-  .nav-btn-next {
-    min-width: 48px !important;
-    padding: 0 12px !important;
+  .btn-text {
+    display: inline;
   }
 
   .btn-text-register {
