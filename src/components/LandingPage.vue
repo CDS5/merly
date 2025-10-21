@@ -49,8 +49,8 @@
 
                 <v-btn color="#FE40B4" size="x-large"
                   class="text-white font-weight-bold px-10 cta-button fade-up delay-4" rounded="pill" elevation="0"
-                  @click="scrollToSection('productos')">
-                  Ver Catálogo
+                  @click="scrollToSection('servicios')">
+                  Descubre Más
                   <v-icon end>mdi-arrow-right</v-icon>
                 </v-btn>
 
@@ -125,12 +125,142 @@
           </v-row>
         </v-container>
 
-        <div class="scroll-indicator" @click="scrollToSection('productos')">
+        <div class="scroll-indicator" @click="scrollToSection('servicios')">
           <v-icon color="#FE40B4" class="bounce">mdi-chevron-down</v-icon>
         </div>
       </section>
 
-      <!-- SECCIÓN 2: PRODUCTOS -->
+      <!-- SECCIÓN 2: SERVICIOS (NUEVA) -->
+      <section id="servicios" class="servicios-section py-16">
+        <v-container>
+          <div class="text-center mb-12">
+            <v-chip color="#195030" class="mb-4" size="small" variant="tonal">
+              <v-icon start>mdi-star</v-icon>
+              ¿POR QUÉ ELEGIRNOS?
+            </v-chip>
+            <h2 class="section-title mb-4 text-high-emphasis">Servicios que nos Hacen Únicos</h2>
+            <p class="section-subtitle text-medium-emphasis">
+              Ofrecemos mucho más que productos. Descubre la experiencia Merly completa
+            </p>
+          </div>
+
+          <!-- Servicios Principales -->
+          <v-row class="mb-12">
+            <v-col cols="12" md="4" v-for="(service, i) in mainServices" :key="i">
+              <v-card class="service-card" elevation="0" height="100%">
+                <v-card-text class="pa-8">
+                  <div class="service-icon-wrapper mb-4">
+                    <v-avatar :color="service.color" size="80" class="service-icon">
+                      <v-icon color="white" size="40">{{ service.icon }}</v-icon>
+                    </v-avatar>
+                    <div class="icon-bg" :style="`background: ${service.color}15`"></div>
+                  </div>
+                  <h3 class="service-title mb-3 text-high-emphasis">{{ service.title }}</h3>
+                  <p class="service-description mb-4 text-medium-emphasis">{{ service.description }}</p>
+                  <v-chip size="small" :color="service.color" variant="tonal" class="font-weight-bold">
+                    <v-icon start size="small">mdi-check</v-icon>
+                    {{ service.badge }}
+                  </v-chip>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+
+          <!-- Por Qué Elegirnos -->
+          <div class="why-choose-section mb-12">
+            <v-row align="center">
+              <v-col cols="12" md="6">
+                <div class="why-image-container">
+                  <v-img src="@/assets/mujerCorriendo.png" class="rounded-xl why-image" cover height="400">
+                    <template v-slot:placeholder>
+                      <div class="d-flex align-center justify-center fill-height">
+                        <v-icon size="64" color="#FE40B4">mdi-image</v-icon>
+                      </div>
+                    </template>
+                  </v-img>
+                  <div class="why-image-decoration"></div>
+                </div>
+              </v-col>
+              <v-col cols="12" md="6" class="ps-md-8">
+                <v-chip color="#FE40B4" class="mb-4" size="small" variant="tonal">
+                  <v-icon start>mdi-heart</v-icon>
+                  NUESTRA PROMESA
+                </v-chip>
+                <h2 class="section-title mb-6 text-high-emphasis">¿Por Qué Elegir Merly?</h2>
+                <v-list class="why-list bg-transparent">
+                  <v-list-item v-for="(reason, i) in whyChooseReasons" :key="i" class="why-item px-0 mb-3">
+                    <template v-slot:prepend>
+                      <v-avatar :color="reason.color" size="50" class="mr-4">
+                        <v-icon color="white" size="24">{{ reason.icon }}</v-icon>
+                      </v-avatar>
+                    </template>
+                    <v-list-item-title class="why-item-title text-high-emphasis mb-1">{{ reason.title }}</v-list-item-title>
+                    <v-list-item-subtitle class="why-item-text text-medium-emphasis">{{ reason.text }}</v-list-item-subtitle>
+                  </v-list-item>
+                </v-list>
+              </v-col>
+            </v-row>
+          </div>
+
+          <!-- Beneficios Adicionales -->
+          <div class="benefits-grid">
+            <v-row>
+              <v-col cols="12" sm="6" md="3" v-for="(benefit, i) in additionalBenefits" :key="i">
+                <div class="benefit-card text-center">
+                  <div class="benefit-icon-wrapper mb-3">
+                    <v-icon :color="benefit.color" size="48">{{ benefit.icon }}</v-icon>
+                  </div>
+                  <h4 class="benefit-title mb-2 text-high-emphasis">{{ benefit.title }}</h4>
+                  <p class="benefit-text text-medium-emphasis">{{ benefit.text }}</p>
+                </div>
+              </v-col>
+            </v-row>
+          </div>
+
+          <!-- Garantía y Confianza -->
+          <v-card class="guarantee-card mt-12" elevation="0">
+            <v-card-text class="pa-8 pa-md-12">
+              <v-row align="center">
+                <v-col cols="12" md="8">
+                  <div class="d-flex align-center mb-4">
+                    <v-icon color="#195030" size="60" class="mr-4">mdi-shield-check</v-icon>
+                    <div>
+                      <h3 class="guarantee-title text-high-emphasis mb-2">Garantía de Satisfacción 100%</h3>
+                      <p class="guarantee-subtitle text-medium-emphasis mb-0">
+                        Si no estás completamente satisfecho con tu compra, te devolvemos tu dinero sin preguntas
+                      </p>
+                    </div>
+                  </div>
+                  <v-divider class="my-4"></v-divider>
+                  <div class="d-flex flex-wrap gap-4">
+                    <v-chip color="#195030" variant="tonal">
+                      <v-icon start>mdi-check-circle</v-icon>
+                      30 días de garantía
+                    </v-chip>
+                    <v-chip color="#FE40B4" variant="tonal">
+                      <v-icon start>mdi-certificate</v-icon>
+                      Productos certificados
+                    </v-chip>
+                    <v-chip color="#195030" variant="tonal">
+                      <v-icon start>mdi-lock</v-icon>
+                      Compra segura
+                    </v-chip>
+                  </div>
+                </v-col>
+                <v-col cols="12" md="4" class="text-center">
+                  <v-btn color="#FE40B4" size="large" class="text-white font-weight-bold px-8" rounded="pill"
+                    elevation="0" @click="scrollToSection('productos')">
+                    Ver Productos
+                    <v-icon end>mdi-arrow-right</v-icon>
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-card-text>
+          </v-card>
+        </v-container>
+      </section>
+
+      <!-- SECCIÓN 3: PRODUCTOS -->
       <section id="productos" class="productos-section py-16 bg-surface">
         <v-container>
           <div class="text-center mb-12">
@@ -215,7 +345,7 @@
         </v-container>
       </section>
 
-      <!-- SECCIÓN 3: CONÓCENOS -->
+      <!-- SECCIÓN 4: CONÓCENOS -->
       <section id="conocenos" class="about-section">
         <!-- Hero About -->
         <div class="about-hero">
@@ -367,6 +497,85 @@ const scrollToSection = (sectionId) => {
 
 // Categoría seleccionada
 const selectedCategory = ref('todos');
+
+// SERVICIOS - Nuevos datos
+const mainServices = ref([
+  {
+    icon: 'mdi-cart-check',
+    color: '#FE40B4',
+    title: 'Sistema POS Inteligente',
+    description: 'Plataforma de punto de venta optimizada para distribuidores. Gestiona inventario, ventas y clientes en tiempo real.',
+    badge: 'Para distribuidores'
+  },
+  {
+    icon: 'mdi-account-group',
+    color: '#195030',
+    title: 'Asesoría Personalizada',
+    description: 'Nuestro equipo de expertos te guía en la selección de productos según tus necesidades específicas de salud.',
+    badge: 'Consulta gratis'
+  },
+  {
+    icon: 'mdi-rocket-launch',
+    color: '#FE40B4',
+    title: 'Programa de Distribuidores',
+    description: 'Únete a nuestra red de distribuidores y accede a precios especiales, capacitación y soporte continuo.',
+    badge: 'Oportunidad de negocio'
+  }
+]);
+
+const whyChooseReasons = ref([
+  {
+    icon: 'mdi-leaf',
+    color: '#195030',
+    title: 'Productos 100% Naturales',
+    text: 'Ingredientes orgánicos certificados sin aditivos artificiales ni conservadores dañinos'
+  },
+  {
+    icon: 'mdi-certificate',
+    color: '#FE40B4',
+    title: 'Certificación Internacional',
+    text: 'Todos nuestros productos cuentan con certificaciones de calidad reconocidas a nivel mundial'
+  },
+  {
+    icon: 'mdi-science',
+    color: '#195030',
+    title: 'Respaldo Científico',
+    text: 'Fórmulas desarrolladas con base en investigaciones y estudios clínicos comprobados'
+  },
+  {
+    icon: 'mdi-heart-pulse',
+    color: '#FE40B4',
+    title: 'Resultados Comprobados',
+    text: 'Miles de clientes satisfechos han transformado su salud con nuestros productos'
+  }
+]);
+
+const additionalBenefits = ref([
+  {
+    icon: 'mdi-truck-fast',
+    color: '#195030',
+    title: 'Envío Express',
+    text: 'Recibe tus productos en 24-48 horas'
+  },
+  {
+    icon: 'mdi-currency-usd',
+    color: '#FE40B4',
+    title: 'Mejor Precio',
+    text: 'Garantizamos los precios más competitivos'
+  },
+  {
+    icon: 'mdi-headphones',
+    color: '#195030',
+    title: 'Soporte 24/7',
+    text: 'Estamos disponibles cuando nos necesites'
+  },
+  {
+    icon: 'mdi-gift',
+    color: '#FE40B4',
+    title: 'Programa de Lealtad',
+    text: 'Acumula puntos y obtén descuentos'
+  }
+]);
 
 // Productos
 const products = ref([
@@ -817,7 +1026,7 @@ const team = ref([
 }
 
 .card-value {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 900;
   line-height: 1;
 }
@@ -847,6 +1056,223 @@ const team = ref([
   50% {
     transform: translateY(10px);
   }
+}
+
+/* === SERVICIOS SECTION === */
+.servicios-section {
+  background: rgb(var(--v-theme-background));
+  position: relative;
+  overflow: hidden;
+}
+
+.servicios-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 400px;
+  background: linear-gradient(135deg, rgba(25, 80, 48, 0.05) 0%, transparent 100%);
+  z-index: 0;
+}
+
+.theme--dark .servicios-section::before {
+  background: linear-gradient(135deg, rgba(25, 80, 48, 0.1) 0%, transparent 100%);
+}
+
+.service-card {
+  border: 2px solid rgba(var(--v-border-color), var(--v-border-opacity));
+  border-radius: 24px;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(254, 64, 180, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.service-card:hover::before {
+  left: 100%;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  border-color: #FE40B4;
+  box-shadow: 0 15px 40px rgba(254, 64, 180, 0.2);
+}
+
+.theme--dark .service-card:hover {
+  box-shadow: 0 15px 40px rgba(254, 64, 180, 0.3);
+}
+
+.service-icon-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.service-icon {
+  transition: transform 0.4s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.service-card:hover .service-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.icon-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  z-index: 1;
+  transition: transform 0.4s ease;
+}
+
+.service-card:hover .icon-bg {
+  transform: translate(-50%, -50%) scale(1.3);
+}
+
+.service-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.service-description {
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+/* Por Qué Elegirnos */
+.why-choose-section {
+  position: relative;
+}
+
+.why-image-container {
+  position: relative;
+}
+
+.why-image {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  transition: transform 0.4s ease;
+}
+
+.theme--dark .why-image {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.why-image-container:hover .why-image {
+  transform: scale(1.02);
+}
+
+.why-image-decoration {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(135deg, rgba(254, 64, 180, 0.2), rgba(25, 80, 48, 0.2));
+  border-radius: 50%;
+  z-index: -1;
+  filter: blur(40px);
+}
+
+.why-list {
+  background: transparent !important;
+}
+
+.why-item {
+  transition: transform 0.3s ease;
+  padding: 12px 0;
+}
+
+.why-item:hover {
+  transform: translateX(10px);
+}
+
+.why-item-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.why-item-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Beneficios Adicionales */
+.benefits-grid {
+  margin-top: 48px;
+}
+
+.benefit-card {
+  padding: 24px;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.benefit-card:hover {
+  background: rgba(var(--v-theme-surface), 1);
+  transform: translateY(-5px);
+}
+
+.benefit-icon-wrapper {
+  transition: transform 0.3s ease;
+}
+
+.benefit-card:hover .benefit-icon-wrapper {
+  transform: scale(1.1);
+}
+
+.benefit-title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.benefit-text {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Garantía Card */
+.guarantee-card {
+  border: 3px solid #195030;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(25, 80, 48, 0.05) 0%, transparent 100%);
+  transition: all 0.4s ease;
+}
+
+.theme--dark .guarantee-card {
+  background: linear-gradient(135deg, rgba(25, 80, 48, 0.1) 0%, transparent 100%);
+}
+
+.guarantee-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(25, 80, 48, 0.2);
+}
+
+.guarantee-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.guarantee-subtitle {
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 /* === PRODUCTOS SECTION === */
@@ -934,17 +1360,6 @@ const team = ref([
 .product-old-price {
   font-size: 0.875rem;
   text-decoration: line-through;
-}
-
-.benefit-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-.benefit-text {
-  font-size: 0.9rem;
-  line-height: 1.5;
 }
 
 /* === ABOUT SECTION === */
@@ -1304,6 +1719,18 @@ const team = ref([
     bottom: 20px;
     right: 20px;
   }
+
+  .why-image-decoration {
+    display: none;
+  }
+
+  .service-card {
+    margin-bottom: 16px;
+  }
+
+  .guarantee-card {
+    text-align: center;
+  }
 }
 
 @media (max-width: 600px) {
@@ -1314,6 +1741,14 @@ const team = ref([
 
   .feature-chip {
     justify-content: center;
+  }
+
+  .service-title {
+    font-size: 1.2rem;
+  }
+
+  .benefit-card {
+    padding: 16px;
   }
 }
 </style>

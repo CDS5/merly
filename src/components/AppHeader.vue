@@ -19,6 +19,10 @@
             Inicio
             <div class="nav-underline"></div>
           </v-btn>
+          <v-btn text class="nav-btn" rounded="xl" @click="scrollToSection('servicios')">
+            Servicios
+            <div class="nav-underline"></div>
+          </v-btn>
           <v-btn text class="nav-btn" rounded="xl" @click="scrollToSection('productos')">
             Productos
             <div class="nav-underline"></div>
@@ -29,8 +33,21 @@
           </v-btn>
         </div>
 
-        <!-- Action Buttons -->
+        <!-- Action Buttons + Theme Toggle -->
         <div class="hidden-sm-and-down d-flex align-center gap-2">
+          <!-- Theme Toggle Button -->
+          <v-btn
+            icon
+            variant="text"
+            class="theme-toggle-btn"
+            @click="toggleTheme"
+            rounded="xl"
+          >
+            <v-icon v-if="selectedTheme === 'light'">mdi-weather-sunny</v-icon>
+            <v-icon v-else-if="selectedTheme === 'dark'">mdi-weather-night</v-icon>
+            <v-icon v-else>mdi-theme-light-dark</v-icon>
+          </v-btn>
+
           <v-btn variant="outlined" color="#195030" rounded="xl" class="font-weight-bold action-btn-outlined me-2"
             to="/register">
             <v-icon start>mdi-store</v-icon>
@@ -54,6 +71,9 @@
         <v-list-item @click="scrollToSection('inicio')" prepend-icon="mdi-home">
           <v-list-item-title>Inicio</v-list-item-title>
         </v-list-item>
+        <v-list-item @click="scrollToSection('servicios')" prepend-icon="mdi-star">
+          <v-list-item-title>Servicios</v-list-item-title>
+        </v-list-item>
         <v-list-item @click="scrollToSection('productos')" prepend-icon="mdi-shopping">
           <v-list-item-title>Productos</v-list-item-title>
         </v-list-item>
@@ -61,6 +81,32 @@
           <v-list-item-title>Conócenos</v-list-item-title>
         </v-list-item>
         <v-divider class="my-2"></v-divider>
+        
+        <!-- Theme Selector in Mobile -->
+        <v-list-item>
+          <v-list-item-title class="text-caption mb-2">Tema</v-list-item-title>
+          <v-btn-toggle
+            v-model="selectedTheme"
+            mandatory
+            color="primary"
+            density="compact"
+            class="mb-3"
+            divided
+          >
+            <v-btn value="light" size="small">
+              <v-icon>mdi-weather-sunny</v-icon>
+            </v-btn>
+            <v-btn value="dark" size="small">
+              <v-icon>mdi-weather-night</v-icon>
+            </v-btn>
+            <v-btn value="system" size="small">
+              <v-icon>mdi-theme-light-dark</v-icon>
+            </v-btn>
+          </v-btn-toggle>
+        </v-list-item>
+
+        <v-divider class="my-2"></v-divider>
+
         <v-list-item>
           <v-btn variant="outlined" color="#195030" block class="mb-2" to="/register">
             <v-icon start>mdi-store</v-icon>
@@ -77,13 +123,16 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { useTheme } from 'vuetify'
 
 const router = useRouter()
 const route = useRoute()
+const theme = useTheme()
 const drawer = ref(false)
 const scrolled = ref(false)
+const selectedTheme = ref('light')
 
 const handleScroll = () => {
   scrolled.value = window.scrollY > 50
@@ -131,8 +180,57 @@ const scrollToSection = (sectionId) => {
   }
 }
 
+// Función para aplicar el tema
+const applyTheme = (themeName) => {
+  if (themeName === 'system') {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    theme.global.name.value = prefersDark ? 'dark' : 'light'
+  } else {
+    theme.global.name.value = themeName
+  }
+  // Guardar preferencia en localStorage
+  localStorage.setItem('merly-theme', themeName)
+}
+
+// Función para alternar entre temas (ciclo: light -> dark -> system)
+const toggleTheme = () => {
+  if (selectedTheme.value === 'light') {
+    selectedTheme.value = 'dark'
+  } else if (selectedTheme.value === 'dark') {
+    selectedTheme.value = 'system'
+  } else {
+    selectedTheme.value = 'light'
+  }
+}
+
+// Watch para cambios en el tema seleccionado
+watch(selectedTheme, (newTheme) => {
+  applyTheme(newTheme)
+})
+
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
+  
+  // Cargar tema guardado o usar el del sistema
+  const savedTheme = localStorage.getItem('merly-theme')
+  if (savedTheme) {
+    selectedTheme.value = savedTheme
+  } else {
+    // Detectar preferencia del sistema
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    selectedTheme.value = prefersDark ? 'dark' : 'light'
+  }
+  
+  applyTheme(selectedTheme.value)
+
+  // Escuchar cambios en las preferencias del sistema
+  const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+  const handleSystemThemeChange = (e) => {
+    if (selectedTheme.value === 'system') {
+      theme.global.name.value = e.matches ? 'dark' : 'light'
+    }
+  }
+  mediaQuery.addEventListener('change', handleSystemThemeChange)
 })
 
 onUnmounted(() => {
@@ -194,6 +292,43 @@ onUnmounted(() => {
 
 .nav-btn:hover .nav-underline {
   transform: translateX(-50%) scaleX(1);
+}
+
+/* === THEME TOGGLE BUTTON === */
+.theme-toggle-btn {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(254, 64, 180, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s, height 0.4s;
+}
+
+.theme-toggle-btn:hover::before {
+  width: 100px;
+  height: 100px;
+}
+
+.theme-toggle-btn:hover {
+  transform: rotate(20deg);
+}
+
+.theme-toggle-btn :deep(.v-icon) {
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle-btn:hover :deep(.v-icon) {
+  transform: scale(1.2);
 }
 
 /* === ACTION BUTTONS === */
