@@ -1,9 +1,13 @@
 <template>
-  <v-footer class="footer-compact" height="auto" app>
-    <v-container fluid class="py-0">
+  <v-footer 
+    class="footer-compact" 
+    height="auto" 
+    :app="isAppLayout"
+  >
+    <v-container fluid class="py-3 py-sm-4">
       <v-row align="center" justify="space-between" no-gutters>
         <!-- Left: Logo y copyright -->
-        <v-col cols="12" sm="auto" class="text-center text-sm-left mb-2 mb-sm-0">
+        <v-col cols="12" sm="auto" class="text-center text-sm-left mb-3 mb-sm-0">
           <div class="d-flex align-center justify-center justify-sm-start">
             <div class="footer-logo-small">
               <v-icon size="20" color="#FE40B4">mdi-cart-heart</v-icon>
@@ -16,7 +20,7 @@
         </v-col>
 
         <!-- Center: Made with love -->
-        <v-col cols="12" sm="auto" class="text-center mb-2 mb-sm-0">
+        <v-col cols="12" sm="auto" class="text-center mb-3 mb-sm-0">
           <div class="footer-credits text-medium-emphasis">
             Hecho con 
             <v-icon color="#FE40B4" size="14" class="heart-beat mx-1">mdi-heart</v-icon> 
@@ -56,8 +60,16 @@
 
 <script setup>
 import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 const currentYear = computed(() => new Date().getFullYear())
+
+// El footer solo será "app" (fijo) en las páginas del dashboard
+const isAppLayout = computed(() => {
+  const noAppRoutes = ['/', '/landing', '/login', '/register', '/about']
+  return !noAppRoutes.includes(route.path)
+})
 
 const socialItems = [
   {
@@ -139,6 +151,8 @@ const socialItems = [
   display: inline-flex;
   align-items: center;
   gap: 2px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .heart-beat {
@@ -179,6 +193,7 @@ const socialItems = [
   display: inline-flex;
   gap: 8px;
   align-items: center;
+  justify-content: center;
 }
 
 .social-link-compact {
@@ -222,6 +237,18 @@ const socialItems = [
   .social-avatar-compact {
     width: 28px !important;
     height: 28px !important;
+  }
+  
+  /* Más padding en móvil para que no se pegue al borde */
+  .footer-compact {
+    padding-bottom: env(safe-area-inset-bottom, 0) !important;
+  }
+}
+
+/* === ESPACIADO PARA MÓVIL === */
+@media (max-width: 600px) {
+  .v-row {
+    row-gap: 8px;
   }
 }
 </style>

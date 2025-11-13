@@ -12,9 +12,9 @@
           <div class="shape shape-4"></div>
         </div>
 
-        <v-container class="py-12 py-md-16">
+        <v-container class="py-8 py-md-12 py-lg-16">
           <v-row align="center" justify="center">
-            <v-col cols="12" md="6" class="text-left px-6 px-md-12">
+            <v-col cols="12" md="6" class="text-center text-md-left px-4 px-sm-6 px-md-12">
               <div class="fade-up">
                 <v-chip color="#FE40B4" class="mb-4 chip-pulse" size="small">
                   <img height="20" src="@/assets/isotipo.svg" alt="logo" class="mr-2">
@@ -27,34 +27,41 @@
                   <div class="title-decoration"></div>
                 </h1>
 
-                <p class="hero-subtitle mb-8 fade-up delay-2 text-medium-emphasis">
+                <p class="hero-subtitle mb-6 mb-md-8 fade-up delay-2 text-medium-emphasis">
                   Descubre nuestra línea completa de productos naturales y suplementos alimenticios.
                   Sistema de punto de venta rápido y confiable para distribuidores y consumidores finales.
                 </p>
 
-                <div class="features-pills mb-8 fade-up delay-3">
-                  <v-chip class="feature-chip" color="#195030" variant="tonal">
-                    <v-icon start>mdi-leaf</v-icon>
+                <div class="features-pills mb-6 mb-md-8 fade-up delay-3">
+                  <v-chip class="feature-chip" color="#195030" variant="tonal" size="small">
+                    <v-icon start size="small">mdi-leaf</v-icon>
                     Natural
                   </v-chip>
-                  <v-chip class="feature-chip" color="#FE40B4" variant="tonal">
-                    <v-icon start>mdi-certificate</v-icon>
+                  <v-chip class="feature-chip" color="#FE40B4" variant="tonal" size="small">
+                    <v-icon start size="small">mdi-certificate</v-icon>
                     Certificado
                   </v-chip>
-                  <v-chip class="feature-chip" color="#195030" variant="tonal">
-                    <v-icon start>mdi-truck-fast</v-icon>
+                  <v-chip class="feature-chip" color="#195030" variant="tonal" size="small">
+                    <v-icon start size="small">mdi-truck-fast</v-icon>
                     Envío Rápido
                   </v-chip>
                 </div>
 
-                <v-btn color="#FE40B4" size="x-large"
-                  class="text-white font-weight-bold px-10 cta-button fade-up delay-4" rounded="pill" elevation="0"
-                  @click="scrollToSection('servicios')">
+                <v-btn 
+                  color="#FE40B4" 
+                  :size="isMobile ? 'large' : 'x-large'"
+                  class="text-white font-weight-bold cta-button fade-up delay-4" 
+                  rounded="pill" 
+                  elevation="0"
+                  @click="scrollToSection('servicios')"
+                  block
+                  :class="{ 'px-8': isMobile, 'px-10': !isMobile }"
+                >
                   Descubre Más
                   <v-icon end>mdi-arrow-right</v-icon>
                 </v-btn>
 
-                <v-row class="mt-10 fade-up delay-5">
+                <v-row class="mt-6 mt-md-10 fade-up delay-5">
                   <v-col cols="4" class="text-center stat-item">
                     <div class="stat-number text-high-emphasis">150+</div>
                     <div class="stat-label text-medium-emphasis">Productos</div>
@@ -71,11 +78,16 @@
               </div>
             </v-col>
 
-            <v-col cols="12" lg="6" class="d-flex justify-center mt-8 mt-lg-0">
+            <v-col cols="12" lg="6" class="d-none d-lg-flex justify-center">
               <div class="image-container fade-up delay-1">
                 <div class="image-wrapper">
-                  <v-img src="@/assets/mujerCorriendo.png" alt="Productos Ismerely" max-width="580"
-                    class="rounded-xl hero-image" cover></v-img>
+                  <v-img 
+                    src="@/assets/mujerCorriendo.png" 
+                    alt="Productos Ismerely" 
+                    max-width="580"
+                    class="rounded-xl hero-image" 
+                    cover
+                  ></v-img>
 
                   <v-card class="floating-card card-1" elevation="8" rounded="xl">
                     <v-card-text class="pa-3">
@@ -125,33 +137,33 @@
           </v-row>
         </v-container>
 
-        <div class="scroll-indicator" @click="scrollToSection('servicios')">
+        <div class="scroll-indicator d-none d-md-block" @click="scrollToSection('servicios')">
           <v-icon color="#FE40B4" class="bounce">mdi-chevron-down</v-icon>
         </div>
       </section>
 
-      <!-- SECCIÓN 2: SERVICIOS (NUEVA) -->
-      <section id="servicios" class="servicios-section py-16">
+      <!-- SECCIÓN 2: SERVICIOS -->
+      <section id="servicios" class="servicios-section py-12 py-md-16">
         <v-container>
-          <div class="text-center mb-12">
+          <div class="text-center mb-8 mb-md-12">
             <v-chip color="#195030" class="mb-4" size="small" variant="tonal">
               <v-icon start>mdi-star</v-icon>
               ¿POR QUÉ ELEGIRNOS?
             </v-chip>
             <h2 class="section-title mb-4 text-high-emphasis">Servicios que nos Hacen Únicos</h2>
-            <p class="section-subtitle text-medium-emphasis">
+            <p class="section-subtitle text-medium-emphasis px-4">
               Ofrecemos mucho más que productos. Descubre la experiencia Merly completa
             </p>
           </div>
 
           <!-- Servicios Principales -->
-          <v-row class="mb-12">
-            <v-col cols="12" md="4" v-for="(service, i) in mainServices" :key="i">
+          <v-row class="mb-8 mb-md-12">
+            <v-col cols="12" md="4" v-for="(service, i) in mainServices" :key="i" class="mb-4 mb-md-0">
               <v-card class="service-card" elevation="0" height="100%">
-                <v-card-text class="pa-8">
+                <v-card-text class="pa-6 pa-md-8">
                   <div class="service-icon-wrapper mb-4">
-                    <v-avatar :color="service.color" size="80" class="service-icon">
-                      <v-icon color="white" size="40">{{ service.icon }}</v-icon>
+                    <v-avatar :color="service.color" :size="isMobile ? 64 : 80" class="service-icon">
+                      <v-icon color="white" :size="isMobile ? 32 : 40">{{ service.icon }}</v-icon>
                     </v-avatar>
                     <div class="icon-bg" :style="`background: ${service.color}15`"></div>
                   </div>
@@ -167,21 +179,26 @@
           </v-row>
 
           <!-- Por Qué Elegirnos -->
-          <div class="why-choose-section mb-12">
+          <div class="why-choose-section mb-8 mb-md-12">
             <v-row align="center">
-              <v-col cols="12" md="6">
+              <v-col cols="12" md="6" class="mb-6 mb-md-0">
                 <div class="why-image-container">
-                  <v-img src="@/assets/mujerCorriendo.png" class="rounded-xl why-image" cover height="400">
+                  <v-img 
+                    src="@/assets/mujerCorriendo.png" 
+                    class="rounded-xl why-image" 
+                    cover 
+                    :height="isMobile ? 300 : 400"
+                  >
                     <template v-slot:placeholder>
                       <div class="d-flex align-center justify-center fill-height">
                         <v-icon size="64" color="#FE40B4">mdi-image</v-icon>
                       </div>
                     </template>
                   </v-img>
-                  <div class="why-image-decoration"></div>
+                  <div class="why-image-decoration d-none d-md-block"></div>
                 </div>
               </v-col>
-              <v-col cols="12" md="6" class="ps-md-8">
+              <v-col cols="12" md="6" class="px-4 ps-md-8">
                 <v-chip color="#FE40B4" class="mb-4" size="small" variant="tonal">
                   <v-icon start>mdi-heart</v-icon>
                   NUESTRA PROMESA
@@ -190,8 +207,8 @@
                 <v-list class="why-list bg-transparent">
                   <v-list-item v-for="(reason, i) in whyChooseReasons" :key="i" class="why-item px-0 mb-3">
                     <template v-slot:prepend>
-                      <v-avatar :color="reason.color" size="50" class="mr-4">
-                        <v-icon color="white" size="24">{{ reason.icon }}</v-icon>
+                      <v-avatar :color="reason.color" :size="isMobile ? 40 : 50" class="mr-3 mr-md-4">
+                        <v-icon color="white" :size="isMobile ? 20 : 24">{{ reason.icon }}</v-icon>
                       </v-avatar>
                     </template>
                     <v-list-item-title class="why-item-title text-high-emphasis mb-1">{{ reason.title }}</v-list-item-title>
@@ -205,10 +222,10 @@
           <!-- Beneficios Adicionales -->
           <div class="benefits-grid">
             <v-row>
-              <v-col cols="12" sm="6" md="3" v-for="(benefit, i) in additionalBenefits" :key="i">
-                <div class="benefit-card text-center">
+              <v-col cols="6" md="3" v-for="(benefit, i) in additionalBenefits" :key="i" class="mb-4 mb-md-0">
+                <div class="benefit-card text-center pa-4">
                   <div class="benefit-icon-wrapper mb-3">
-                    <v-icon :color="benefit.color" size="48">{{ benefit.icon }}</v-icon>
+                    <v-icon :color="benefit.color" :size="isMobile ? 36 : 48">{{ benefit.icon }}</v-icon>
                   </div>
                   <h4 class="benefit-title mb-2 text-high-emphasis">{{ benefit.title }}</h4>
                   <p class="benefit-text text-medium-emphasis">{{ benefit.text }}</p>
@@ -217,13 +234,13 @@
             </v-row>
           </div>
 
-          <!-- Garantía y Confianza -->
-          <v-card class="guarantee-card mt-12" elevation="0">
-            <v-card-text class="pa-8 pa-md-12">
+          <!-- Garantía -->
+          <v-card class="guarantee-card mt-8 mt-md-12" elevation="0">
+            <v-card-text class="pa-6 pa-md-12">
               <v-row align="center">
-                <v-col cols="12" md="8">
-                  <div class="d-flex align-center mb-4">
-                    <v-icon color="#195030" size="60" class="mr-4">mdi-shield-check</v-icon>
+                <v-col cols="12" md="8" class="mb-4 mb-md-0">
+                  <div class="d-flex align-center mb-4 flex-column flex-sm-row text-center text-sm-left">
+                    <v-icon color="#195030" :size="isMobile ? 48 : 60" class="mb-3 mb-sm-0 mr-sm-4">mdi-shield-check</v-icon>
                     <div>
                       <h3 class="guarantee-title text-high-emphasis mb-2">Garantía de Satisfacción 100%</h3>
                       <p class="guarantee-subtitle text-medium-emphasis mb-0">
@@ -232,24 +249,32 @@
                     </div>
                   </div>
                   <v-divider class="my-4"></v-divider>
-                  <div class="d-flex flex-wrap gap-4">
-                    <v-chip color="#195030" variant="tonal">
-                      <v-icon start>mdi-check-circle</v-icon>
+                  <div class="d-flex flex-wrap gap-2 gap-sm-4 justify-center justify-md-start">
+                    <v-chip color="#195030" variant="tonal" size="small">
+                      <v-icon start size="small">mdi-check-circle</v-icon>
                       30 días de garantía
                     </v-chip>
-                    <v-chip color="#FE40B4" variant="tonal">
-                      <v-icon start>mdi-certificate</v-icon>
+                    <v-chip color="#FE40B4" variant="tonal" size="small">
+                      <v-icon start size="small">mdi-certificate</v-icon>
                       Productos certificados
                     </v-chip>
-                    <v-chip color="#195030" variant="tonal">
-                      <v-icon start>mdi-lock</v-icon>
+                    <v-chip color="#195030" variant="tonal" size="small">
+                      <v-icon start size="small">mdi-lock</v-icon>
                       Compra segura
                     </v-chip>
                   </div>
                 </v-col>
                 <v-col cols="12" md="4" class="text-center">
-                  <v-btn color="#FE40B4" size="large" class="text-white font-weight-bold px-8" rounded="pill"
-                    elevation="0" @click="scrollToSection('productos')">
+                  <v-btn 
+                    color="#FE40B4" 
+                    :size="isMobile ? 'default' : 'large'"
+                    class="text-white font-weight-bold cta-button" 
+                    rounded="pill"
+                    elevation="0" 
+                    @click="scrollToSection('productos')"
+                    block
+                    :class="{ 'px-6': isMobile, 'px-8': !isMobile }"
+                  >
                     Ver Productos
                     <v-icon end>mdi-arrow-right</v-icon>
                   </v-btn>
@@ -261,36 +286,37 @@
       </section>
 
       <!-- SECCIÓN 3: PRODUCTOS -->
-      <section id="productos" class="productos-section py-16 bg-surface">
+      <section id="productos" class="productos-section py-12 py-md-16 bg-surface">
         <v-container>
-          <div class="text-center mb-12">
+          <div class="text-center mb-8 mb-md-12">
             <v-chip color="#FE40B4" class="mb-4" size="small">
               <img height="20" src="@/assets/isotipo.svg" alt="logo" class="mr-2">
-                NUESTROS PRODUCTOS
+              NUESTROS PRODUCTOS
             </v-chip>
             <h2 class="section-title mb-4 text-high-emphasis">Productos Premium para tu Salud</h2>
-            <p class="section-subtitle text-medium-emphasis">Explora nuestra selección de productos naturales diseñados para tu bienestar</p>
+            <p class="section-subtitle text-medium-emphasis px-4">Explora nuestra selección de productos naturales diseñados para tu bienestar</p>
           </div>
 
-          <!-- Categorías de Productos -->
-          <v-row class="mb-8">
+          <!-- Categorías -->
+          <v-row class="mb-6 mb-md-8">
             <v-col cols="12" class="text-center">
-              <v-chip-group v-model="selectedCategory" mandatory color="#FE40B4">
-                <v-chip value="todos" variant="outlined" class="category-chip">
-                  <v-icon start>mdi-view-grid</v-icon>
+              <v-chip-group v-model="selectedCategory" mandatory color="#FE40B4" class="justify-center">
+                <v-chip value="todos" variant="outlined" class="category-chip" size="small">
+                  <v-icon start size="small">mdi-view-grid</v-icon>
                   Todos
                 </v-chip>
-                <v-chip value="suplementos" variant="outlined" class="category-chip">
-                  <v-icon start>mdi-pill</v-icon>
+                <v-chip value="suplementos" variant="outlined" class="category-chip" size="small">
+                  <v-icon start size="small">mdi-pill</v-icon>
                   Suplementos
                 </v-chip>
-                <v-chip value="bebidas" variant="outlined" class="category-chip">
-                  <v-icon start>mdi-cup</v-icon>
+                <v-chip value="bebidas" variant="outlined" class="category-chip" size="small">
+                  <v-icon start size="small">mdi-cup</v-icon>
                   Bebidas
                 </v-chip>
-                <v-chip value="cuidado" variant="outlined" class="category-chip">
-                  <v-icon start>mdi-heart-pulse</v-icon>
-                  Cuidado Personal
+                <v-chip value="cuidado" variant="outlined" class="category-chip" size="small">
+                  <v-icon start size="small">mdi-heart-pulse</v-icon>
+                  <span class="d-none d-sm-inline">Cuidado Personal</span>
+                  <span class="d-inline d-sm-none">Cuidado</span>
                 </v-chip>
               </v-chip-group>
             </v-col>
@@ -298,33 +324,33 @@
 
           <!-- Grid de Productos -->
           <v-row>
-            <v-col cols="12" sm="6" md="4" lg="3" v-for="(product, i) in filteredProducts" :key="i">
+            <v-col cols="6" sm="6" md="4" lg="3" v-for="(product, i) in filteredProducts" :key="i">
               <v-card class="product-card" elevation="0" height="100%">
                 <div class="product-image-container">
-                  <v-img :src="product.image" height="220" cover class="product-image">
+                  <v-img :src="product.image" :height="isMobile ? 160 : 220" cover class="product-image">
                     <template v-slot:placeholder>
                       <div class="d-flex align-center justify-center fill-height">
-                        <v-icon size="64" color="#FE40B4">mdi-package-variant</v-icon>
+                        <v-icon size="48" color="#FE40B4">mdi-package-variant</v-icon>
                       </div>
                     </template>
                   </v-img>
-                  <v-chip v-if="product.badge" class="product-badge" :color="product.badgeColor" size="small">
+                  <v-chip v-if="product.badge" class="product-badge" :color="product.badgeColor" size="x-small">
                     {{ product.badge }}
                   </v-chip>
                 </div>
-                <v-card-text class="pa-4">
+                <v-card-text class="pa-3 pa-sm-4">
                   <v-chip size="x-small" :color="product.categoryColor" variant="tonal" class="mb-2">
                     {{ product.categoryLabel }}
                   </v-chip>
                   <h4 class="product-title mb-2 text-high-emphasis">{{ product.name }}</h4>
-                  <p class="product-description mb-3 text-medium-emphasis">{{ product.description }}</p>
+                  <p class="product-description mb-3 text-medium-emphasis d-none d-sm-block">{{ product.description }}</p>
                   <div class="d-flex align-center justify-space-between">
                     <div>
                       <div class="product-price">${{ product.price }}</div>
                       <div v-if="product.oldPrice" class="product-old-price text-disabled">${{ product.oldPrice }}</div>
                     </div>
                     <v-btn icon size="small" color="#FE40B4" variant="tonal">
-                      <v-icon>mdi-cart-plus</v-icon>
+                      <v-icon size="small">mdi-cart-plus</v-icon>
                     </v-btn>
                   </div>
                 </v-card-text>
@@ -332,11 +358,11 @@
             </v-col>
           </v-row>
 
-          <!-- Características de Productos -->
-          <v-row class="mt-12">
-            <v-col cols="12" md="3" v-for="(benefit, i) in productBenefits" :key="i" class="text-center">
-              <v-avatar :color="benefit.color" size="80" class="mb-4">
-                <v-icon color="white" size="40">{{ benefit.icon }}</v-icon>
+          <!-- Beneficios de Productos -->
+          <v-row class="mt-8 mt-md-12">
+            <v-col cols="6" md="3" v-for="(benefit, i) in productBenefits" :key="i" class="text-center mb-4 mb-md-0">
+              <v-avatar :color="benefit.color" :size="isMobile ? 64 : 80" class="mb-3 mb-md-4">
+                <v-icon color="white" :size="isMobile ? 32 : 40">{{ benefit.icon }}</v-icon>
               </v-avatar>
               <h4 class="benefit-title mb-2 text-high-emphasis">{{ benefit.title }}</h4>
               <p class="benefit-text text-medium-emphasis">{{ benefit.text }}</p>
@@ -349,9 +375,9 @@
       <section id="conocenos" class="about-section">
         <!-- Hero About -->
         <div class="about-hero">
-          <v-container class="py-4">
+          <v-container class="py-12 py-md-16">
             <v-row justify="center">
-              <v-col cols="12" md="10" lg="8" class="text-center">
+              <v-col cols="12" md="10" lg="8" class="text-center px-4">
                 <v-chip color="#FE40B4" class="mb-4 chip-pulse" size="small">
                   <img height="20" src="@/assets/isotipo.svg" alt="logo" class="mr-2">
                   NUESTRA HISTORIA
@@ -376,15 +402,15 @@
         </div>
 
         <!-- Misión, Visión, Valores -->
-        <div class="values-section py-16 bg-surface">
+        <div class="values-section py-12 py-md-16 bg-surface">
           <v-container>
             <v-row>
-              <v-col cols="12" md="4" v-for="(item, i) in values" :key="i">
+              <v-col cols="12" md="4" v-for="(item, i) in values" :key="i" class="mb-4 mb-md-0">
                 <v-card class="value-card" elevation="0" height="100%">
-                  <v-card-text class="pa-8 text-center">
+                  <v-card-text class="pa-6 pa-md-8 text-center">
                     <div class="value-icon-wrapper mb-4">
-                      <v-avatar :color="item.color" size="80" class="value-icon">
-                        <v-icon color="white" size="40">{{ item.icon }}</v-icon>
+                      <v-avatar :color="item.color" :size="isMobile ? 64 : 80" class="value-icon">
+                        <v-icon color="white" :size="isMobile ? 32 : 40">{{ item.icon }}</v-icon>
                       </v-avatar>
                     </div>
                     <h3 class="value-title mb-3 text-high-emphasis">{{ item.title }}</h3>
@@ -397,17 +423,17 @@
         </div>
 
         <!-- Estadísticas -->
-        <div class="stats-section py-16">
+        <div class="stats-section py-12 py-md-16">
           <v-container>
-            <div class="text-center mb-12">
+            <div class="text-center mb-8 mb-md-12 px-4">
               <h2 class="section-title mb-4 text-high-emphasis">Nuestro Impacto</h2>
               <p class="section-subtitle-dark text-medium-emphasis">Resultados que hablan por sí mismos</p>
             </div>
             <v-row>
-              <v-col cols="6" md="3" v-for="(stat, i) in stats" :key="i" class="text-center">
+              <v-col cols="6" md="3" v-for="(stat, i) in stats" :key="i" class="text-center mb-4 mb-md-0">
                 <div class="stat-card">
                   <div class="stat-icon-bg" :style="`background: ${stat.color}15`">
-                    <v-icon :color="stat.color" size="32">{{ stat.icon }}</v-icon>
+                    <v-icon :color="stat.color" :size="isMobile ? 24 : 32">{{ stat.icon }}</v-icon>
                   </div>
                   <div class="stat-number-big text-high-emphasis">{{ stat.number }}</div>
                   <div class="stat-label-big text-medium-emphasis">{{ stat.label }}</div>
@@ -418,29 +444,29 @@
         </div>
 
         <!-- Equipo -->
-        <div class="values-section py-16">
+        <div class="values-section py-12 py-md-16">
           <v-container>
-            <div class="text-center mb-12">
+            <div class="text-center mb-8 mb-md-12 px-4">
               <h2 class="section-title-dark mb-4 text-high-emphasis">Nuestro Equipo</h2>
               <p class="section-subtitle-dark text-medium-emphasis">Expertos comprometidos con tu bienestar</p>
             </div>
             <v-row>
-              <v-col cols="12" sm="6" md="3" v-for="(member, i) in team" :key="i">
+              <v-col cols="6" sm="6" md="3" v-for="(member, i) in team" :key="i" class="mb-4 mb-md-0">
                 <v-card class="team-card" elevation="0">
                   <div class="team-image-wrapper">
-                    <v-avatar size="200" class="team-avatar">
-                      <v-icon size="100" color="#195030">mdi-account-circle</v-icon>
+                    <v-avatar :size="isMobile ? 120 : 200" class="team-avatar">
+                      <v-icon :size="isMobile ? 60 : 100" color="#195030">mdi-account-circle</v-icon>
                     </v-avatar>
                     <div class="team-overlay">
                       <v-btn icon size="small" color="white" class="ma-1">
-                        <v-icon color="#195030">mdi-linkedin</v-icon>
+                        <v-icon color="#195030" size="small">mdi-linkedin</v-icon>
                       </v-btn>
                       <v-btn icon size="small" color="white" class="ma-1">
-                        <v-icon color="#FE40B4">mdi-instagram</v-icon>
+                        <v-icon color="#FE40B4" size="small">mdi-instagram</v-icon>
                       </v-btn>
                     </div>
                   </div>
-                  <v-card-text class="text-center pa-4">
+                  <v-card-text class="text-center pa-3 pa-md-4">
                     <h4 class="team-name text-high-emphasis">{{ member.name }}</h4>
                     <p class="team-role">{{ member.role }}</p>
                   </v-card-text>
@@ -451,17 +477,25 @@
         </div>
 
         <!-- CTA Final -->
-        <div class="cta-section py-16">
+        <div class="cta-section py-12 py-md-16">
           <v-container>
             <v-card class="cta-card" elevation="0">
-              <v-card-text class="pa-12 text-center">
-                <v-icon color="#FE40B4" size="60" class="mb-4">mdi-handshake</v-icon>
+              <v-card-text class="pa-6 pa-md-12 text-center">
+                <v-icon color="#FE40B4" :size="isMobile ? 48 : 60" class="mb-4">mdi-handshake</v-icon>
                 <h2 class="cta-title mb-4 text-high-emphasis">¿Listo para comenzar tu transformación?</h2>
-                <p class="cta-text mb-8 text-medium-emphasis">
+                <p class="cta-text mb-6 mb-md-8 text-medium-emphasis px-4">
                   Únete a nuestra comunidad y descubre cómo nuestros productos pueden cambiar tu vida
                 </p>
-                <v-btn color="#FE40B4" size="x-large" class="text-white font-weight-bold px-12 cta-button"
-                  rounded="pill" elevation="0" @click="scrollToSection('productos')">
+                <v-btn 
+                  color="#FE40B4" 
+                  :size="isMobile ? 'large' : 'x-large'"
+                  class="text-white font-weight-bold cta-button"
+                  rounded="pill" 
+                  elevation="0" 
+                  @click="scrollToSection('productos')"
+                  :block="isMobile"
+                  :class="{ 'px-8': isMobile, 'px-12': !isMobile }"
+                >
                   Explorar Productos
                   <v-icon end>mdi-arrow-right</v-icon>
                 </v-btn>
@@ -473,8 +507,14 @@
     </v-main>
 
     <!-- WhatsApp FAB -->
-    <v-btn icon size="x-large" color="#25D366" class="whatsapp-fab" elevation="8">
-      <v-icon size="32">mdi-whatsapp</v-icon>
+    <v-btn 
+      icon 
+      :size="isMobile ? 'large' : 'x-large'"
+      color="#25D366" 
+      class="whatsapp-fab" 
+      elevation="8"
+    >
+      <v-icon :size="isMobile ? 24 : 32">mdi-whatsapp</v-icon>
       <div class="whatsapp-pulse"></div>
     </v-btn>
 
@@ -486,19 +526,23 @@
 import AppHeader from './AppHeader.vue';
 import AppFooter from './AppFooter.vue';
 import { ref, computed } from 'vue';
+import { useDisplay } from 'vuetify';
 
-// Función para scroll suave
+const { smAndDown } = useDisplay();
+const isMobile = smAndDown;
+
 const scrollToSection = (sectionId) => {
   const element = document.getElementById(sectionId);
   if (element) {
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const headerOffset = isMobile.value ? 64 : 72;
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
   }
 };
 
-// Categoría seleccionada
 const selectedCategory = ref('todos');
 
-// SERVICIOS - Nuevos datos
 const mainServices = ref([
   {
     icon: 'mdi-cart-check',
@@ -577,7 +621,6 @@ const additionalBenefits = ref([
   }
 ]);
 
-// Productos
 const products = ref([
   {
     name: 'Colágeno Hidrolizado',
@@ -665,7 +708,6 @@ const products = ref([
   }
 ]);
 
-// Productos filtrados
 const filteredProducts = computed(() => {
   if (selectedCategory.value === 'todos') {
     return products.value;
@@ -673,7 +715,6 @@ const filteredProducts = computed(() => {
   return products.value.filter(p => p.category === selectedCategory.value);
 });
 
-// Beneficios de productos
 const productBenefits = ref([
   {
     icon: 'mdi-shield-check',
@@ -701,7 +742,6 @@ const productBenefits = ref([
   }
 ]);
 
-// Valores (Conócenos)
 const values = ref([
   {
     icon: 'mdi-target',
@@ -723,7 +763,6 @@ const values = ref([
   }
 ]);
 
-// Estadísticas
 const stats = ref([
   { number: '8+', label: 'Años de experiencia', icon: 'mdi-calendar-star', color: '#195030' },
   { number: '150+', label: 'Productos', icon: 'mdi-package-variant', color: '#FE40B4' },
@@ -731,7 +770,6 @@ const stats = ref([
   { number: '98%', label: 'Satisfacción', icon: 'mdi-thumb-up', color: '#FE40B4' }
 ]);
 
-// Equipo
 const team = ref([
   { name: 'Dr. María González', role: 'Directora General' },
   { name: 'Lic. Carlos Méndez', role: 'Director de Ventas' },
@@ -835,7 +873,7 @@ const team = ref([
 
 .hero-title {
   font-weight: 900;
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2rem, 6vw, 4.5rem);
   line-height: 1.1;
   letter-spacing: -0.02em;
   position: relative;
@@ -871,8 +909,8 @@ const team = ref([
 }
 
 .hero-subtitle {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  line-height: 1.7;
+  font-size: clamp(0.95rem, 2vw, 1.25rem);
+  line-height: 1.6;
   max-width: 540px;
   position: relative;
   z-index: 1;
@@ -881,7 +919,14 @@ const team = ref([
 .features-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 8px;
+  justify-content: center;
+}
+
+@media (min-width: 960px) {
+  .features-pills {
+    justify-content: flex-start;
+  }
 }
 
 .feature-chip {
@@ -934,14 +979,14 @@ const team = ref([
 }
 
 .stat-number {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 900;
   line-height: 1;
   margin-bottom: 4px;
 }
 
 .stat-label {
-  font-size: 0.875rem;
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
   font-weight: 600;
 }
 
@@ -1080,9 +1125,22 @@ const team = ref([
   background: linear-gradient(135deg, rgba(25, 80, 48, 0.1) 0%, transparent 100%);
 }
 
+.section-title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
 .service-card {
   border: 2px solid rgba(var(--v-border-color), var(--v-border-opacity));
-  border-radius: 24px;
+  border-radius: 20px;
   transition: all 0.4s ease;
   cursor: pointer;
   position: relative;
@@ -1146,14 +1204,14 @@ const team = ref([
 }
 
 .service-title {
-  font-size: 1.4rem;
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
   font-weight: 800;
   line-height: 1.3;
 }
 
 .service-description {
-  line-height: 1.7;
-  font-size: 1rem;
+  line-height: 1.6;
+  font-size: clamp(0.875rem, 2vw, 1rem);
 }
 
 /* Por Qué Elegirnos */
@@ -1196,7 +1254,6 @@ const team = ref([
 
 .why-item {
   transition: transform 0.3s ease;
-  padding: 12px 0;
 }
 
 .why-item:hover {
@@ -1204,22 +1261,18 @@ const team = ref([
 }
 
 .why-item-title {
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
   font-weight: 700;
 }
 
 .why-item-text {
-  font-size: 0.95rem;
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
   line-height: 1.6;
 }
 
-/* Beneficios Adicionales */
-.benefits-grid {
-  margin-top: 48px;
-}
-
+/* Beneficios */
 .benefit-card {
-  padding: 24px;
+  padding: 16px;
   border-radius: 16px;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -1239,16 +1292,16 @@ const team = ref([
 }
 
 .benefit-title {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
   font-weight: 700;
 }
 
 .benefit-text {
-  font-size: 0.875rem;
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
   line-height: 1.5;
 }
 
-/* Garantía Card */
+/* Garantía */
 .guarantee-card {
   border: 3px solid #195030;
   border-radius: 24px;
@@ -1266,30 +1319,18 @@ const team = ref([
 }
 
 .guarantee-title {
-  font-size: 1.5rem;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
   font-weight: 800;
 }
 
 .guarantee-subtitle {
-  font-size: 1rem;
+  font-size: clamp(0.875rem, 2vw, 1rem);
   line-height: 1.6;
 }
 
 /* === PRODUCTOS SECTION === */
 .productos-section {
   background: rgb(var(--v-theme-surface));
-}
-
-.section-title {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  font-weight: 900;
-  letter-spacing: -0.02em;
-}
-
-.section-subtitle {
-  font-size: 1.1rem;
-  max-width: 600px;
-  margin: 0 auto;
 }
 
 .category-chip {
@@ -1303,13 +1344,13 @@ const team = ref([
 
 .product-card {
   border: 2px solid rgba(var(--v-border-color), var(--v-border-opacity));
-  border-radius: 20px;
+  border-radius: 16px;
   transition: all 0.4s ease;
   overflow: hidden;
 }
 
 .product-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-8px);
   border-color: #FE40B4;
   box-shadow: 0 10px 30px rgba(254, 64, 180, 0.15);
 }
@@ -1333,14 +1374,14 @@ const team = ref([
 
 .product-badge {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 8px;
+  right: 8px;
   font-weight: 700;
   z-index: 2;
 }
 
 .product-title {
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
   font-weight: 700;
   line-height: 1.3;
 }
@@ -1351,7 +1392,7 @@ const team = ref([
 }
 
 .product-price {
-  font-size: 1.5rem;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
   font-weight: 900;
   color: #FE40B4;
   line-height: 1;
@@ -1369,7 +1410,7 @@ const team = ref([
 
 .about-hero {
   background: linear-gradient(135deg, rgba(254, 64, 180, 0.08) 0%, rgba(254, 64, 180, 0.04) 50%, transparent 100%);
-  padding-top: 80px;
+  padding-top: 60px;
   position: relative;
 }
 
@@ -1378,14 +1419,14 @@ const team = ref([
 }
 
 .about-title {
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(1.75rem, 5vw, 3.5rem);
   font-weight: 900;
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
 
 .about-subtitle {
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-size: clamp(0.95rem, 2vw, 1.25rem);
   line-height: 1.7;
   max-width: 700px;
   margin: 0 auto;
@@ -1443,14 +1484,14 @@ const team = ref([
 }
 
 .value-title {
-  font-size: 1.5rem;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
   font-weight: 800;
   margin-bottom: 12px;
 }
 
 .value-text {
-  line-height: 1.7;
-  font-size: 1rem;
+  line-height: 1.6;
+  font-size: clamp(0.875rem, 2vw, 1rem);
 }
 
 .stats-section {
@@ -1464,7 +1505,7 @@ const team = ref([
 }
 
 .section-subtitle-dark {
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
 }
 
 .stat-card {
@@ -1478,13 +1519,13 @@ const team = ref([
 }
 
 .stat-icon-bg {
-  width: 80px;
-  height: 80px;
-  border-radius: 20px;
+  width: clamp(60px, 15vw, 80px);
+  height: clamp(60px, 15vw, 80px);
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 16px;
+  margin: 0 auto 12px;
   transition: transform 0.3s ease;
 }
 
@@ -1493,30 +1534,26 @@ const team = ref([
 }
 
 .stat-number-big {
-  font-size: 3rem;
+  font-size: clamp(2rem, 6vw, 3rem);
   font-weight: 900;
   line-height: 1;
   margin-bottom: 8px;
 }
 
 .stat-label-big {
-  font-size: 1rem;
+  font-size: clamp(0.875rem, 2vw, 1rem);
   font-weight: 600;
 }
 
-.team-section {
-  background: rgb(var(--v-theme-surface-variant));
-}
-
 .section-title-dark {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 900;
   letter-spacing: -0.02em;
 }
 
 .team-card {
   border: 2px solid rgba(var(--v-border-color), var(--v-border-opacity));
-  border-radius: 20px;
+  border-radius: 16px;
   transition: all 0.4s ease;
   overflow: hidden;
 }
@@ -1532,7 +1569,7 @@ const team = ref([
 
 .team-image-wrapper {
   position: relative;
-  padding: 24px;
+  padding: 20px;
   background: linear-gradient(135deg, rgba(254, 64, 180, 0.1), rgba(254, 64, 180, 0.05));
   display: flex;
   justify-content: center;
@@ -1566,13 +1603,13 @@ const team = ref([
 }
 
 .team-name {
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
   font-weight: 700;
   margin-bottom: 4px;
 }
 
 .team-role {
-  font-size: 0.9rem;
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
   color: #FE40B4;
   font-weight: 600;
 }
@@ -1586,7 +1623,7 @@ const team = ref([
 }
 
 .cta-card {
-  border-radius: 32px;
+  border-radius: 24px;
   border: 3px solid #FE40B4;
 }
 
@@ -1596,18 +1633,26 @@ const team = ref([
 }
 
 .cta-text {
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
   max-width: 600px;
   margin: 0 auto;
+  line-height: 1.6;
 }
 
 /* === WHATSAPP FAB === */
 .whatsapp-fab {
   position: fixed;
-  bottom: 32px;
-  right: 32px;
+  bottom: 20px;
+  right: 20px;
   z-index: 1000;
   transition: all 0.3s ease;
+}
+
+@media (min-width: 960px) {
+  .whatsapp-fab {
+    bottom: 32px;
+    right: 32px;
+  }
 }
 
 .whatsapp-fab:hover {
@@ -1676,79 +1721,75 @@ const team = ref([
 }
 
 /* === RESPONSIVE === */
-@media (max-width: 960px) {
+@media (max-width: 959px) {
   .hero-section {
-    text-align: center;
-    padding: 40px 0;
+    min-height: auto;
+    padding-top: 64px;
   }
-
-  .hero-title {
-    font-size: 2.5rem;
+  
+  .title-decoration {
+    margin-left: auto;
+    margin-right: auto;
   }
-
-  .hero-subtitle {
-    font-size: 1rem;
-    margin: 0 auto;
-  }
-
-  .features-pills {
-    justify-content: center;
-  }
-
-  .image-container {
-    margin-top: 40px;
-  }
-
+  
   .floating-card {
     display: none;
-  }
-
-  .stat-number {
-    font-size: 1.5rem;
-  }
-
-  .stat-number-big {
-    font-size: 2rem;
-  }
-
-  .team-overlay {
-    opacity: 1;
-  }
-
-  .whatsapp-fab {
-    bottom: 20px;
-    right: 20px;
-  }
-
-  .why-image-decoration {
-    display: none;
-  }
-
-  .service-card {
-    margin-bottom: 16px;
-  }
-
-  .guarantee-card {
-    text-align: center;
   }
 }
 
 @media (max-width: 600px) {
+  .hero-section {
+    padding-top: 40px;
+  }
+  
   .features-pills {
-    flex-direction: column;
-    align-items: stretch;
+    gap: 6px;
   }
-
-  .feature-chip {
-    justify-content: center;
+  
+  .stat-number {
+    font-size: 1.5rem;
   }
-
-  .service-title {
-    font-size: 1.2rem;
+  
+  .service-card {
+    margin-bottom: 16px;
   }
-
+  
   .benefit-card {
-    padding: 16px;
+    padding: 12px;
   }
+  
+  .benefit-title {
+    font-size: 0.85rem;
+  }
+  
+  .benefit-text {
+    font-size: 0.7rem;
+  }
+  
+  .product-title {
+    font-size: 0.9rem;
+  }
+  
+  .product-price {
+    font-size: 1.1rem;
+  }
+  
+  .guarantee-card {
+    text-align: center;
+  }
+  
+  .team-overlay {
+    opacity: 1;
+    background: rgba(25, 80, 48, 0.85);
+  }
+}
+
+/* === UTILITY === */
+.gap-2 {
+  gap: 8px;
+}
+
+.gap-4 {
+  gap: 16px;
 }
 </style>
