@@ -547,32 +547,32 @@
 
 
             <v-col cols="12" lg="4">
-             <v-row no-gutters>
-               <v-col cols>
-                 <v-text-field
-                   v-model="pvn_to_8800"
-                   label="🔵 8800 PVN"
-                   prepend-inner-icon="mdi-dots-triangle"
-                   variant="outlined"
-                   rounded="xl"
-                   readonly
-                   type="number"
-                   :loading="loading"
-                 />
-               </v-col>
-               <v-col cols>
-                 <v-text-field
-                   v-model="pvn_to_8800"
-                   label="🔵 EN DINERO"
-                   prepend-inner-icon="mdi-dots-triangle"
-                   variant="outlined"
-                   rounded="xl"
-                   readonly
-                   type="number"
-                   :loading="loading"
-                 />
-               </v-col>
-             </v-row>
+              <v-row no-gutters>
+                <v-col cols>
+                  <v-text-field
+                    v-model="pvn_to_8800"
+                    label="🔵 8800 PVN"
+                    prepend-inner-icon="mdi-dots-triangle"
+                    variant="outlined"
+                    rounded="xl"
+                    readonly
+                    type="number"
+                    :loading="loading"
+                  />
+                </v-col>
+                <v-col cols>
+                  <v-text-field
+                    v-model="pvn_to_8800"
+                    label="🔵 EN DINERO"
+                    prepend-inner-icon="mdi-dots-triangle"
+                    variant="outlined"
+                    rounded="xl"
+                    readonly
+                    type="number"
+                    :loading="loading"
+                  />
+                </v-col>
+              </v-row>
             </v-col>
 
 

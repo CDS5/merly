@@ -67,8 +67,8 @@ export const router = [
       class: '',
       prependIcon: 'mdi-warehouse',
       active: false,
-     // to: '/stock'
-      disabled: true,
+      to: '/stock',
+      disabled: false,
     }
   },
 
