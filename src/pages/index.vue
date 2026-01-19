@@ -1,5 +1,6 @@
 <template>
-  <LandingPage />
+<!--  <LandingPage />-->
+  <Order />
 </template>
 
 <script>

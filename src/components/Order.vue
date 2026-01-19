@@ -500,9 +500,9 @@
                 <v-col
                 >
                   <v-text-field
-                    v-model="pvn_to_2200"
+                    v-model="money_to_2200"
                     label="🟢 EN DINERO"
-                    prepend-inner-icon="mdi-dots-triangle"
+                    prepend-inner-icon="mdi-currency-usd"
                     variant="outlined"
                     rounded="xl"
                     readonly
@@ -532,9 +532,9 @@
                 </v-col>
                 <v-col>
                   <v-text-field
-                    v-model="pvn_to_4400"
+                    v-model="money_to_4400"
                     label="🟣 EN DINERO"
-                    prepend-inner-icon="mdi-dots-triangle"
+                    prepend-inner-icon="mdi-currency-usd"
                     variant="outlined"
                     rounded="xl"
                     readonly
@@ -562,9 +562,9 @@
                 </v-col>
                 <v-col cols>
                   <v-text-field
-                    v-model="pvn_to_8800"
+                    v-model="money_to_8800"
                     label="🔵 EN DINERO"
-                    prepend-inner-icon="mdi-dots-triangle"
+                    prepend-inner-icon="mdi-currency-usd"
                     variant="outlined"
                     rounded="xl"
                     readonly
@@ -649,6 +649,7 @@ import VueNumberComponent from '@chenfengyuan/vue-number-input'
 import API_REQUEST from '@/controller/api.js'
 import Order from "@/models/Order.js";
 import MyAlert from "@/components/MyAlert.vue";
+import {th} from "vuetify/locale";
 
 export default {
   components: {
@@ -725,7 +726,15 @@ export default {
     },
 
     money_to_2200() {
-      return 0
+      return Math.ceil( this.pvn_to_2200 * 1.2927)
+    },
+
+    money_to_4400() {
+      return Math.ceil( this.pvn_to_4400 * 1.2927 )
+    },
+
+    money_to_8800() {
+      return Math.ceil( this.pvn_to_8800 *  1.2927 )
     },
 
 
