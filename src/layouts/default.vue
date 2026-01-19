@@ -1,8 +1,7 @@
 <template>
-
   <v-app>
-    <v-layout>
-
+    <!-- Layout completo SOLO si NO es landing page -->
+    <v-layout v-if="!isLandingPage">
       <v-app-bar
         elevation="0"
         app
@@ -29,11 +28,9 @@
               Beta
             </v-chip>
           </div>
-
         </v-toolbar-title>
 
-
-        <v-btn
+        <!--<v-btn
           class="color-changing-border"
           rounded
           @click="dialogFeatures = true"
@@ -50,9 +47,8 @@
         >
           ✨IG: Merly DTOX ✨
         </v-btn>
-
+        -->
       </v-app-bar>
-
 
       <v-navigation-drawer
         v-model="drawer"
@@ -67,22 +63,17 @@
           rounded="e-xl"
         />
 
-
         <v-divider class="my-2" />
 
         <!-- Botón de Cerrar sesión -->
-
         <v-list>
           <v-list-item
-            @click="$router.push('/login')"
+            @click="$router.push('/')"
             prepend-icon="mdi-logout"
             title="Cerrar sesión"
-
           />
         </v-list>
-
       </v-navigation-drawer>
-
 
       <v-main class="bg-primary-lighten-1">
         <v-container fluid>
@@ -90,79 +81,92 @@
         </v-container>
       </v-main>
 
-
       <AppFooter/>
     </v-layout>
-  </v-app>
 
-  <v-dialog
-    v-model="dialogFeatures"
-    max-width="800px"
-  >
-    <v-card
-      elevation="0"
-      rounded="xl"
-      prepend-icon="mdi-hand-wave-outline"
-      title="¡GRACIAS!"
+    <!-- Sin layout para landing pages -->
+    <router-view v-else />
+
+    <!-- Dialog sigue disponible en todas las páginas -->
+    <v-dialog
+      v-model="dialogFeatures"
+      max-width="800px"
     >
-      <template #append>
-        <v-btn
-          rounded="xl"
-          flat
-          icon="mdi-window-close"
-          @click="dialogFeatures = false"
-        />
-      </template>
-      <v-card-text>
-        <h3>
-          Gracias por usar Merly e interesarte en este proyecto. 🙏
-          Estamos trabajando en nuevas funcionalidades para ti, para poder potencializar tu productividad y ayudarte a
-          crecer. 🚀
+      <v-card
+        elevation="0"
+        rounded="xl"
+        prepend-icon="mdi-hand-wave-outline"
+        title="¡GRACIAS!"
+      >
+        <template #append>
+          <v-btn
+            rounded="xl"
+            flat
+            icon="mdi-window-close"
+            @click="dialogFeatures = false"
+          />
+        </template>
+        <v-card-text>
+          <h3>
+            Gracias por usar Merly e interesarte en este proyecto. 🙏
+            Estamos trabajando en nuevas funcionalidades para ti, para poder potencializar tu productividad y ayudarte a
+            crecer. 🚀
 
-          <br> <br>
+            <br> <br>
 
-          Por favor, ten en cuenta que esta es una versión beta, por lo que es posible que encuentres errores. ⚠️
+            Por favor, ten en cuenta que esta es una versión beta, por lo que es posible que encuentres errores. ⚠️
 
-          <br> <br>
+            <br> <br>
 
-          Sin embargo, nos gustaría que te mantuvieras al tanto de nuestras actualizaciones y lograrás registrar tu
-          correo en el siguiente enlace. 📧 Así serás de las primeras personas en usar la plataforma. 💥
-        </h3>
-      </v-card-text>
+            Sin embargo, nos gustaría que te mantuvieras al tanto de nuestras actualizaciones y lograrás registrar tu
+            correo en el siguiente enlace. 📧 Así serás de las primeras personas en usar la plataforma. 💥
+          </h3>
+        </v-card-text>
 
-      <v-card-actions>
-        <v-btn
-          size="large"
-          color="primary"
-          rounded="xl"
-          variant="outlined"
-          tag="a"
-          href="https://forms.gle/3rU9PAZZaEPd8aAV8"
-          target="_blank"
-        >
-          ¡Ir al Registro!
-        </v-btn>
-      </v-card-actions>
-
-
-    </v-card>
-  </v-dialog>
-
-
+        <v-card-actions>
+          <v-btn
+            size="large"
+            color="primary"
+            rounded="xl"
+            variant="outlined"
+            tag="a"
+            href="https://forms.gle/3rU9PAZZaEPd8aAV8"
+            target="_blank"
+          >
+            ¡Ir al Registro!
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-app>
 </template>
 
 <script>
 import AppFooter from "@/components/AppFooter.vue";
-import {router} from "@/router/routes.js";
+import { router } from "@/router/routes.js";
 
 export default {
-  components: {AppFooter},
+  components: { AppFooter },
   data: () => ({
     dialogFeatures: false,
     drawer: false,
     group: null,
     items: router,
   }),
+  computed: {
+    isLandingPage() {
+      // Aquí defines las rutas que NO tendrán layout
+      const routesWithoutLayout = [
+        "/", //esta en la raiz es la landing
+        "/about",
+        "/login",
+        "/register"
+        
+      ];
+      
+      return routesWithoutLayout.includes(this.$route.path);
+    }
+  }
 }
 </script>
 

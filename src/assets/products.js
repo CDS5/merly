@@ -76,6 +76,9 @@ import PT787 from '@/assets/products/PT787.png'
 import PT804 from '@/assets/products/PT804.png'
 import PT806 from '@/assets/products/PT806.png'
 import PT803 from '@/assets/products/PT803.png'
+import PT812 from '@/assets/products/PT812.png'
+import PT814 from '@/assets/products/PT814.png'
+import PT815 from '@/assets/products/PT815.png'
 
 
 const products = {
@@ -889,6 +892,50 @@ const products = {
     checked: true
   },
 
+  'PT812': {
+    id: 'PT812',
+    name: 'VYBES PRANA 60 CAPS',
+    alternative_name: 'prana caps',
+    price: {public: 649, member: 325},
+    pvn: 251,
+    quantity: 0,
+    img: PT812,
+    checked: true
+  },
+
+  'PT814': {
+    id: 'PT814',
+    name: 'VYBES TRIBE CREATHY 250 G BOLSA',
+    alternative_name: 'creatina bolsa',
+    price: {public: 799, member: 325},
+    pvn: 251,
+    quantity: 0,
+    img: PT814,
+    checked: true
+  },
+
+  'PT815': {
+    id: 'PT815',
+    name: 'VYBES TRIBE CREATHY 250 G FRASCO',
+    alternative_name: 'creatina bote frasco',
+    price: {public: 799, member: 325},
+    pvn: 251,
+    quantity: 0,
+    img: PT815,
+    checked: true
+  },
+
+
+  'HE804': {
+    id: 'HE804',
+    name: 'CATALOGO UNITARIO ISMERELY 2025',
+    alternative_name: 'catalogo, ismerely',
+    price: {public: 35, member: 35},
+    pvn: 0,
+    quantity: 0,
+    img: CATALOGO,
+    checked: true
+  },
   'HE805': {
     id: 'HE805',
     name: 'PAQUETE DE 3 CATALOGOS UNITARIOS ISMERELY 2025',
