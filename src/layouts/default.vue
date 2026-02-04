@@ -160,10 +160,10 @@ export default {
         "/", //esta en la raiz es la landing
         "/about",
         "/login",
-        "/register"
-        
+        "/register",
+
       ];
-      
+
       return routesWithoutLayout.includes(this.$route.path);
     }
   }
