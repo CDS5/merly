@@ -79,7 +79,8 @@ import PT803 from '@/assets/products/PT803.png'
 import PT812 from '@/assets/products/PT812.png'
 import PT814 from '@/assets/products/PT814.png'
 import PT815 from '@/assets/products/PT815.png'
-
+import PT817 from '@/assets/products/PT817.png'
+import PT819 from '@/assets/products/PT819.png'
 
 const products = {
   'PT758': {
@@ -935,7 +936,26 @@ const products = {
     img: PT815,
     checked: true
   },
-
+  'PT817':{
+     id: 'PT817',
+    name: 'RIVER-H 60 CAPS',
+    alternative_name: 'river h',
+    price: {public: 529, member: 215},
+    pvn: 166,
+    quantity: 0,
+    img: PT817,
+    checked: true
+  },
+  'PT819': {
+    id: 'PT819',
+    name: 'NOUVEL 60 CAPS',
+    alternative_name: 'nouvel',
+    price: {public: 649, member: 0},
+    pvn: 0,
+    quantity: 0,
+    img: PT819,
+    checked: true
+  },
 
   'HE804': {
     id: 'HE804',
