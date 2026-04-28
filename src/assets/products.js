@@ -81,6 +81,7 @@ import PT814 from '@/assets/products/PT814.png'
 import PT815 from '@/assets/products/PT815.png'
 import PT817 from '@/assets/products/PT817.png'
 import PT819 from '@/assets/products/PT819.png'
+import PT820 from '@/assets/products/PT820.png'
 
 const products = {
   'PT758': {
@@ -583,6 +584,16 @@ const products = {
     pvn: 232,
     quantity: 0,
     img: PT736,
+    checked: true
+  },
+   'PT820': {
+    id: 'PT820',
+    name: 'ORIGEN CAFE ORGANICO SABOR LATTE 300 GR - SOBRES',
+    alternative_name: 'origen cafe 300 gr sobres sabor latte caja',
+    price: {public: 799, member: 730},
+    pvn: 566,
+    quantity: 0,
+    img: PT820,
     checked: true
   },
   'PT737': {

@@ -149,14 +149,14 @@
                 v-model="order.state.id"
                 label="ID o USUARIO"
                 prepend-inner-icon="mdi-key"
-                append-inner-icon="mdi-content-copy"
+                :append-inner-icon="order.state.id ? 'mdi-content-copy' : ''"
                 variant="outlined"
                 type="number"
                 rounded="xl"
                 max="999999"
                 placeholder="COLOQUE SU ID O USUARIO"
                 :loading="loading"
-                @click:append-inner="copy_to_clipboard(String(order.state.id || ''))"
+                @click:append-inner="order.state.id && copy_to_clipboard(String(order.state.id))"
                 @blur="getNameById"
               />
             </v-col>
@@ -171,8 +171,8 @@
                 type="text"
                 placeholder="COLOQUE EL NOMBRE"
                 :loading="loading"
-                 append-inner-icon="mdi-content-copy"
-                @click:append-inner="copy_to_clipboard(String(order.state.client || ''))"
+                :append-inner-icon="order.state.client ? 'mdi-content-copy' : ''"
+                @click:append-inner="order.state.client && copy_to_clipboard(String(order.state.client))"
                 @input="event => {order.state.client = event.target.value.toUpperCase()}"
               />
             </v-col>
