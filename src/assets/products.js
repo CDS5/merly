@@ -82,6 +82,7 @@ import PT815 from '@/assets/products/PT815.png'
 import PT817 from '@/assets/products/PT817.png'
 import PT819 from '@/assets/products/PT819.png'
 import PT820 from '@/assets/products/PT820.png'
+import PT822 from '@/assets/products/PT822.png'
 
 const products = {
   'PT758': {
@@ -965,6 +966,17 @@ const products = {
     pvn: 0,
     quantity: 0,
     img: PT819,
+    checked: true
+  },
+
+  'PT822': {
+    id: 'PT822',
+    name: 'VYBES GO-TROLYT 240 G - SOBRES',
+    alternative_name: 'electrolitos sobres go trolyt vybes',
+    price: {public: 699, member: 0},
+    pvn: 0,
+    quantity: 0,
+    img: PT822,
     checked: true
   },
 
